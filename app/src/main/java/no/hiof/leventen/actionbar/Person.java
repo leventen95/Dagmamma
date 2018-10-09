@@ -15,6 +15,4 @@ public class Person {
         this.photoId = photoId;
     }
 
-
-
 }
