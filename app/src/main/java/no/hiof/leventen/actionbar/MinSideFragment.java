@@ -30,6 +30,8 @@ public class MinSideFragment extends Fragment {
                 /*if(container != null){
                     container.removeAllViews();
                 }*/
+
+                // (ChangeFragmentInterface) getActivity().changeFragment();
                 Fragment redigerSideFragment = new RedigerSideFragment();
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                 fragmentTransaction.replace(R.id.fragment_container, redigerSideFragment,redigerSideFragment.getTag());
