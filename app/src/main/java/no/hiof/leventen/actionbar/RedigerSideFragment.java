@@ -12,13 +12,7 @@ import android.view.ViewGroup;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RedigerSideFragment extends Fragment {
-
-
-    public RedigerSideFragment() {
-        // Required empty public constructor
-    }
-
+public class RedigerSideFragment extends MinSideFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
