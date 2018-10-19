@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "363292575630",
+    "firebase_url": "https://dagmamma-fd35a.firebaseio.com",
+    "project_id": "dagmamma-fd35a",
+    "storage_bucket": "dagmamma-fd35a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363292575630:android:bd4cd1a013412112",
+        "android_client_info": {
+          "package_name": "no.hiof.leventen.actionbar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363292575630-ddbonaghc2tnqkt4guv56gg74j82347a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "no.hiof.leventen.actionbar",
+            "certificate_hash": "615429683a98733ac55cc03996ae7e08323dc71e"
+          }
+        },
+        {
+          "client_id": "363292575630-n7mdc1a56aa2hm97tc2vm0v9d7u11jbc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiU-WBnsH3ujOqnxGHkgYQ3pdlMfYbm-c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363292575630-n7mdc1a56aa2hm97tc2vm0v9d7u11jbc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
