@@ -1,5 +1,6 @@
 package no.hiof.leventen.actionbar;
 
+import android.content.ClipData;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -15,12 +17,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 List<Person> persons;
 
+
     public static class PersonViewHolder extends RecyclerView.ViewHolder{
         CardView cardView;
         TextView personName;
         TextView personAge;
         ImageView personPhoto;
         List<Person> persons;
+        public Person person;
 
         PersonViewHolder(View itemView) {
             super(itemView);
@@ -28,6 +32,14 @@ List<Person> persons;
             personName = itemView.findViewById(R.id.person_name);
             personAge = itemView.findViewById(R.id.person_age);
             personPhoto = itemView.findViewById(R.id.person_photo);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Istedenfor å bytte personens navn til Hei vil vi heller bli tatt med videre til personens profil. Dette blir implementert senere.
+                    personName.setText("Hei");
+                }
+            });
         }
 
     }
@@ -49,6 +61,7 @@ List<Person> persons;
         personViewHolder.personName.setText(persons.get(i).name);
         personViewHolder.personAge.setText(persons.get(i).age+" år");
         personViewHolder.personPhoto.setImageResource(persons.get(i).photoId);
+        personViewHolder.person = persons.get(i);
     }
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
@@ -60,5 +73,6 @@ List<Person> persons;
     public int getItemCount() {
         return persons.size();
     }
+
 
 }

@@ -15,6 +15,7 @@ import java.util.List;
 public class AnnonserFragment extends Fragment {
     RecyclerView recyclerView;
     private List<Person> personList;
+    RecyclerViewAdapter recyclerViewAdapter;
 
     public AnnonserFragment() {
         // Required empty public constructor
