@@ -15,7 +15,8 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.PersonViewHolder> {
 
-List<Person> persons;
+    List<Person> persons;
+    private RecyclerViewClickListener clickListener;
 
 
     public static class PersonViewHolder extends RecyclerView.ViewHolder{
@@ -26,7 +27,7 @@ List<Person> persons;
         List<Person> persons;
         public Person person;
 
-        PersonViewHolder(View itemView) {
+        PersonViewHolder(View itemView, final RecyclerViewClickListener clickListener) {
             super(itemView);
             cardView = itemView.findViewById(R.id.cv);
             personName = itemView.findViewById(R.id.person_name);
@@ -35,24 +36,25 @@ List<Person> persons;
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v) {
+                public void onClick(View view) {
                     //Istedenfor å bytte personens navn til Hei vil vi heller bli tatt med videre til personens profil. Dette blir implementert senere.
-                    personName.setText("Hei");
+                    clickListener.onClick(view, getAdapterPosition());
                 }
             });
         }
 
     }
 
-    public RecyclerViewAdapter(List<Person> persons) {
+    public RecyclerViewAdapter(List<Person> persons, RecyclerViewClickListener clickListener) {
         this.persons = persons;
+        this.clickListener = clickListener;
     }
 
     @NonNull
     @Override
     public PersonViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_layout, viewGroup,false);
-        PersonViewHolder personViewHolder = new PersonViewHolder(v);
+        PersonViewHolder personViewHolder = new PersonViewHolder(v, clickListener);
         return personViewHolder;
     }
 
@@ -74,5 +76,7 @@ List<Person> persons;
         return persons.size();
     }
 
-
+    public interface RecyclerViewClickListener {
+        void onClick(View view, int position);
+    }
 }

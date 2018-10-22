@@ -25,10 +25,10 @@ public class Person {
         List<Person> personer = new ArrayList<>();
 
         int [] pictures = {
-            R.drawable.scarletjohansson,
+            R.drawable.scarlettjohannson,
             R.drawable.emmawatson,
-            R.drawable.keanureeves,
-            R.drawable.sandrabullock
+            R.drawable.keanureevesnew,
+            R.drawable.sandrabullocknew
         };
 
         String [] name = {
@@ -73,7 +73,7 @@ public class Person {
     public void setPicture(int picture){
         this.photoId = picture;
     }
-    public void setId(int imageId){
+    public void setId(int id){
         this.id = id;
     }
 
