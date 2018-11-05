@@ -56,7 +56,6 @@ List<Person> persons;
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-
     @Override
     public int getItemCount() {
         return persons.size();
