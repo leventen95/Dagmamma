@@ -1,5 +1,8 @@
 package no.hiof.leventen.actionbar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Person {
     String name;
     int age;
@@ -74,27 +77,4 @@ public class Person {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public int getPhotoId() {
-        return photoId;
-    }
-
-    public void setPhotoId(int photoId) {
-        this.photoId = photoId;
-    }
 }
