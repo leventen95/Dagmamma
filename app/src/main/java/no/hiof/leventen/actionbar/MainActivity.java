@@ -9,6 +9,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
+
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
@@ -28,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
         annonserFragment = new AnnonserFragment();
         chatListFragment = new ChatListFragment();
         minSideFragment = new MinSideFragment();
+        FirebaseDatasource test = new FirebaseDatasource();
+        List<Person> testData = Person.getData();
 
+        test.createUser(testData.get(0));
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override

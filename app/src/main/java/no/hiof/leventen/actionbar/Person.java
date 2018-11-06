@@ -8,17 +8,37 @@ public class Person {
     int age;
     int photoId;
     private int id;
+    private String email;
+    private String tlfNr;
 
-
-    public Person(String name, int age, int photoId) {
+    public Person(String name, int age, int photoId, int id, String email, String tlfNr) {
         this.name = name;
         this.age = age;
         this.photoId = photoId;
+        this.id = id;
+        this.email = email;
+        this.tlfNr = tlfNr;
     }
-    public Person(){
 
+    public void setPhotoId(int photoId) {
+        this.photoId = photoId;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTlfNr() {
+        return tlfNr;
+    }
+
+    public void setTlfNr(String tlfNr) {
+        this.tlfNr = tlfNr;
+    }
 
     public static List<Person> getData(){
 
@@ -42,11 +62,7 @@ public class Person {
         };
 
         for (int i=0; i<pictures.length; i++){
-            Person current = new Person();
-            current.setId(i);
-            current.setName(name[i]);
-            current.setAge(age[i]);
-            current.setPicture(pictures[i]);
+            Person current = new Person(name[i],age[i],pictures[i],i,"minkulemeial","49149858");
             personer.add(current);
         }
 
