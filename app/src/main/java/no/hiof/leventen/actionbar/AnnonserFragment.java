@@ -56,7 +56,7 @@ public class AnnonserFragment extends Fragment {
                 Toast.makeText(getActivity(), personList.get(position).getName(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), PersonDetailedActivity.class);
-                intent.putExtra(PersonDetailedActivity.PERSON_ID_KEY, personList.get(position).getId());
+                intent.putExtra(PersonDetailedActivity.PERSON_ID_KEY, 1);
                 startActivity(intent);
             }
         };

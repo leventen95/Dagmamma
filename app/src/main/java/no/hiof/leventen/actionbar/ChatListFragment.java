@@ -5,7 +5,6 @@ import android.os.Bundle;;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +18,7 @@ import java.util.List;
  */
 public class ChatListFragment extends Fragment {
     RecyclerView recyclerView;
-    private List<Dialog> dialogList;
+    private List<Conversation> conversationList;
     private List<ChatMessage> d1;
     private String lastMessage;
     private String dialogUser;
@@ -45,7 +44,7 @@ public class ChatListFragment extends Fragment {
     }
     private void initializeData(){
         d1 = new ArrayList<ChatMessage>();
-        Dialog d2 = new Dialog();
+        Conversation d2 = new Conversation();
         d1.add(new ChatMessage("Hei du! Jeg vil gjerne passe ungen din!", "Fredrik Kalsberg", 81992972));
         d1.add(new ChatMessage("Hei du! Jeg har ingen unger jeg!", "Joakim Granaas", 81996972));
         d1.add(new ChatMessage("Uff, det var dumt!", "Fredrik Kalsberg", 81997972));
@@ -59,9 +58,9 @@ public class ChatListFragment extends Fragment {
         d2.addMessage(new ChatMessage("Masse rart med sukker på!", "Joakim Granaas", 81998972));
         d2.addMessage(new ChatMessage("Javell? Hva da?", "Fredrik Kalsberg", 81999972));
         d2.addMessage(new ChatMessage("Ingen ting..!", "Joakim Granaas", 820100072));
-        dialogList = new ArrayList<>();
-        //dialogList.add(d1);
-        dialogList.add(d2);
+        conversationList = new ArrayList<>();
+        //conversationList.add(d1);
+        conversationList.add(d2);
 
     }
     private void initializeAdapter(){
