@@ -9,6 +9,13 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import java.util.List;
+
+import no.hiof.leventen.actionbar.Chat.ChatListFragment;
+import no.hiof.leventen.actionbar.Firebasehandler.DidCreateUserCallback;
+import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
+import no.hiof.leventen.actionbar.Firebasehandler.LoginCallBack;
+
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
@@ -16,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private AnnonserFragment annonserFragment;
     private ChatListFragment chatListFragment;
     private MinSideFragment minSideFragment;
-
+    public FirebaseDatasource test = new FirebaseDatasource();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         annonserFragment = new AnnonserFragment();
         chatListFragment = new ChatListFragment();
         minSideFragment = new MinSideFragment();
+        testLogin();
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,5 +64,30 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_frame,fragment);
         fragmentTransaction.commit();
 
+    }
+
+    private void testLogin(){
+        test.loginUser("minkulemeial", "passord123", new LoginCallBack() {
+            @Override
+            public void onLoginBack(Person user) {
+                if(user != null){
+                    System.out.println("user existed, now log in");
+                }else{
+                    System.out.println("User not found");
+                }
+            }
+        });
+    }
+
+
+    private void testCreate(){
+
+        List<Person> testData = Person.getData();
+        test.createUser(testData.get(0), "passord123", new DidCreateUserCallback() {
+            @Override
+            public void didCreateUser(boolean didComplete) {
+                System.out.println(didComplete);
+            }
+        });
     }
 }

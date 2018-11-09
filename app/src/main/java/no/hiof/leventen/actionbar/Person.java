@@ -7,18 +7,58 @@ public class Person {
     String name;
     int age;
     int photoId;
-    private int id;
+    private String email;
+    private String tlfNr;
+    private String passord;
+    private List<String> chatConversations;
+    private static Person currentUser;
 
-
-    public Person(String name, int age, int photoId) {
+    public Person(String name, int age, int photoId, String email, String tlfNr, String passord) {
         this.name = name;
         this.age = age;
         this.photoId = photoId;
+        this.email = email;
+        this.tlfNr = tlfNr;
+        this.passord = passord;
+        this.chatConversations = new ArrayList<>();
+        this.currentUser = this;
     }
-    public Person(){
 
+    public List<String> getChatConversations() {
+        return chatConversations;
     }
 
+    public void setChatConversations(List<String> chatConversations) {
+        this.chatConversations = chatConversations;
+    }
+
+    public static Person getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(Person currentUser) {
+        Person.currentUser = currentUser;
+    }
+
+    public void setPhotoId(int photoId) {
+        this.photoId = photoId;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTlfNr() {
+        return tlfNr;
+    }
+
+    public void setTlfNr(String tlfNr) {
+        this.tlfNr = tlfNr;
+    }
 
     public static List<Person> getData(){
 
@@ -42,11 +82,7 @@ public class Person {
         };
 
         for (int i=0; i<pictures.length; i++){
-            Person current = new Person();
-            current.setId(i);
-            current.setName(name[i]);
-            current.setAge(age[i]);
-            current.setPicture(pictures[i]);
+            Person current = new Person(name[i],age[i],pictures[i],"minkulemeial","49149858","passord123");
             personer.add(current);
         }
 
@@ -61,9 +97,6 @@ public class Person {
     public int getPhotoId(){
         return photoId;
     }
-    public int getId(){
-        return id;
-    }
     public void setAge(int age){
         this.age = age;
     }
@@ -73,8 +106,10 @@ public class Person {
     public void setPicture(int picture){
         this.photoId = picture;
     }
-    public void setId(int id){
-        this.id = id;
-    }
 
+    public String getPassord() { return passord; }
+
+    public void setPassord(String passord) {
+        this.passord = passord;
+    }
 }

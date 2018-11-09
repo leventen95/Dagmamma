@@ -1,4 +1,4 @@
-package no.hiof.leventen.actionbar;
+package no.hiof.leventen.actionbar.Chat;
 
 import java.util.Date;
 
