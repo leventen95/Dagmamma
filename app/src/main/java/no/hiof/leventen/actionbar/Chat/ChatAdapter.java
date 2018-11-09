@@ -19,14 +19,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     List<ChatMessage> messages;
 
     public static class ChatViewHolder extends  RecyclerView.ViewHolder{
-        TextView message;
-        TextView messageDate;
+        TextView messageIn;
+        TextView messageInDate;
         ImageView userImage;
 
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
-            message = itemView.findViewById(R.id.message_in);
-            messageDate = itemView.findViewById(R.id.message_in_date);
+            messageIn = itemView.findViewById(R.id.message_in);
+            messageInDate = itemView.findViewById(R.id.message_in_date);
             userImage = itemView.findViewById(R.id.user_image);
         }
     }
@@ -43,8 +43,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder chatViewHolder, int i) {
-        chatViewHolder.message.setText(messages.get(i).getMessageText());
-        chatViewHolder.messageDate.setText(DateFormat.format("MM/dd/yyyy", new Date(messages.get(i).getMessageDate())).toString());
+        chatViewHolder.messageIn.setText(messages.get(i).getMessageText());
+        chatViewHolder.messageInDate.setText(DateFormat.format("MM/dd/yyyy", new Date(messages.get(i).getMessageDate())).toString());
     //    chatViewHolder.userImage.setImageResource(persons.get(i).getMessageUser());
     }
 
