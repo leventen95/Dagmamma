@@ -14,8 +14,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import no.hiof.leventen.actionbar.ChatMessage;
-import no.hiof.leventen.actionbar.Conversation;
+import no.hiof.leventen.actionbar.Chat.ChatMessage;
+import no.hiof.leventen.actionbar.Chat.Conversation;
 import no.hiof.leventen.actionbar.Person;
 
 interface DidCompleteCallback{

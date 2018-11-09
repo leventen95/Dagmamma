@@ -1,4 +1,4 @@
-package no.hiof.leventen.actionbar;
+package no.hiof.leventen.actionbar.Chat;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import java.util.Date;
 import java.util.List;
+
+import no.hiof.leventen.actionbar.R;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
 

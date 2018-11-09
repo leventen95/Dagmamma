@@ -1,4 +1,4 @@
-package no.hiof.leventen.actionbar;
+package no.hiof.leventen.actionbar.Chat;
 
 
 import android.os.Bundle;;
@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import no.hiof.leventen.actionbar.R;
 
 
 /**

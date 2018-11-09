@@ -1,4 +1,4 @@
-package no.hiof.leventen.actionbar;
+package no.hiof.leventen.actionbar.Chat;
 
 import android.support.v7.widget.RecyclerView;
 

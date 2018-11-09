@@ -1,7 +1,6 @@
-package no.hiof.leventen.actionbar;
+package no.hiof.leventen.actionbar.Chat;
 
 
-import android.app.Dialog;
 import android.os.Bundle;;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +11,8 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import no.hiof.leventen.actionbar.R;
 
 
 /**

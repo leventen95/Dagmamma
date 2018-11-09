@@ -9,9 +9,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import no.hiof.leventen.actionbar.Chat.ChatListFragment;
 import no.hiof.leventen.actionbar.Firebasehandler.DidCreateUserCallback;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 import no.hiof.leventen.actionbar.Firebasehandler.LoginCallBack;
