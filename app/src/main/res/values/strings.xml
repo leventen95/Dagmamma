@@ -1,7 +1,17 @@
 <resources>
-    <string name="app_name">ActionBar</string>
+    <string name="app_name">Hardcore Nanny</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="textInput_typeMessage">Skriv en melding..</string>
+    <string name="loginHeader">Hardcore Nanny</string>
+    <string name="loginWelcome">Velkommen til en helt ny møteplass for barnepassere og foreldre !</string>
+    <string name="loginBrukerInput">Example@gmail.com</string>
+    <string name="loginPassordInput">Passord</string>
+    <string name="loginNyBruker">Ny bruker?</string>
+    <string name="loginButton">Login</string>
+    <string name="loginRegistrer">Registrer deg med dine ønsker her</string>
+    <string name="loginRegistrerButton">Registrer</string>
+    <string name="loginPicture">kidsOnGrass</string>
+    <string name="personPicture">personPicture</string>
 </resources>
