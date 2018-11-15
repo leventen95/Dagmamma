@@ -20,7 +20,7 @@ import no.hiof.leventen.actionbar.R;
  * A simple {@link Fragment} subclass.
  */
 public class DialogFragment extends Fragment {
-    RecyclerView recyclerView;
+/*    RecyclerView recyclerView;
     private List<ChatMessage> dialog;
 
     public DialogFragment() {
@@ -48,5 +48,5 @@ public class DialogFragment extends Fragment {
         dialog.add(new ChatMessage("Men jeg kjenner en person som har unger da!", "Joakim Granaas", new Date(81996972)));
         dialog.add(new ChatMessage("Javell? Hvem da?", "Fredrik Kalsberg", new Date(81996972)));
         dialog.add(new ChatMessage("Han heter Rolf!", "Joakim Granaas", new Date(81996972)));
-    }
+    }*/
 }

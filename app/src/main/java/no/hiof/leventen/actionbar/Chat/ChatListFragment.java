@@ -53,8 +53,8 @@ public class ChatListFragment extends Fragment {
         d1.add(new ChatMessage("Uff, det var dumt!", "Fredrik Kalsberg", new Date(81996972)));
         d1.add(new ChatMessage("Men jeg kjenner en person som har unger da!", "Joakim Granaas", new Date(81996972)));
         d1.add(new ChatMessage("Javell? Hvem da?", "Fredrik Kalsberg", new Date(81996972)));
-        d1.add(new ChatMessage("Han heter Petter!", "Joakim Granaas", new Date(81996972)));
-        
+        d1.add(new ChatMessage("Han heter Petter!", "Joakim Granaas", new Date()));
+
         conversationList = new ArrayList<>();
         conversationList.add(d2);
 
