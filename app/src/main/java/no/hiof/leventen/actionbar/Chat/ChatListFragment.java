@@ -22,7 +22,7 @@ import no.hiof.leventen.actionbar.R;
 public class ChatListFragment extends Fragment {
     RecyclerView recyclerView;
     private List<Conversation> conversationList;
-    private List<ChatMessage> d1;
+    private List<Message> d1;
     private String lastMessage;
     private String dialogUser;
     private String lastMessageTime;
@@ -46,14 +46,14 @@ public class ChatListFragment extends Fragment {
         return fragment_chat_list;
     }
     private void initializeData(){
-        d1 = new ArrayList<ChatMessage>();
+        d1 = new ArrayList<Message>();
         Conversation d2 = new Conversation();
-        d1.add(new ChatMessage("Hei du! Jeg vil gjerne passe ungen din!", "Fredrik Kalsberg", new Date(81996972)));
-        d1.add(new ChatMessage("Hei du! Jeg har ingen unger jeg!", "Joakim Granaas", new Date(81996972)));
-        d1.add(new ChatMessage("Uff, det var dumt!", "Fredrik Kalsberg", new Date(81996972)));
-        d1.add(new ChatMessage("Men jeg kjenner en person som har unger da!", "Joakim Granaas", new Date(81996972)));
-        d1.add(new ChatMessage("Javell? Hvem da?", "Fredrik Kalsberg", new Date(81996972)));
-        d1.add(new ChatMessage("Han heter Petter!", "Joakim Granaas", new Date()));
+        d1.add(new Message("Hei du! Jeg vil gjerne passe ungen din!", "Fredrik Kalsberg", new Date(81996972)));
+        d1.add(new Message("Hei du! Jeg har ingen unger jeg!", "Joakim Granaas", new Date(81996972)));
+        d1.add(new Message("Uff, det var dumt!", "Fredrik Kalsberg", new Date(81996972)));
+        d1.add(new Message("Men jeg kjenner en person som har unger da!", "Joakim Granaas", new Date(81996972)));
+        d1.add(new Message("Javell? Hvem da?", "Fredrik Kalsberg", new Date(81996972)));
+        d1.add(new Message("Han heter Petter!", "Joakim Granaas", new Date()));
 
         conversationList = new ArrayList<>();
         conversationList.add(d2);

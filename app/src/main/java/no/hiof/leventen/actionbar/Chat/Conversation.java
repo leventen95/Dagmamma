@@ -6,29 +6,29 @@ import java.util.ArrayList;
 
 public class Conversation {
     RecyclerView recyclerView;
-    private ArrayList<ChatMessage> dialogList;
+    private ArrayList<Message> dialogList;
     String to;
     private String conversationId;
 
     public Conversation() {
-        dialogList = new ArrayList<ChatMessage>();
+        dialogList = new ArrayList<Message>();
     }
-    public void addMessage(ChatMessage message) {
+    public void addMessage(Message message) {
         dialogList.add(message);
     }
 
-    public void removeMessage(ChatMessage message) {
+    public void removeMessage(Message message) {
         for (int i = 0; i < dialogList.size(); i++) {
             if (dialogList.get(i) == message)
                 dialogList.remove(i);
         }
     }
 
-    public ArrayList<ChatMessage> getDialogList() {
+    public ArrayList<Message> getDialogList() {
         return dialogList;
     }
 
-    public void setDialogList(ArrayList<ChatMessage> dialogList) {
+    public void setDialogList(ArrayList<Message> dialogList) {
         this.dialogList = dialogList;
     }
 

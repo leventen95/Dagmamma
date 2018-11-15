@@ -14,7 +14,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import no.hiof.leventen.actionbar.Chat.ChatMessage;
+import no.hiof.leventen.actionbar.Chat.Message;
 import no.hiof.leventen.actionbar.Chat.Conversation;
 import no.hiof.leventen.actionbar.Person;
 
@@ -26,8 +26,8 @@ interface ConversationCallback{
 }
 
 interface ChatCallback{
-    void didRecieve(List<ChatMessage> messages);
-    void onUpdate(ChatMessage newMessage);
+    void didRecieve(List<Message> messages);
+    void onUpdate(Message newMessage);
 }
 
 public class FirebaseDatasource {
@@ -67,7 +67,7 @@ public class FirebaseDatasource {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                ChatMessage newMessage = new ChatMessage();
+                Message newMessage = new Message();
 
 
             }

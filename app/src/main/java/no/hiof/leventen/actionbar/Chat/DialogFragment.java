@@ -21,7 +21,7 @@ import no.hiof.leventen.actionbar.R;
  */
 public class DialogFragment extends Fragment {
 /*    RecyclerView recyclerView;
-    private List<ChatMessage> dialog;
+    private List<Message> dialog;
 
     public DialogFragment() {
         // Required empty public constructor
@@ -42,11 +42,11 @@ public class DialogFragment extends Fragment {
     }
     private void initializeData(){
         dialog = new ArrayList<>();
-        dialog.add(new ChatMessage("Hei du! Jeg vil gjerne passe ungen din!", "Fredrik Kalsberg", new Date(81996972)));
-        dialog.add(new ChatMessage("Hei du! Jeg har ingen unger jeg!", "Joakim Granaas", new Date(81996972)));
-        dialog.add(new ChatMessage("Uff, det var dumt!", "Fredrik Kalsberg", new Date(81996972)));
-        dialog.add(new ChatMessage("Men jeg kjenner en person som har unger da!", "Joakim Granaas", new Date(81996972)));
-        dialog.add(new ChatMessage("Javell? Hvem da?", "Fredrik Kalsberg", new Date(81996972)));
-        dialog.add(new ChatMessage("Han heter Rolf!", "Joakim Granaas", new Date(81996972)));
+        dialog.add(new Message("Hei du! Jeg vil gjerne passe ungen din!", "Fredrik Kalsberg", new Date(81996972)));
+        dialog.add(new Message("Hei du! Jeg har ingen unger jeg!", "Joakim Granaas", new Date(81996972)));
+        dialog.add(new Message("Uff, det var dumt!", "Fredrik Kalsberg", new Date(81996972)));
+        dialog.add(new Message("Men jeg kjenner en person som har unger da!", "Joakim Granaas", new Date(81996972)));
+        dialog.add(new Message("Javell? Hvem da?", "Fredrik Kalsberg", new Date(81996972)));
+        dialog.add(new Message("Han heter Rolf!", "Joakim Granaas", new Date(81996972)));
     }*/
 }
