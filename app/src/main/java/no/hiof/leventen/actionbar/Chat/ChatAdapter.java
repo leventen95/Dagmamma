@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder chatViewHolder, int i) {
         chatViewHolder.messageIn.setText(messages.get(i).getMessageText());
-        chatViewHolder.messageInDate.setText(DateFormat.format("MM/dd/yyyy", new Date(messages.get(i).getMessageDate())).toString());
+        chatViewHolder.messageInDate.setText(new SimpleDateFormat("MM/dd/yyyy").format(messages.get(i).getDate()));
     //    chatViewHolder.userImage.setImageResource(persons.get(i).getMessageUser());
     }
 

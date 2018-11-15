@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import no.hiof.leventen.actionbar.R;
@@ -47,21 +48,14 @@ public class ChatListFragment extends Fragment {
     private void initializeData(){
         d1 = new ArrayList<ChatMessage>();
         Conversation d2 = new Conversation();
-        d1.add(new ChatMessage("Hei du! Jeg vil gjerne passe ungen din!", "Fredrik Kalsberg", 81992972));
-        d1.add(new ChatMessage("Hei du! Jeg har ingen unger jeg!", "Joakim Granaas", 81996972));
-        d1.add(new ChatMessage("Uff, det var dumt!", "Fredrik Kalsberg", 81997972));
-        d1.add(new ChatMessage("Men jeg kjenner en person som har unger da!", "Joakim Granaas", 81998972));
-        d1.add(new ChatMessage("Javell? Hvem da?", "Fredrik Kalsberg", 81999972));
-        d1.add(new ChatMessage("Han heter Rolf!", "Joakim Granaas", 820100072));
-
-        d2.addMessage(new ChatMessage("Hei du!", "Fredrik Kalsberg", 81992972));
-        d2.addMessage(new ChatMessage("Hei du!", "Joakim Granaas", 81996972));
-        d2.addMessage(new ChatMessage("Skjer?", "Fredrik Kalsberg", 81997972));
-        d2.addMessage(new ChatMessage("Masse rart med sukker på!", "Joakim Granaas", 81998972));
-        d2.addMessage(new ChatMessage("Javell? Hva da?", "Fredrik Kalsberg", 81999972));
-        d2.addMessage(new ChatMessage("Ingen ting..!", "Joakim Granaas", 820100072));
+        d1.add(new ChatMessage("Hei du! Jeg vil gjerne passe ungen din!", "Fredrik Kalsberg", new Date(81996972)));
+        d1.add(new ChatMessage("Hei du! Jeg har ingen unger jeg!", "Joakim Granaas", new Date(81996972)));
+        d1.add(new ChatMessage("Uff, det var dumt!", "Fredrik Kalsberg", new Date(81996972)));
+        d1.add(new ChatMessage("Men jeg kjenner en person som har unger da!", "Joakim Granaas", new Date(81996972)));
+        d1.add(new ChatMessage("Javell? Hvem da?", "Fredrik Kalsberg", new Date(81996972)));
+        d1.add(new ChatMessage("Han heter Petter!", "Joakim Granaas", new Date(81996972)));
+        
         conversationList = new ArrayList<>();
-        //conversationList.add(d1);
         conversationList.add(d2);
 
     }

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import no.hiof.leventen.actionbar.R;
@@ -41,11 +42,11 @@ public class DialogFragment extends Fragment {
     }
     private void initializeData(){
         dialog = new ArrayList<>();
-        dialog.add(new ChatMessage("Hei du! Jeg vil gjerne passe ungen din!", "Fredrik Kalsberg", 81992972));
-        dialog.add(new ChatMessage("Hei du! Jeg har ingen unger jeg!", "Joakim Granaas", 81996972));
-        dialog.add(new ChatMessage("Uff, det var dumt!", "Fredrik Kalsberg", 81997972));
-        dialog.add(new ChatMessage("Men jeg kjenner en person som har unger da!", "Joakim Granaas", 81998972));
-        dialog.add(new ChatMessage("Javell? Hvem da?", "Fredrik Kalsberg", 81999972));
-        dialog.add(new ChatMessage("Han heter Rolf!", "Joakim Granaas", 820100072));
+        dialog.add(new ChatMessage("Hei du! Jeg vil gjerne passe ungen din!", "Fredrik Kalsberg", new Date(81996972)));
+        dialog.add(new ChatMessage("Hei du! Jeg har ingen unger jeg!", "Joakim Granaas", new Date(81996972)));
+        dialog.add(new ChatMessage("Uff, det var dumt!", "Fredrik Kalsberg", new Date(81996972)));
+        dialog.add(new ChatMessage("Men jeg kjenner en person som har unger da!", "Joakim Granaas", new Date(81996972)));
+        dialog.add(new ChatMessage("Javell? Hvem da?", "Fredrik Kalsberg", new Date(81996972)));
+        dialog.add(new ChatMessage("Han heter Rolf!", "Joakim Granaas", new Date(81996972)));
     }
 }

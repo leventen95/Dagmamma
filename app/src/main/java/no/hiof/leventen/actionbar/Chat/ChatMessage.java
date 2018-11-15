@@ -2,42 +2,40 @@ package no.hiof.leventen.actionbar.Chat;
 
 import java.util.Date;
 
+import no.hiof.leventen.actionbar.Person;
+
 public class ChatMessage {
     private String messageText;
-    private String messageUser;
-    private long messageDate;
+    private String otherUserEmail;
+    private Date date;
 
-    public ChatMessage(String messageText, String messageUser, long messageTime) {
+    public ChatMessage(String messageText, String otherUserEmail, Date date) {
         this.messageText = messageText;
-        this.messageUser = messageUser;
-        messageTime = new Date().getTime();
+        this.otherUserEmail = otherUserEmail;
+        this.date = date;
     }
 
     public ChatMessage() {
 
     }
 
-    public String getMessageText() {
-        return messageText;
+    public String getMessageText() { return messageText; }
+
+    public void setMessageText(String message) { this.messageText = message; }
+
+    public String getOtherUserEmail() {
+        return otherUserEmail;
     }
 
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
+    public void setUser(String otherUserEmail) {
+        this.otherUserEmail = otherUserEmail;
     }
 
-    public String getMessageUser() {
-        return messageUser;
+    public Date getDate() {
+        return date;
     }
 
-    public void setMessageUser(String messageUser) {
-        this.messageUser = messageUser;
-    }
-
-    public long getMessageDate() {
-        return messageDate;
-    }
-
-    public void setMessageDate(long messageTime) {
-        this.messageDate = messageTime;
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
