@@ -45,6 +45,16 @@ public class Person {
         this.fDato = fDato;
     }
 
+    public String parseFDato(String fDato) {
+        if (fDato.length() == 6) {
+            String day = fDato.substring(0, Math.min(fDato.length(), 2));
+            String month = fDato.substring(2, Math.min(fDato.length(), 2));
+            String year = fDato.substring(4, Math.min(fDato.length(), 2));
+            return day + "-" + month + "-" + year;
+        }
+        return null;
+    }
+
     public String getUserType() {
         return userType;
     }
@@ -144,5 +154,4 @@ public class Person {
     public void setPicture(int picture){
         this.photoId = picture;
     }
-
 }

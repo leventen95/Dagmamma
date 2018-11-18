@@ -11,17 +11,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Arrays;
 import java.util.List;
 
+import no.hiof.leventen.actionbar.Classes.UserType;
 import no.hiof.leventen.actionbar.Firebasehandler.DidCreateUserCallback;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 
@@ -32,7 +34,7 @@ public class RegistrerActivity extends AppCompatActivity {
     Uri imageUri;
     EditText emailInput, passInput, navnInput, fDatoInput, beskrivelseInput, byInput;
     FirebaseAuth mAuth;
-
+    RadioGroup radioGroup;
     List<AuthUI.IdpConfig> providers = Arrays.asList(
             new AuthUI.IdpConfig.EmailBuilder().build(),
             new AuthUI.IdpConfig.PhoneBuilder().build()
@@ -44,6 +46,7 @@ public class RegistrerActivity extends AppCompatActivity {
     String fDato;
     String beskrivelse;
     String by;
+    String userType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class RegistrerActivity extends AppCompatActivity {
         fDatoInput = findViewById(R.id.registrerFodselEdit);
         beskrivelseInput = findViewById(R.id.editText11);
         byInput = findViewById(R.id.registrerByEdit);
+        radioGroup = findViewById(R.id.userTypeRadioGroup);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -76,6 +80,9 @@ public class RegistrerActivity extends AppCompatActivity {
 
             }
         });
+
+
+
     }
 
     private void openGallery() {
@@ -132,10 +139,12 @@ public class RegistrerActivity extends AppCompatActivity {
                             true);
 
                     FirebaseDatasource fb = new FirebaseDatasource();
-                    fb.addExtraInfoForUser(newPerson, FirebaseAuth.getInstance().getCurrentUser().getUid(), new DidCreateUserCallback() {
+                    fb.addExtraInfoForUser(newPerson, FirebaseAuth.getInstance().getCurrentUser().getUid(),userType, new DidCreateUserCallback() {
                         @Override
                         public void didCreateUser(boolean didComplete) {
-                            //TODO - Gå tilbake eller gå til main activity
+
+                            Intent intent = new Intent(RegistrerActivity.this, MainActivity.class);
+                            startActivity(intent);
                         }
                     });
 
@@ -146,4 +155,18 @@ public class RegistrerActivity extends AppCompatActivity {
 
     }
 
+
+    public void onRadioButtonClicked(View view) {
+
+        switch (view.getId()){
+            case R.id.registrerForelderCheckBox:
+                userType = UserType.FORELDRE.toString().toLowerCase();
+                break;
+            case R.id.registrerBarnepassCheckBox:
+                userType = UserType.DAGMAMMA.toString().toLowerCase();
+                break;
+        }
+
+
+    }
 }

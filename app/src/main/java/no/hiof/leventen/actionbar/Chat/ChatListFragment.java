@@ -59,6 +59,7 @@ public class ChatListFragment extends Fragment {
                     return false;
                 if(keyCode == KeyEvent.KEYCODE_ENTER ){
                     sendAction(view);
+                    messageInupt.setText("");
                     return true;
                 }
                 return false;
