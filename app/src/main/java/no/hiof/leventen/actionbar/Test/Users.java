@@ -1,12 +1,12 @@
 package no.hiof.leventen.actionbar.Test;
 
 public class Users {
-    public String name, image, description;
+    public String name, image, beskrivelse;
 
-    public Users(String name, String image, String description) {
+    public Users(String name, String image, String beskrivelse) {
         this.name = name;
         this.image = image;
-        this.description = description;
+        this.beskrivelse = beskrivelse;
     }
     public Users(){
 
@@ -29,11 +29,11 @@ public class Users {
     }
 
     public String getDescription() {
-        return description;
+        return beskrivelse;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.beskrivelse = description;
     }
 
     }
