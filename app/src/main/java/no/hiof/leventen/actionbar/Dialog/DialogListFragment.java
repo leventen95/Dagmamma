@@ -1,4 +1,4 @@
-package no.hiof.leventen.actionbar.Chat;
+package no.hiof.leventen.actionbar.Dialog;
 
 
 import android.os.Bundle;;
@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import no.hiof.leventen.actionbar.Chat.Message;
 import no.hiof.leventen.actionbar.R;
 
 

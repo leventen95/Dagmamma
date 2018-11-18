@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.method.KeyListener;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +40,18 @@ public class LogInActivity extends AppCompatActivity {
         Button registrerButton = findViewById(R.id.loginRegistrerButton);
         emailInput = findViewById(R.id.loginBrukerInput);
         passwordInput = findViewById(R.id.passordInput);
+        passwordInput.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+                if (keyEvent.getAction()!=KeyEvent.ACTION_DOWN)
+                    return false;
+                if(keyCode == KeyEvent.KEYCODE_ENTER ){
+                    signIn(view);
+                    return true;
+                }
+                return false;
+            }
+        });
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
@@ -48,26 +63,7 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = emailInput.getText().toString().trim();
-                String passord = passwordInput.getText().toString();
-
-                if(email.isEmpty() || passord.isEmpty()){
-                    System.out.println("Email eller passord er tomt");
-                    return;
-                }
-
-                mAuth.signInWithEmailAndPassword(email,passord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            System.out.println("Login success");
-                            startActivity(intent);
-                        }else{
-                            System.out.println("Something went wrong");
-                            System.out.println(task.getException().toString());
-                        }
-                    }
-                });
+                signIn(v);
             }
         });
 
@@ -76,6 +72,28 @@ public class LogInActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(LogInActivity.this, RegistrerActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+    private void signIn(View view) {
+        String email = emailInput.getText().toString().trim();
+        String passord = passwordInput.getText().toString();
+
+        if(email.isEmpty() || passord.isEmpty()){
+            System.out.println("Email eller passord er tomt");
+            return;
+        }
+
+        mAuth.signInWithEmailAndPassword(email,passord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    System.out.println("Login success");
+                    startActivity(intent);
+                }else{
+                    System.out.println("Something went wrong");
+                    System.out.println(task.getException().toString());
+                }
             }
         });
     }

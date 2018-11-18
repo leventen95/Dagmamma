@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import no.hiof.leventen.actionbar.Chat.ChatListFragment;
-import no.hiof.leventen.actionbar.Chat.DialogListFragment;
+import no.hiof.leventen.actionbar.Dialog.DialogListFragment;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 
 public class MainActivity extends AppCompatActivity {
