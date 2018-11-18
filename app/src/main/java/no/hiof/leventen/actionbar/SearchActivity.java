@@ -6,13 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -23,9 +23,9 @@ import com.google.firebase.database.Query;
 import no.hiof.leventen.actionbar.Test.Users;
 
 public class SearchActivity extends AppCompatActivity {
-    private EditText searchField;
-    private ImageButton searchBtn;
-    private RecyclerView recyclerView;
+    private EditText searchField; //
+    private ImageButton searchBtn;//
+    private RecyclerView recyclerView;//
     private DatabaseReference mUserDatabase;
 
 
@@ -36,29 +36,35 @@ public class SearchActivity extends AppCompatActivity {
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference("users");
 
-        searchField = (EditText) findViewById(R.id.search_field);
-        searchBtn = (ImageButton) findViewById(R.id.imageButton);
-        recyclerView = (RecyclerView) findViewById(R.id.result_list);
+        searchField = (EditText) findViewById(R.id.search_field);//
+        searchBtn = (ImageButton) findViewById(R.id.imageButton);//
+        recyclerView = (RecyclerView) findViewById(R.id.result_list);//
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                firebaseUserSearch();
+                String searchText = searchField.getText().toString();
+
+                firebaseUserSearch(searchText);
             }
         });
     }
 
-    private void firebaseUserSearch() {
-        Query query = mUserDatabase;
+    private void firebaseUserSearch(String searchText) {
+        Query query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
 
-        FirebaseRecyclerOptions<Users> options = new FirebaseRecyclerOptions.Builder<Users>()
+        /*FirebaseRecyclerOptions<Users> options = new FirebaseRecyclerOptions.Builder<Users>()
                 .setQuery(query,Users.class)
                 .build();
         FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users,
                 UsersViewHolder>(
-                options) {
+                options) {*/
+        FirebaseRecyclerOptions<Users> options = new FirebaseRecyclerOptions.Builder<Users>()// Disse skal slettes hvis kommentaren ovenfor fjernes
+                .setQuery(query, Users.class).build();//
+        FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users,//
+                UsersViewHolder>(options) {//
             @Override
             protected void onBindViewHolder(@NonNull UsersViewHolder viewHolder, int position, @NonNull Users model) {
 
@@ -69,21 +75,24 @@ public class SearchActivity extends AppCompatActivity {
             @NonNull
             @Override
             public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-                return null;
+                View view = LayoutInflater.from(viewGroup.getContext())
+                        .inflate(R.layout.cardview_layout, viewGroup, false);
+
+                return new UsersViewHolder(view);
             }
         };
 
         recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
-    public static class UsersViewHolder extends RecyclerView.ViewHolder{
+    public static class UsersViewHolder extends RecyclerView.ViewHolder{ //
 
         View mView;
 
-        public UsersViewHolder(@NonNull View itemView) {
+        public UsersViewHolder(@NonNull View itemView) { //
             super(itemView);
 
-            mView = itemView;
+            mView = itemView;//
         }
 
         public void setDetails(Context context, String userName, String description, String userImage){
@@ -97,7 +106,6 @@ public class SearchActivity extends AppCompatActivity {
             Glide.with(context).load(userImage).into(user_image);
 
         }
-
 
     }
 }
