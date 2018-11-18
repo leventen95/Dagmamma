@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -32,6 +34,7 @@ public class ChatListFragment extends Fragment {
     private String lastMessage;
     private String dialogUser;
     private String lastMessageTime;
+    //private FirebaseRecyclerAdapter;
 
     public ChatListFragment() {
         // Required empty public constructor

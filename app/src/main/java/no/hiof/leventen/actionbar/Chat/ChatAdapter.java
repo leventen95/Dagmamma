@@ -17,10 +17,17 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     List<Message> messages;
 
+
+    public ChatAdapter(List<Message> messages) {
+        this.messages = messages;
+    }
+
     public static class ChatViewHolder extends  RecyclerView.ViewHolder{
         TextView messageIn;
         TextView messageInDate;
         ImageView userImage;
+
+
 
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -29,8 +36,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             userImage = itemView.findViewById(R.id.user_image);
         }
     }
-
-    public ChatAdapter(List<Message> messages) { this.messages = messages; }
 
     @NonNull
     @Override

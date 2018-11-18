@@ -44,12 +44,10 @@ public class FirebaseDatasource {
         dbRef = FirebaseDatabase.getInstance().getReference();
 
         Task<Void> nameRef = dbRef.child("users").child(newUserData.getEmail()).child("username").setValue(newUserData.getName());
-        Task<Void> ageRef = dbRef.child("users").child(newUserData.getEmail()).child("age").setValue(newUserData.getAge());
-        Task<Void> tlfRef = dbRef.child("users").child(newUserData.getEmail()).child("tlfnr").setValue(newUserData.getTlfNr());
+        //Task<Void> ageRef = dbRef.child("users").child(newUserData.getEmail()).child("age").setValue(newUserData.getAge());
+        //Task<Void> tlfRef = dbRef.child("users").child(newUserData.getEmail()).child("tlfnr").setValue(newUserData.getTlfNr());
 
-        if(newUserData.getPassord() != null){
-            Task<Void> passRef = dbRef.child("users").child(newUserData.getEmail()).child("password").setValue(newUserData.getPassord());
-        }
+
 
 
         user = newUserData;
@@ -132,13 +130,13 @@ public class FirebaseDatasource {
 
     }
 
-    public void createUser(Person person, String password, DidCreateUserCallback callback){
+    public void addExtraInfoForUser(Person person, String userUid, DidCreateUserCallback callback){
 
-        dbRef = FirebaseDatabase.getInstance().getReference();
-        Task<Void> nameRef = dbRef.child("users").child(person.getEmail()).child("username").setValue(person.getName());
-        Task<Void> passRef = dbRef.child("users").child(person.getEmail()).child("password").setValue(password);
-        Task<Void> ageRef = dbRef.child("users").child(person.getEmail()).child("age").setValue(person.getAge());
-        Task<Void> tlfRef = dbRef.child("users").child(person.getEmail()).child("tlfnr").setValue(person.getTlfNr());
+        dbRef = FirebaseDatabase.getInstance().getReference().child("users").child(userUid);
+        Task<Void> nameRef = dbRef.child("name").setValue(person.getName());
+        Task<Void> beskrivelse = dbRef.child("beskrivelse").setValue(person.getProfilBeskrivelse());
+        Task<Void> by = dbRef.child("by").setValue(person.getBy());
+        Task<Void> fdato = dbRef.child("fdato").setValue(person.getfDato());
 
         callback.didCreateUser(true);
     }
@@ -160,8 +158,7 @@ public class FirebaseDatasource {
                         String tlfNr = dataSnapshot.child("tlfnr").getValue().toString();
                         String email = dataSnapshot.getKey();
 
-                        Person user = new Person(userName,age,22,email,tlfNr,"222");
-                        loginCallBack.onLoginBack(user);
+                        loginCallBack.onLoginBack(null);
                         }
 
                     }
@@ -172,7 +169,9 @@ public class FirebaseDatasource {
                         System.out.println(databaseError.getMessage());
                     }
                 });
-
     }
+
+
+
 
 }

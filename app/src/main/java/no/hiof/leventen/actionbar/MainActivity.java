@@ -13,8 +13,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
+<<<<<<< HEAD
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+=======
 import java.util.ArrayList;
 import java.util.Collections;
+>>>>>>> a7d840fd629cfa22c77abcf78ebdb13106d949cd
 import java.util.List;
 import java.util.Locale;
 
@@ -92,13 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void testCreate(){
 
-        List<Person> testData = Person.getData();
-        test.createUser(testData.get(0), "passord123", new DidCreateUserCallback() {
-            @Override
-            public void didCreateUser(boolean didComplete) {
-                System.out.println(didComplete);
-            }
-        });
+
     }
 
     public void navigateToSearch(View view) {
