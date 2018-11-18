@@ -11,12 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
-
-import com.google.firebase.auth.FirebaseAuth;
-
 import no.hiof.leventen.actionbar.Chat.ChatListFragment;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
-import no.hiof.leventen.actionbar.Firebasehandler.LoginCallBack;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     private MinSideFragment minSideFragment;
     public FirebaseDatasource test = new FirebaseDatasource();
     private Button goToSearch;
-    private FirebaseAuth mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,9 +35,6 @@ public class MainActivity extends AppCompatActivity {
         annonserFragment = new AnnonserFragment();
         chatListFragment = new ChatListFragment();
         minSideFragment = new MinSideFragment();
-
-
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
