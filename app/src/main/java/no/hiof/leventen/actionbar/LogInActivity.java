@@ -53,6 +53,7 @@ public class LogInActivity extends AppCompatActivity {
 
                 if(email.isEmpty() || passord.isEmpty()){
                     System.out.println("Email eller passord er tomt");
+                    return;
                 }
 
                 mAuth.signInWithEmailAndPassword(email,passord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {

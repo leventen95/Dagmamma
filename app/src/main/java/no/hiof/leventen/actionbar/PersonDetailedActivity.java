@@ -12,11 +12,12 @@ public class PersonDetailedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_person_detailed);
 
-        int id = getIntent().getIntExtra(PERSON_ID_KEY,1);
-
+        String name = getIntent().getStringExtra("name");
+        String alder = getIntent().getStringExtra("alder");
+        String desc = getIntent().getStringExtra("desc");
         FragmentManager fragmentManager = getSupportFragmentManager();
         PersonDetailedFragment personDetailedFragment = (PersonDetailedFragment) fragmentManager.findFragmentById(R.id.personDetailedFragment);
 
-        personDetailedFragment.setDisplayedPersonDetail(id);
+        personDetailedFragment.setDisplayedPersonDetail(name,alder,desc);
     }
 }

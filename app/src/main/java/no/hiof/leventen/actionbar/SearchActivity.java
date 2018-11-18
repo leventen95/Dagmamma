@@ -19,8 +19,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-
-import no.hiof.leventen.actionbar.Test.Users;
+import no.hiof.leventen.actionbar.Person;
 
 public class SearchActivity extends AppCompatActivity {
     private EditText searchField; //
@@ -61,15 +60,14 @@ public class SearchActivity extends AppCompatActivity {
         FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users,
                 UsersViewHolder>(
                 options) {*/
-        FirebaseRecyclerOptions<Users> options = new FirebaseRecyclerOptions.Builder<Users>()// Disse skal slettes hvis kommentaren ovenfor fjernes
-                .setQuery(query, Users.class).build();//
-        FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users,//
-                UsersViewHolder>(options) {//
+        FirebaseRecyclerOptions<Person> options = new FirebaseRecyclerOptions.Builder<Person>()// Disse skal slettes hvis kommentaren ovenfor fjernes
+                .setQuery(query, Person.class).build();//
+        FirebaseRecyclerAdapter<Person, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Person,
+                UsersViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull UsersViewHolder viewHolder, int position, @NonNull Users model) {
+            protected void onBindViewHolder(@NonNull UsersViewHolder viewHolder, int position, @NonNull Person model) {
 
-                viewHolder.setDetails(getApplicationContext(),model.getName(), model.getDescription(), model.getImage());
-
+                viewHolder.setDetails(getApplicationContext(),model.getName(), model.getbeskrivelse(), model.getPhotoId());
             }
 
             @NonNull
@@ -85,14 +83,14 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
-    public static class UsersViewHolder extends RecyclerView.ViewHolder{ //
+    public static class UsersViewHolder extends RecyclerView.ViewHolder{
 
         View mView;
 
-        public UsersViewHolder(@NonNull View itemView) { //
+        public UsersViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            mView = itemView;//
+            mView = itemView;
         }
 
         public void setDetails(Context context, String userName, String description, String userImage){
@@ -106,6 +104,5 @@ public class SearchActivity extends AppCompatActivity {
             Glide.with(context).load(userImage).into(user_image);
 
         }
-
     }
 }

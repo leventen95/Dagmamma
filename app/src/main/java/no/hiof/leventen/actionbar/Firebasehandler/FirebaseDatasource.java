@@ -124,21 +124,33 @@ public class FirebaseDatasource {
 
     }
 
+
+    public void createConversation(){
+
+        DatabaseReference convRef = dbRef.child("Chat").push();
+        String key = convRef.getKey();
+
+        DatabaseReference newRef = dbRef.child("Chat").child(key);
+
+
+    }
+
+
     public void getConversations(final Person thisUser, final ConversationCallback callback){
         DatabaseReference chatRef = dbRef.child("chat");
         final List<Conversation> convList = new ArrayList<>();
 
-        for(final String conversationId: thisUser.getChatConversations()){
+        for(String conversationId: thisUser.getChatConversations()){
+
             final DatabaseReference conversation = chatRef.child(conversationId);
 
             conversation.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    Conversation conversationItem = new Conversation();
-                    conversationItem.setConversationId(conversationId);
-                    conversationItem.setTo(dataSnapshot.child("user1").getValue().toString());
 
-                    convList.add(conversationItem);
+
+
+
                 }
 
                 @Override
