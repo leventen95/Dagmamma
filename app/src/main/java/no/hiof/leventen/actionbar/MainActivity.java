@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import no.hiof.leventen.actionbar.Chat.ChatListFragment;
-import no.hiof.leventen.actionbar.Chat.DialogFragment;
+import no.hiof.leventen.actionbar.Chat.DialogListFragment;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout frameLayout;
     private AnnonserFragment annonserFragment;
     private ChatListFragment chatListFragment;
-    //private DialogFragment dialogFragment;
+    private DialogListFragment dialogListFragment;
     private MinSideFragment minSideFragment;
     public FirebaseDatasource test = new FirebaseDatasource();
     private Button goToSearch;
@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
 
         frameLayout = (FrameLayout) findViewById(R.id.main_frame);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.main_nav);
-        goToSearch = findViewById(R.id.goToSearchBtn);
+       // goToSearch = findViewById(R.id.goToSearchBtn);
 
         annonserFragment = new AnnonserFragment();
         chatListFragment = new ChatListFragment();
-        //dialogFragment = new DialogFragment();
+        dialogListFragment = new DialogListFragment();
         minSideFragment = new MinSideFragment();
 
 
@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
                         setFragment(annonserFragment);
                         return true;
                     case R.id.nav_chat:
-                        setFragment(chatListFragment);
+                     //   setFragment(chatListFragment);
+                        setFragment(dialogListFragment);
                         return true;
                     case R.id.nav_minSide:
                         setFragment(minSideFragment);

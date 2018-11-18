@@ -19,11 +19,11 @@ import no.hiof.leventen.actionbar.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DialogFragment extends Fragment {
+public class DialogListFragment extends Fragment {
     RecyclerView recyclerView;
     private List<Message> dialog;
 
-    public DialogFragment() {
+    public DialogListFragment() {
         // Required empty public constructor
     }
 
@@ -31,8 +31,9 @@ public class DialogFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.cardview_chat_list, container, false);
-        recyclerView = (RecyclerView) view.findViewById(R.id.cardview_dialog_item);
+        View view = inflater.inflate(R.layout.cardview_dialog_list, container, false);
+       // recyclerView = (RecyclerView) view.findViewById(R.id.cardview_dialog_item);
+        recyclerView = (RecyclerView) view.findViewById(R.id.dialogRecyclerView);
         recyclerView.hasFixedSize();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);

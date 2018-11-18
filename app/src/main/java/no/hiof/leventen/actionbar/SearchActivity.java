@@ -13,7 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.bumptech.glide.Glide;
+//import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
@@ -67,7 +67,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             protected void onBindViewHolder(@NonNull UsersViewHolder viewHolder, int position, @NonNull Person model) {
 
-                viewHolder.setDetails(getApplicationContext(),model.getName(), model.getbeskrivelse(), model.getPhotoId());
+        //        viewHolder.setDetails(getApplicationContext(),model.getName(), model.getbeskrivelse(), model.getPhotoId());
             }
 
             @NonNull
@@ -101,7 +101,7 @@ public class SearchActivity extends AppCompatActivity {
             user_name.setText(userName);
             user_description.setText(description);
 
-            Glide.with(context).load(userImage).into(user_image);
+        //    Glide.with(context).load(userImage).into(user_image);
 
         }
     }

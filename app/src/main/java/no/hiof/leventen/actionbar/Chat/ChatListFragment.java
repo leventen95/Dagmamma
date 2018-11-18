@@ -59,7 +59,6 @@ public class ChatListFragment extends Fragment {
                     return false;
                 if(keyCode == KeyEvent.KEYCODE_ENTER ){
                     sendAction(view);
-                    messageInupt.setText("");
                     return true;
                 }
                 return false;
@@ -101,6 +100,7 @@ public class ChatListFragment extends Fragment {
         } else {
             Toast.makeText(getContext(), "Sender melding..", Toast.LENGTH_LONG).show();
             // TODO - Send til database og legg til i listen slik at man slipper å hente data fra database hver gang man sender mld
+            messageInupt.setText("");
         }
     }
 }
