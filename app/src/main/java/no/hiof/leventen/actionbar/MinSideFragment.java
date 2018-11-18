@@ -12,8 +12,8 @@ import android.widget.ImageButton;
 
 
 public class MinSideFragment extends Fragment {
-    Button button;
-    ImageButton imageButton;
+    ImageButton redigerSideButton;
+    ImageButton btnSignOut;
 
     private RedigerSideFragment redigerSideFragment;
     private FrameLayout frameRedigerLayout;
@@ -22,7 +22,7 @@ public class MinSideFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_min_side, container, false);
 
-        ImageButton redigerSideButton = view.findViewById(R.id.redigerSideButton);
+        redigerSideButton = view.findViewById(R.id.redigerSideButton);
         redigerSideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

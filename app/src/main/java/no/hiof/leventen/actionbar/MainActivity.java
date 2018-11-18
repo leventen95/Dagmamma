@@ -15,6 +15,7 @@ import android.widget.FrameLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
 import no.hiof.leventen.actionbar.Chat.ChatListFragment;
+import no.hiof.leventen.actionbar.Chat.DialogFragment;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 import no.hiof.leventen.actionbar.Firebasehandler.LoginCallBack;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private FrameLayout frameLayout;
     private AnnonserFragment annonserFragment;
     private ChatListFragment chatListFragment;
+    //private DialogFragment dialogFragment;
     private MinSideFragment minSideFragment;
     public FirebaseDatasource test = new FirebaseDatasource();
     private Button goToSearch;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         annonserFragment = new AnnonserFragment();
         chatListFragment = new ChatListFragment();
+        //dialogFragment = new DialogFragment();
         minSideFragment = new MinSideFragment();
 
 
