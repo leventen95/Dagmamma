@@ -1,25 +1,42 @@
 package no.hiof.leventen.actionbar;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class LogInActivity extends AppCompatActivity {
 
     Button button;
-
+    private FirebaseAuth mAuth;
+    private EditText emailInput, passwordInput;
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_log_in);
 
+        intent = new Intent(LogInActivity.this, MainActivity.class);
+
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+            startActivity(intent);
+        }
+
+        mAuth = FirebaseAuth.getInstance();
+
+        setContentView(R.layout.activity_log_in);
         Button loginButton = findViewById(R.id.loginButton);
         Button registrerButton = findViewById(R.id.loginRegistrerButton);
+        emailInput = findViewById(R.id.loginBrukerInput);
+        passwordInput = findViewById(R.id.passordInput);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
@@ -31,15 +48,25 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /*Her skal det legges inn kode som sjekker at en bruker finnes.
-                Om noe er tastet inn feil vil en warning dukke opp med vennligst prøv igjen.
-                Om tiden strekker til legges det også inn en glemt passord egenskap, der man vil
-                automatisk sende en mail til brukernavn(mail) hvor man kan følge en link og
-                endre sitt passord.
-                 */
+                String email = emailInput.getText().toString().trim();
+                String passord = passwordInput.getText().toString();
 
-                Intent intent = new Intent(LogInActivity.this, MainActivity.class);
-                startActivity(intent);
+                if(email.isEmpty() || passord.isEmpty()){
+                    System.out.println("Email eller passord er tomt");
+                }
+
+                mAuth.signInWithEmailAndPassword(email,passord).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            System.out.println("Login success");
+                            startActivity(intent);
+                        }else{
+                            System.out.println("Something went wrong");
+                            System.out.println(task.getException().toString());
+                        }
+                    }
+                });
             }
         });
 

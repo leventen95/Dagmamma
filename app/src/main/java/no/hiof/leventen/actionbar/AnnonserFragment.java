@@ -14,12 +14,15 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.hiof.leventen.actionbar.Classes.UserType;
+import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
+
 
 public class AnnonserFragment extends Fragment {
     RecyclerView recyclerView;
     private List<Person> personList;
     RecyclerViewAdapter recyclerViewAdapter;
-
+    FirebaseDatasource datasource;
     public AnnonserFragment() {
         // Required empty public constructor
     }
@@ -33,21 +36,17 @@ public class AnnonserFragment extends Fragment {
         recyclerView.hasFixedSize();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+
+        datasource = new FirebaseDatasource();
+
         initializeData();
         initializeAdapter();
         return fragment_annonser;
     }
     private void initializeData(){
         personList = new ArrayList<>();
-        personList = Person.getData();
-        /*personList.add(new Person("Emma Watson",29,R.drawable.person));
-        personList.add(new Person("Scarlet Johansson",33,R.drawable.person));
-        personList.add(new Person("Keanu Reeves",54,R.drawable.person));
-        personList.add(new Person("Sandra Bullock",54,R.drawable.person));
-        personList.add(new Person("Sandra Bullock",54,R.drawable.person));
-        personList.add(new Person("Keanu Reeves",54,R.drawable.person));
-        personList.add(new Person("Keanu Reeves",54,R.drawable.person));
-        personList.add(new Person("Sandra Bullock",54,R.drawable.person));*/
+        personList = datasource.getAllUsers(UserType.DAGMAMMA);
+
     }
     private void initializeAdapter(){
         RecyclerViewAdapter.RecyclerViewClickListener clickListener = new RecyclerViewAdapter.RecyclerViewClickListener() {
