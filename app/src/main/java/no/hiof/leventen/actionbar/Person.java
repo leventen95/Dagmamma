@@ -144,5 +144,4 @@ public class Person {
     public void setPicture(int picture){
         this.photoId = picture;
     }
-
 }
