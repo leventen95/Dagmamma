@@ -24,7 +24,8 @@
             android:resource="@xml/message_rounded_borders_layout" />
 
         <activity android:name=".RedigerSideActivity" />
-        <activity android:name=".RegistrerActivity"></activity>
+        <activity android:name=".RegistrerActivity" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>

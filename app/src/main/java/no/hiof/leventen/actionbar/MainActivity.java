@@ -1,15 +1,22 @@
 package no.hiof.leventen.actionbar;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 import no.hiof.leventen.actionbar.Chat.ChatListFragment;
 import no.hiof.leventen.actionbar.Firebasehandler.DidCreateUserCallback;
@@ -24,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private ChatListFragment chatListFragment;
     private MinSideFragment minSideFragment;
     public FirebaseDatasource test = new FirebaseDatasource();
+    private Button goToSearch;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         frameLayout = (FrameLayout) findViewById(R.id.main_frame);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.main_nav);
+        goToSearch = findViewById(R.id.goToSearchBtn);
 
         annonserFragment = new AnnonserFragment();
         chatListFragment = new ChatListFragment();
@@ -89,5 +99,10 @@ public class MainActivity extends AppCompatActivity {
                 System.out.println(didComplete);
             }
         });
+    }
+
+    public void navigateToSearch(View view) {
+        Intent intent = new Intent(MainActivity.this,SearchActivity.class);
+        startActivity(intent);
     }
 }
