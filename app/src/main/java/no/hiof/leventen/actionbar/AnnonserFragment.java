@@ -15,12 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import no.hiof.leventen.actionbar.Classes.UserType;
+import no.hiof.leventen.actionbar.Firebasehandler.DidGetUsersCallBack;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 
 
 public class AnnonserFragment extends Fragment {
     RecyclerView recyclerView;
-    private List<Person> personList;
+    private List<Person> userList;
     RecyclerViewAdapter recyclerViewAdapter;
     FirebaseDatasource datasource;
     public AnnonserFragment() {
@@ -40,19 +41,25 @@ public class AnnonserFragment extends Fragment {
         datasource = new FirebaseDatasource();
 
         initializeData();
-        initializeAdapter();
+
         return fragment_annonser;
     }
     private void initializeData(){
-        personList = new ArrayList<>();
-        personList = datasource.getAllUsers(UserType.DAGMAMMA);
+        userList = new ArrayList<>();
+        datasource.getAllUsers(UserType.DAGMAMMA, new DidGetUsersCallBack() {
+            @Override
+            public void didRecieve(List<Person> personList) {
+                userList = personList;
+                initializeAdapter();
+            }
+        });
 
     }
     private void initializeAdapter(){
         RecyclerViewAdapter.RecyclerViewClickListener clickListener = new RecyclerViewAdapter.RecyclerViewClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(getActivity(), personList.get(position).getName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), userList.get(position).getName(), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(getActivity(), PersonDetailedActivity.class);
                 intent.putExtra(PersonDetailedActivity.PERSON_ID_KEY, 1);
@@ -60,7 +67,7 @@ public class AnnonserFragment extends Fragment {
             }
         };
 
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(personList, clickListener);
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(userList, clickListener);
         recyclerView.setAdapter(adapter);
 
     }

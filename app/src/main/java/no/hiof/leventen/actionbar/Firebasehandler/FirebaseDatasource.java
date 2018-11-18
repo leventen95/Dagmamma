@@ -54,8 +54,8 @@ public class FirebaseDatasource {
         callback.didComplete(true);
     }
 
-    public List<Person> getAllUsers(UserType searchParam){
-        ArrayList<Person> users = new ArrayList<>();
+    public void getAllUsers(UserType searchParam, final DidGetUsersCallBack callBack){
+        final ArrayList<Person> users = new ArrayList<>();
 
         DatabaseReference usersRef = dbRef.child("users").child(searchParam.toString().toLowerCase());
 
@@ -72,8 +72,9 @@ public class FirebaseDatasource {
                             snapshot.child("by").getValue().toString(),
                             snapshot.child("fdato").getValue().toString(),
                             false);
+                    users.add(person);
                 }
-
+                callBack.didRecieve(users);
             }
 
             @Override
@@ -81,8 +82,6 @@ public class FirebaseDatasource {
 
             }
         });
-
-        return users;
     }
 
     public void getChatMessages(String chatId, final ChatCallback callback){
