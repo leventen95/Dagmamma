@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         annonserFragment = new AnnonserFragment();
         chatListFragment = new ChatListFragment();
         minSideFragment = new MinSideFragment();
-        testLogin();
 
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
