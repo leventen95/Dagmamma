@@ -13,17 +13,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-<<<<<<< HEAD
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-=======
-import java.util.ArrayList;
-import java.util.Collections;
->>>>>>> a7d840fd629cfa22c77abcf78ebdb13106d949cd
-import java.util.List;
-import java.util.Locale;
-
 import no.hiof.leventen.actionbar.Chat.ChatListFragment;
 import no.hiof.leventen.actionbar.Firebasehandler.DidCreateUserCallback;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
@@ -80,19 +69,6 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.main_frame,fragment);
         fragmentTransaction.commit();
 
-    }
-
-    private void testLogin(){
-        test.loginUser("minkulemeial", "passord123", new LoginCallBack() {
-            @Override
-            public void onLoginBack(Person user) {
-                if(user != null){
-                    System.out.println("user existed, now log in");
-                }else{
-                    System.out.println("User not found");
-                }
-            }
-        });
     }
 
 

@@ -143,35 +143,4 @@ public class FirebaseDatasource {
 
 
 
-    public void loginUser(String email, final String password, final LoginCallBack loginCallBack){
-        dbRef = FirebaseDatabase.getInstance().getReference();
-
-        dbRef.child("users").child(email)
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String passFromDB = dataSnapshot.child("password").getValue().toString();
-
-                    if(password.equalsIgnoreCase(passFromDB)){
-                        String userName = dataSnapshot.child("username").getValue().toString();
-                        int age =  Integer.valueOf(dataSnapshot.child("age").getValue().toString());
-                        String tlfNr = dataSnapshot.child("tlfnr").getValue().toString();
-                        String email = dataSnapshot.getKey();
-
-                        loginCallBack.onLoginBack(null);
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                    loginCallBack.onLoginBack(null);
-                        System.out.println(databaseError.getMessage());
-                    }
-                });
-    }
-
-
-
-
 }
