@@ -59,7 +59,7 @@ public class PersonDetailedFragment extends Fragment {
 
         Person person = personList.get(personIndex);
         personNameTextView.setText(person.getName());
-        personAlderTextView.setText(person.getAge() + " år.");
+        //personAlderTextView.setText(person.getAge() + " år.");
 
         Drawable picture = ContextCompat.getDrawable(getActivity(), person.getPhotoId());
         if(picture != null){

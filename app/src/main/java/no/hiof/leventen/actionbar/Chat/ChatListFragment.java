@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +28,7 @@ public class ChatListFragment extends Fragment {
     private String lastMessage;
     private String dialogUser;
     private String lastMessageTime;
+    //private FirebaseRecyclerAdapter;
 
     public ChatListFragment() {
         // Required empty public constructor
@@ -63,6 +66,9 @@ public class ChatListFragment extends Fragment {
         ChatAdapter adapter = new ChatAdapter(d1);
         recyclerView.setAdapter(adapter);
     }
+
+
+
 }
 
 

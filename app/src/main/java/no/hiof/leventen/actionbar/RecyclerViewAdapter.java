@@ -62,7 +62,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public void onBindViewHolder(@NonNull PersonViewHolder personViewHolder, int i) {
         personViewHolder.personName.setText(persons.get(i).name);
-        personViewHolder.personAge.setText(persons.get(i).age+" år");
+        //personViewHolder.personAge.setText(persons.get(i).age+" år");
         personViewHolder.personPhoto.setImageResource(persons.get(i).photoId);
         personViewHolder.person = persons.get(i);
     }

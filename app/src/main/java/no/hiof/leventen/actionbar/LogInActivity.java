@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class LogInActivity extends AppCompatActivity {
 
     Button button;
@@ -17,6 +20,12 @@ public class LogInActivity extends AppCompatActivity {
 
         Button loginButton = findViewById(R.id.loginButton);
         Button registrerButton = findViewById(R.id.loginRegistrerButton);
+
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if(currentUser != null){
+            FirebaseAuth.getInstance().signOut();
+
+        }
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

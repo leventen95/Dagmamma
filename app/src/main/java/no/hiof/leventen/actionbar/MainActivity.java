@@ -9,6 +9,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.List;
 
 import no.hiof.leventen.actionbar.Chat.ChatListFragment;
@@ -82,12 +85,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void testCreate(){
 
-        List<Person> testData = Person.getData();
-        test.createUser(testData.get(0), "passord123", new DidCreateUserCallback() {
-            @Override
-            public void didCreateUser(boolean didComplete) {
-                System.out.println(didComplete);
-            }
-        });
+
     }
 }
