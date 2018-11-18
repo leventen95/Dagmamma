@@ -60,9 +60,12 @@ public class AnnonserFragment extends Fragment {
             @Override
             public void onClick(View view, int position) {
                 Toast.makeText(getActivity(), userList.get(position).getName(), Toast.LENGTH_SHORT).show();
-
+                Person thisUser = userList.get(position);
                 Intent intent = new Intent(getActivity(), PersonDetailedActivity.class);
-                intent.putExtra(PersonDetailedActivity.PERSON_ID_KEY, 1);
+                intent.putExtra("name",thisUser.getName());
+                intent.putExtra("alder",thisUser.getfDato());
+                intent.putExtra("bilde","");
+                intent.putExtra("desc",thisUser.getProfilBeskrivelse());
                 startActivity(intent);
             }
         };

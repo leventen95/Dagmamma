@@ -43,7 +43,7 @@ public class PersonDetailedFragment extends Fragment {
         personImageView = view.findViewById(R.id.imageViewPerson);
 
         personIndex = savedInstanceState == null? DEFAULT_PERSON_INDEX : savedInstanceState.getInt(PERSON_INDEX, DEFAULT_PERSON_INDEX);
-        setDisplayedPersonDetail(personIndex);
+        //setDisplayedPersonDetail(personIndex);
 
         return view;
     }
@@ -53,18 +53,13 @@ public class PersonDetailedFragment extends Fragment {
         outState.putInt(PERSON_INDEX,personIndex);
     }
 
-    public void setDisplayedPersonDetail(int personIndex) {
-        this.personIndex = personIndex;
-        personList = Person.getData();
+    public void setDisplayedPersonDetail(String name, String alder, String desc) {
 
-        Person person = personList.get(personIndex);
-        personNameTextView.setText(person.getName());
-        //personAlderTextView.setText(person.getAge() + " år.");
 
-        Drawable picture = ContextCompat.getDrawable(getActivity(), person.getPhotoId());
-        if(picture != null){
-            personImageView.setImageDrawable(picture);
-        }
+        personNameTextView.setText(name);
+        personAlderTextView.setText(alder);
+        personDescriptionTextView.setText(desc);
+
     }
 
 }
