@@ -20,7 +20,7 @@ import no.hiof.leventen.actionbar.R;
  * A simple {@link Fragment} subclass.
  */
 public class DialogFragment extends Fragment {
-/*    RecyclerView recyclerView;
+    RecyclerView recyclerView;
     private List<Message> dialog;
 
     public DialogFragment() {
@@ -31,14 +31,14 @@ public class DialogFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View fragment_dialog = inflater.inflate(R.layout.fragment_dialog, container, false);
-        recyclerView = (RecyclerView) fragment_dialog.findViewById(R.id.recyclerView);
+        View view = inflater.inflate(R.layout.cardview_chat_list, container, false);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         recyclerView.hasFixedSize();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         initializeData();
     //    initializeAdapter();
-        return fragment_dialog;
+        return view;
     }
     private void initializeData(){
         dialog = new ArrayList<>();
@@ -48,5 +48,5 @@ public class DialogFragment extends Fragment {
         dialog.add(new Message("Men jeg kjenner en person som har unger da!", "Joakim Granaas", new Date(81996972)));
         dialog.add(new Message("Javell? Hvem da?", "Fredrik Kalsberg", new Date(81996972)));
         dialog.add(new Message("Han heter Rolf!", "Joakim Granaas", new Date(81996972)));
-    }*/
+    }
 }
