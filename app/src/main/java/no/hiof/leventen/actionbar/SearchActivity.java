@@ -6,9 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -26,6 +30,7 @@ public class SearchActivity extends AppCompatActivity {
     private ImageButton searchBtn;//
     private RecyclerView recyclerView;//
     private DatabaseReference mUserDatabase;
+    private int clicked = 0;
 
 
     @Override
@@ -48,6 +53,61 @@ public class SearchActivity extends AppCompatActivity {
 
                 firebaseUserSearch(searchText);
             }
+        });
+
+        /*searchField.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                    searchField.setText("");
+
+                    String searchText = searchField.getText().toString();
+                    firebaseUserSearch(searchText);
+                return true;
+            }
+        });*/
+
+        searchField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus && clicked == 0){
+                    searchField.setText("");
+                    clicked = 1;
+
+                    String searchText = searchField.getText().toString();
+                    firebaseUserSearch(searchText);
+                    detectChangeInEditText((EditText) v);
+                }
+                else if(hasFocus && clicked == 1){
+                    /*String searchText = searchField.getText().toString();
+                    firebaseUserSearch(searchText);*/
+                    detectChangeInEditText((EditText) v);
+                }
+                //This one doesn't work yet, cuz wherever i click in the emulator, the edittext still has focus.... strange
+                else if(!hasFocus){
+                    InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(v.getWindowToken(),0);
+                }
+            }
+        });
+    }
+    private void detectChangeInEditText(EditText editText){
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String searchText = searchField.getText().toString();
+                firebaseUserSearch(searchText);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+
+
         });
     }
 
