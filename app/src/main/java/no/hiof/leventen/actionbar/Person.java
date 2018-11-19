@@ -17,6 +17,8 @@ public class Person {
     private String by;
     private String fDato;
 
+    public Person() {
+    }
 
     public Person(String name, String email, String firebaseUid, String profilBeskrivelse, String userType, String by, String fDato, boolean isThisUser) {
         this.name = name;

@@ -33,7 +33,7 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        mUserDatabase = FirebaseDatabase.getInstance().getReference("users");
+        mUserDatabase = FirebaseDatabase.getInstance().getReference("users/dagmamma/");
 
         searchField = (EditText) findViewById(R.id.search_field);//
         searchBtn = (ImageButton) findViewById(R.id.imageButton);//
@@ -52,6 +52,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void firebaseUserSearch(String searchText) {
+
+
         Query query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
 
         /*FirebaseRecyclerOptions<Users> options = new FirebaseRecyclerOptions.Builder<Users>()
@@ -61,13 +63,17 @@ public class SearchActivity extends AppCompatActivity {
                 UsersViewHolder>(
                 options) {*/
         FirebaseRecyclerOptions<Person> options = new FirebaseRecyclerOptions.Builder<Person>()// Disse skal slettes hvis kommentaren ovenfor fjernes
-                .setQuery(query, Person.class).build();//
+                .setQuery(query, Person.class)
+                .setLifecycleOwner(this)
+                .build();//
+
         FirebaseRecyclerAdapter<Person, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Person,
                 UsersViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull UsersViewHolder viewHolder, int position, @NonNull Person model) {
 
         //        viewHolder.setDetails(getApplicationContext(),model.getName(), model.getbeskrivelse(), model.getPhotoId());
+                viewHolder.setDetails(getApplicationContext(),model.getName(), "Hei", "");
             }
 
             @NonNull
@@ -95,11 +101,11 @@ public class SearchActivity extends AppCompatActivity {
 
         public void setDetails(Context context, String userName, String description, String userImage){
             TextView user_name = (TextView) mView.findViewById(R.id.person_name);
-            TextView user_description = (TextView) mView.findViewById(R.id.textViewDescription);
+            //TextView user_description = (TextView) mView.findViewById(R.id.textViewDescription);
             ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
 
             user_name.setText(userName);
-            user_description.setText(description);
+            //user_description.setText(description);
 
         //    Glide.with(context).load(userImage).into(user_image);
 
