@@ -41,7 +41,7 @@ public class FirebaseDatasource {
                 Person person = new Person(dataSnapshot.child("name").getValue().toString(),
                         dataSnapshot.child("email").getValue().toString(),
                         dataSnapshot.getKey(),
-                        dataSnapshot.child("beskrivelse").toString(),
+                        dataSnapshot.child("beskrivelse").getValue().toString(),
                         type.toString(),
                         dataSnapshot.child("by").getValue().toString(),
                         dataSnapshot.child("fdato").getValue().toString(),
