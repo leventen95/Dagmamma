@@ -25,7 +25,8 @@
 
         <activity android:name=".RedigerSideActivity" />
         <activity android:name=".RegistrerActivity" />
-        <activity android:name=".SearchActivity"></activity>
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".Chat.ChatListActivity"></activity>
     </application>
 
 </manifest>

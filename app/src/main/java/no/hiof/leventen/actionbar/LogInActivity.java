@@ -10,6 +10,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -80,7 +81,7 @@ public class LogInActivity extends AppCompatActivity {
         String passord = passwordInput.getText().toString();
 
         if(email.isEmpty() || passord.isEmpty()){
-            System.out.println("Email eller passord er tomt");
+            Toast.makeText(getApplicationContext(), "Fyll inn begge felter", Toast.LENGTH_LONG);
             return;
         }
 
@@ -88,10 +89,10 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    System.out.println("Login success");
+                    Toast.makeText(getApplicationContext(), "Innlogging vellykket!", Toast.LENGTH_LONG);
                     startActivity(intent);
                 }else{
-                    System.out.println("Something went wrong");
+                    Toast.makeText(getApplicationContext(), "Innlogging feilet", Toast.LENGTH_LONG);
                     System.out.println(task.getException().toString());
                 }
             }

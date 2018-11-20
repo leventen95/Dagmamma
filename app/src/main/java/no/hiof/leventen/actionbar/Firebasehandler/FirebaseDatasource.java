@@ -92,7 +92,7 @@ public class FirebaseDatasource {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                Message newMessage = new Message();
+                //Message newMessage = new Message();
 
 
             }

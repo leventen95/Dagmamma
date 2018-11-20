@@ -15,11 +15,11 @@ import no.hiof.leventen.actionbar.R;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
 
-    List<Message> messages;
+    Conversation conversation;
 
 
-    public ChatAdapter(List<Message> messages) {
-        this.messages = messages;
+    public ChatAdapter(Conversation conversation) {
+        this.conversation = conversation;
     }
 
     public static class ChatViewHolder extends  RecyclerView.ViewHolder{
@@ -47,8 +47,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder chatViewHolder, int i) {
-        chatViewHolder.messageIn.setText(messages.get(i).getMessageText());
-        chatViewHolder.messageInDate.setText(new SimpleDateFormat("MM/dd/yyyy").format(messages.get(i).getDate()));
+        chatViewHolder.messageIn.setText(conversation.getConversationMessages().get(i).getMessageText());
+        //chatViewHolder.messageIn.setText(messages.get(i).getMessageText());
+     //   chatViewHolder.messageInDate.setText(new SimpleDateFormat("MM/dd/yyyy").format(messages.get(i).getDate()));
+        chatViewHolder.messageInDate.setText(new SimpleDateFormat("MM/dd/yyyy").format(conversation.getConversationMessages().get(i).getDate()));
     //    chatViewHolder.userImage.setImageResource(persons.get(i).getMessageUser());
     }
 
@@ -59,6 +61,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     @Override
     public int getItemCount() {
-        return messages.size();
+        return conversation.getConversationMessages().size();
     }
 }
