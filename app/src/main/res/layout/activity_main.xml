@@ -29,12 +29,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true">
 
-        <Button
-            android:id="@+id/goToSearchBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="navigateToSearch"
-            android:text="Go to search" />
     </FrameLayout>
 
 

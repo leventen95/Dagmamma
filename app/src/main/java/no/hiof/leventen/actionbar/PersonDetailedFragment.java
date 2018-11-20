@@ -8,8 +8,10 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class PersonDetailedFragment extends Fragment {
     private TextView personDescriptionTextView;
     private ImageView personImageView;
     private int personIndex;
+    private Button goChat;
 
 
     public PersonDetailedFragment() {
@@ -41,9 +44,18 @@ public class PersonDetailedFragment extends Fragment {
         personAlderTextView = view.findViewById(R.id.textViewAlder);
         personDescriptionTextView = view.findViewById(R.id.textViewDescription);
         personImageView = view.findViewById(R.id.imageViewPerson);
+        goChat = view.findViewById(R.id.goToChatBtn);
 
         personIndex = savedInstanceState == null? DEFAULT_PERSON_INDEX : savedInstanceState.getInt(PERSON_INDEX, DEFAULT_PERSON_INDEX);
         //setDisplayedPersonDetail(personIndex);
+
+        goChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getActivity(),"Suck my ass",Toast.LENGTH_LONG);
+                toast.show();
+            }
+        });
 
         return view;
     }

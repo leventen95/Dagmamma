@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -20,18 +21,6 @@ import no.hiof.leventen.actionbar.Chat.Conversation;
 import no.hiof.leventen.actionbar.Classes.UserType;
 import no.hiof.leventen.actionbar.Person;
 
-interface DidCompleteCallback{
-    void didComplete(boolean didComplete);
-}
-interface ConversationCallback{
-    void didRecieve(List<Conversation> conversations);
-}
-
-interface ChatCallback{
-    void didRecieve(List<Message> messages);
-    void onUpdate(Message newMessage);
-}
-
 public class FirebaseDatasource {
 
     private DatabaseReference dbRef;
@@ -40,8 +29,31 @@ public class FirebaseDatasource {
         this.dbRef = FirebaseDatabase.getInstance().getReference();;
     }
 
-    public void getUser(){
+    public void getUser(String uid, final boolean isThisUser){
+        DatabaseReference selfRef = dbRef.child("users").child("dagmamma").child(uid);
 
+        selfRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                //    public Person(String name, String email, String firebaseUid, String profilBeskrivelse, String userType, String by, String fDato, boolean isThisUser) {
+
+                UserType type = UserType.DAGMAMMA;
+                Person person = new Person(dataSnapshot.child("name").getValue().toString(),
+                        dataSnapshot.child("email").getValue().toString(),
+                        dataSnapshot.getKey(),
+                        dataSnapshot.child("beskrivelse").toString(),
+                        type.toString(),
+                        dataSnapshot.child("by").getValue().toString(),
+                        dataSnapshot.child("fdato").getValue().toString(),
+                        isThisUser);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void changeUserDetails(Person user, Person newUserData, DidCompleteCallback callback){
@@ -125,29 +137,105 @@ public class FirebaseDatasource {
     }
 
 
-    public void createConversation(){
+    public void createConversation(String uid){
 
-        DatabaseReference convRef = dbRef.child("Chat").push();
-        String key = convRef.getKey();
+        DatabaseReference chatRef = dbRef.child("Chat").push();
+        String key = chatRef.getKey();
 
-        DatabaseReference newRef = dbRef.child("Chat").child(key);
+        DatabaseReference convRef = dbRef.child("Chat").child(key);
+
+        convRef.child("uid1").setValue(uid);
+        convRef.child("uid2").setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        saveConversationForUsers(uid,key);
+
+    }
+
+    public void sendMessage(String convId, String message, String date){
+
+        DatabaseReference convRef = dbRef.child("Chat").child(convId);
+        DatabaseReference messagesRef = convRef.child("messages");
+
+        DatabaseReference curMessage = messagesRef.push();
+        curMessage.child("message").setValue(message);
+        curMessage.child("fromName").setValue(Person.getCurrentUser().getName());
+        curMessage.child("fromUid").setValue(FirebaseAuth.getInstance().getCurrentUser().getUid());
+        curMessage.child("date").setValue(date);
+
+    }
+
+    public void saveConversationForUsers(String uid, String convId){
+
+        DatabaseReference usersRef = dbRef.child("users").child("dagmamma").child(uid);
+        DatabaseReference selfRef = dbRef.child("users").child("dagmamma").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+
+        usersRef.child("conversations").push().setValue(convId);
+        selfRef.child("conversations").push().setValue(convId);
 
 
     }
 
+    public void getMessagesStream(String convId){
 
-    public void getConversations(final Person thisUser, final ConversationCallback callback){
+        DatabaseReference convRef = dbRef.child("Chat").child(convId);
+
+        convRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+
+    public void getConversations(Person thisUser, ConversationCallback callback){
         DatabaseReference chatRef = dbRef.child("chat");
         final List<Conversation> convList = new ArrayList<>();
 
-        for(String conversationId: thisUser.getChatConversations()){
+        if(thisUser.getChatConversations() == null || thisUser.getChatConversations().size() == 0){
+            return;
+        }
 
-            final DatabaseReference conversation = chatRef.child(conversationId);
+        for(String conversationId : thisUser.getChatConversations()){
+
+            DatabaseReference conversation = chatRef.child(conversationId);
 
             conversation.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                        Conversation conv;
+
+                        if(dataSnapshot.child("uid1").getValue().toString() == FirebaseAuth.getInstance().getCurrentUser().getUid()) {
+                            conv = new Conversation(dataSnapshot.getKey(), dataSnapshot.child("uid2").getValue().toString());
+                            convList.add(conv);
+                        }
+
+                        if(dataSnapshot.child("uid2").getValue().toString() == FirebaseAuth.getInstance().getCurrentUser().getUid()) {
+                            conv = new Conversation(dataSnapshot.getKey(), dataSnapshot.child("uid1").getValue().toString());
+                            convList.add(conv);
+                        }
 
 
 

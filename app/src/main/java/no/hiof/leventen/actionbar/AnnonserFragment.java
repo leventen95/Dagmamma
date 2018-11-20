@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class AnnonserFragment extends Fragment {
     private List<Person> userList;
     RecyclerViewAdapter recyclerViewAdapter;
     FirebaseDatasource datasource;
+    Button goToSearch;
     public AnnonserFragment() {
         // Required empty public constructor
     }
@@ -39,9 +41,18 @@ public class AnnonserFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         datasource = new FirebaseDatasource();
+        goToSearch = fragment_annonser.findViewById(R.id.goToSearchBtn);
 
         initializeData();
 
+
+
+        goToSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToSearchMethod();
+            }
+        });
         return fragment_annonser;
     }
     private void initializeData(){
@@ -73,6 +84,11 @@ public class AnnonserFragment extends Fragment {
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(userList, clickListener);
         recyclerView.setAdapter(adapter);
 
+    }
+
+    private void goToSearchMethod(){
+        Intent intent = new Intent(getActivity(), SearchActivity.class);
+        startActivity(intent);
     }
 
 }

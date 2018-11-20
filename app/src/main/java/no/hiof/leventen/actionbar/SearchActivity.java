@@ -13,6 +13,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -30,8 +32,11 @@ public class SearchActivity extends AppCompatActivity {
     private ImageButton searchBtn;//
     private RecyclerView recyclerView;//
     private DatabaseReference mUserDatabase;
+    private CheckBox byCheckBox;
+    private CheckBox navnCheckBox;
     private int clicked = 0;
-
+    //private Query query;
+    //private String searchText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +48,27 @@ public class SearchActivity extends AppCompatActivity {
         searchField = (EditText) findViewById(R.id.search_field);//
         searchBtn = (ImageButton) findViewById(R.id.imageButton);//
         recyclerView = (RecyclerView) findViewById(R.id.result_list);//
+        byCheckBox = (CheckBox) findViewById(R.id.byCheckBox);
+        navnCheckBox = (CheckBox) findViewById(R.id.navnCheckBox);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
+
+        byCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(byCheckBox.isChecked()){
+
+                    //changeQuery("by",searchField.getText().toString());
+                }
+            }
+        });
+
+
+
+
 
         searchBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,10 +135,20 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private void firebaseUserSearch(String searchText) {
+    private void firebaseUserSearch(final String searchText) {
+
+        final Query query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
+
+        byCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(byCheckBox.isChecked()){
+                    final Query query = mUserDatabase.orderByChild("by").startAt(searchText).endAt(searchText + "\uf8ff");
+                }
+            }
+        });
 
 
-        Query query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
 
         /*FirebaseRecyclerOptions<Users> options = new FirebaseRecyclerOptions.Builder<Users>()
                 .setQuery(query,Users.class)
@@ -171,4 +205,10 @@ public class SearchActivity extends AppCompatActivity {
 
         }
     }
+   /* public void changeQuery(String string, String searchText){
+        Query query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
+    }
+    /*public Query getQuery(){
+        //return query;
+    }*/
 }
