@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private DialogListFragment dialogListFragment;
     private MinSideFragment minSideFragment;
     public FirebaseDatasource test = new FirebaseDatasource();
-    private Button goToSearch;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,10 +72,5 @@ public class MainActivity extends AppCompatActivity {
     private void testCreate(){
 
 
-    }
-
-    public void navigateToSearch(View view) {
-        Intent intent = new Intent(MainActivity.this,SearchActivity.class);
-        startActivity(intent);
     }
 }
