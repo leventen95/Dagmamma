@@ -17,17 +17,14 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     Conversation conversation;
 
-
     public ChatAdapter(Conversation conversation) {
         this.conversation = conversation;
     }
 
-    public static class ChatViewHolder extends  RecyclerView.ViewHolder{
+    public static class ChatViewHolder extends RecyclerView.ViewHolder{
         TextView messageIn;
         TextView messageInDate;
         ImageView userImage;
-
-
 
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);

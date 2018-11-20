@@ -59,11 +59,11 @@ public class LogInActivity extends AppCompatActivity {
         });
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if(currentUser != null){
-            System.out.println("User exists");
+    /*    if(currentUser != null){
+            FirebaseAuth.getInstance().signOut();
 
         }
-
+*/
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
