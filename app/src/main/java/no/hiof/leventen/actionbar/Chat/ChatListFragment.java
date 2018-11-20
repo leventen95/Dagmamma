@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.Date;
 
+import no.hiof.leventen.actionbar.Person;
 import no.hiof.leventen.actionbar.R;
 
 
@@ -25,6 +26,7 @@ public class ChatListFragment extends Fragment {
     RecyclerView recyclerView;
     EditText messageInupt;
     ImageButton btnSend;
+    ChatAdapter adapter;
     //private List<Conversation> conversationList;
     private Conversation con;
     private String lastMessage;
@@ -90,7 +92,7 @@ public class ChatListFragment extends Fragment {
     }
 
     private void initializeAdapter(){
-        ChatAdapter adapter = new ChatAdapter(con);
+        adapter = new ChatAdapter(con);
         recyclerView.setAdapter(adapter);
     }
     private void sendAction(View view) {
@@ -100,6 +102,11 @@ public class ChatListFragment extends Fragment {
         } else {
             Toast.makeText(getContext(), "Sender melding..", Toast.LENGTH_LONG).show();
             // TODO - Send til database og legg til i listen slik at man slipper å hente data fra database hver gang man sender mld
+            con.addMessage(new Message(messageInupt.getText().toString(), Person.getCurrentUser().getEmail(), "Fredrik", new Date()));
+         //   adapter.notifyDataSetChanged();
+         //   adapter.notifyItemInserted(con.getConversationMessages().size() - 1);
+          //  adapter = new ChatAdapter(con);
+          //  recyclerView.setAdapter(adapter);
             messageInupt.setText("");
         }
     }

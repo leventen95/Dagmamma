@@ -15,6 +15,11 @@ public class Message {
         this.fromUser = fromUser;
         this.date = date;
     }
+    public Message(String messageText, String fromUser, String toUser, Date date) {
+        this.messageText = messageText;
+        this.fromUser = fromUser;
+        this.date = date;
+    }
 
     public String getId() { return id; }
 
