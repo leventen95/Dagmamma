@@ -53,4 +53,43 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_field"></android.support.v7.widget.RecyclerView>
+
+    /*<CheckBox
+        android:id="@+id/byCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="By"
+        app:layout_constraintBottom_toTopOf="@+id/result_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_field" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Søke på:"
+        app:layout_constraintBottom_toTopOf="@+id/result_list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_field" />
+
+    <CheckBox
+        android:id="@+id/navnCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Navn"
+        app:layout_constraintBottom_toTopOf="@+id/result_list"
+        app:layout_constraintStart_toEndOf="@+id/byCheckBox"
+        app:layout_constraintTop_toBottomOf="@+id/search_field" />
+
 </android.support.constraint.ConstraintLayout>
