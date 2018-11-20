@@ -18,6 +18,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
+
 public class LogInActivity extends AppCompatActivity {
 
     Button button;
@@ -27,10 +29,12 @@ public class LogInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        FirebaseDatasource datasource = new FirebaseDatasource();
         intent = new Intent(LogInActivity.this, MainActivity.class);
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
+
+            datasource.getUser(FirebaseAuth.getInstance().getCurrentUser().getUid(),true);
             startActivity(intent);
         }
 
@@ -56,7 +60,7 @@ public class LogInActivity extends AppCompatActivity {
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         if(currentUser != null){
-            FirebaseAuth.getInstance().signOut();
+            System.out.println("User exists");
 
         }
 
