@@ -17,9 +17,6 @@ public class Person {
     private String by;
     private String fDato;
 
-    public Person() {
-    }
-
     public Person(String name, String email, String firebaseUid, String profilBeskrivelse, String userType, String by, String fDato, boolean isThisUser) {
         this.name = name;
         this.email = email;
@@ -56,6 +53,8 @@ public class Person {
         }
         return null;
     }
+
+
 
     public String getUserType() {
         return userType;

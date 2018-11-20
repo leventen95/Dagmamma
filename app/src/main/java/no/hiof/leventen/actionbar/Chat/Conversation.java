@@ -17,7 +17,6 @@ public class Conversation implements Parcelable {
     }
 
     public Conversation(Parcel in) {
-      //  this();
         readFromParcel(in);
     }
 
