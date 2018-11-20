@@ -15,9 +15,10 @@ public class PersonDetailedActivity extends AppCompatActivity {
         String name = getIntent().getStringExtra("name");
         String alder = getIntent().getStringExtra("alder");
         String desc = getIntent().getStringExtra("desc");
+        String by = getIntent().getStringExtra("by");
         FragmentManager fragmentManager = getSupportFragmentManager();
         PersonDetailedFragment personDetailedFragment = (PersonDetailedFragment) fragmentManager.findFragmentById(R.id.personDetailedFragment);
 
-        personDetailedFragment.setDisplayedPersonDetail(name,alder,desc);
+        personDetailedFragment.setDisplayedPersonDetail(name,alder,desc,by);
     }
 }

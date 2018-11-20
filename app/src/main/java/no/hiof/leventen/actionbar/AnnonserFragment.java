@@ -75,6 +75,7 @@ public class AnnonserFragment extends Fragment {
                 Intent intent = new Intent(getActivity(), PersonDetailedActivity.class);
                 intent.putExtra("name",thisUser.getName());
                 intent.putExtra("alder",thisUser.getfDato());
+                intent.putExtra("by",thisUser.getBy());
                 intent.putExtra("bilde","");
                 intent.putExtra("desc",thisUser.getProfilBeskrivelse());
                 startActivity(intent);

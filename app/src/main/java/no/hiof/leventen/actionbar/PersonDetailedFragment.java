@@ -22,7 +22,8 @@ public class PersonDetailedFragment extends Fragment {
     public final static String PERSON_INDEX="personIndex";
     private static final int DEFAULT_PERSON_INDEX=1;
     private TextView personNameTextView;
-    private  TextView personAlderTextView;
+    private TextView personAlderTextView;
+    private TextView personByTextView;
     private TextView personDescriptionTextView;
     private ImageView personImageView;
     private int personIndex;
@@ -44,6 +45,7 @@ public class PersonDetailedFragment extends Fragment {
         personAlderTextView = view.findViewById(R.id.textViewAlder);
         personDescriptionTextView = view.findViewById(R.id.textViewDescription);
         personImageView = view.findViewById(R.id.imageViewPerson);
+        personByTextView = view.findViewById(R.id.textViewBy);
         goChat = view.findViewById(R.id.goToChatBtn);
 
         personIndex = savedInstanceState == null? DEFAULT_PERSON_INDEX : savedInstanceState.getInt(PERSON_INDEX, DEFAULT_PERSON_INDEX);
@@ -65,12 +67,13 @@ public class PersonDetailedFragment extends Fragment {
         outState.putInt(PERSON_INDEX,personIndex);
     }
 
-    public void setDisplayedPersonDetail(String name, String alder, String desc) {
+    public void setDisplayedPersonDetail(String name, String alder, String desc, String by) {
 
 
         personNameTextView.setText(name);
         personAlderTextView.setText(alder);
         personDescriptionTextView.setText(desc);
+        personByTextView.setText(by);
 
     }
 
