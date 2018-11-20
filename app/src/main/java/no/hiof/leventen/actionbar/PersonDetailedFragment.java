@@ -52,7 +52,7 @@ public class PersonDetailedFragment extends Fragment {
         goChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getActivity(),"Suck my ass",Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getActivity(),"Sorry not sorry",Toast.LENGTH_LONG);
                 toast.show();
             }
         });
