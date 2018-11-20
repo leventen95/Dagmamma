@@ -1,17 +1,21 @@
 package no.hiof.leventen.actionbar.Dialog;
 
+import android.content.Intent;
 import android.os.Bundle;;
+import android.os.Parcelable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import no.hiof.leventen.actionbar.Chat.ChatListActivity;
 import no.hiof.leventen.actionbar.Chat.Conversation;
 import no.hiof.leventen.actionbar.Chat.Message;
 import no.hiof.leventen.actionbar.R;
@@ -53,7 +57,26 @@ public class DialogListFragment extends Fragment {
         conversations.add(con);
     }
     private void initializeAdapter(){
-        DialogAdapter adapter = new DialogAdapter(conversations);
+        DialogAdapter.DialogClickListener clickListener = new DialogAdapter.DialogClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(getActivity(), conversations.get(position).getOtherUser(), Toast.LENGTH_SHORT).show();
+                Conversation con = new Conversation("1", "Fredrik Karlsberg");
+                //= conversations.get(position);
+                con.addMessage(new Message("1","Hei du! Jeg vil gjerne passe ungen din!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+                con.addMessage(new Message("2","Hei du! Jeg har ingen unger jeg!","Joakim Granaas","Fredrik Kalsberg",new Date(81996972)));
+                con.addMessage(new Message("3","Uff, det var dumt!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+                con.addMessage(new Message("4","Men jeg kjenner en person som har unger da!","Joakim Granaas", "Fredrik Kalsberg",new Date(81996972)));
+                con.addMessage(new Message("5","Javell? Hvem da?","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+                con.addMessage(new Message("6","Han heter Petter!","Joakim Granaas","Fredrik Kalsberg",new Date()));
+                Intent intent = new Intent(getActivity(), ChatListActivity.class);
+          //      intent.putExtra("conversation",conversations.get(position));
+                intent.putExtra("conversation",con);   // FJERN DENNE!!!!! BRUK DEN OVER!!
+                startActivity(intent);
+            }
+        };
+
+        DialogAdapter adapter = new DialogAdapter(conversations, clickListener);
         recyclerView.setAdapter(adapter);
     }
 }

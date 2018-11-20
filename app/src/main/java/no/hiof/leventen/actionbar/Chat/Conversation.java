@@ -1,9 +1,12 @@
 package no.hiof.leventen.actionbar.Chat;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Conversation {
+public class Conversation implements Parcelable {
     private String id, otherUser;
     private ArrayList<Message> conversation;
 
@@ -12,6 +15,29 @@ public class Conversation {
         this.otherUser = otherUser;
         this.conversation = new ArrayList<Message>();
     }
+
+    public Conversation(Parcel in) {
+      //  this();
+        readFromParcel(in);
+    }
+
+    private void readFromParcel(Parcel in) {
+        id = in.readString();
+        otherUser = in.readString();
+
+    }
+
+    public static final Creator<Conversation> CREATOR = new Creator<Conversation>() {
+        @Override
+        public Conversation createFromParcel(Parcel in) {
+            return new Conversation(in);
+        }
+
+        @Override
+        public Conversation[] newArray(int size) {
+            return new Conversation[size];
+        }
+    };
 
     public void addMessage(Message message) {
         conversation.add(message);
@@ -59,4 +85,15 @@ public class Conversation {
     }
 
     public void setConversationMessages(ArrayList<Message> conversation) { this.conversation = conversation; }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(otherUser);
+    }
 }

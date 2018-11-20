@@ -18,21 +18,29 @@ import no.hiof.leventen.actionbar.R;
 public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogViewHolder> {
 
     private List<Conversation> conversations;
-
-    public DialogAdapter(List<Conversation> conversations) {
+    public DialogAdapter(List<Conversation> conversations, DialogClickListener clickListener) {
         this.conversations = conversations;
+        this.clickListener = clickListener;
     }
+    private DialogClickListener clickListener;
 
     public static class DialogViewHolder extends RecyclerView.ViewHolder{
         ImageView userImage;
         TextView userFullName;
         TextView lastMessage;
 
-        public DialogViewHolder(@NonNull View itemView) {
+        public DialogViewHolder(View itemView, final DialogClickListener clickListener) {
             super(itemView);
             userImage = itemView.findViewById(R.id.dialogs_user_image);
             userFullName = itemView.findViewById(R.id.dialogs_user_name);
             lastMessage = itemView.findViewById(R.id.dialogs_last_message);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    clickListener.onClick(view, getAdapterPosition());
+                }
+            });
         }
     }
 
@@ -40,7 +48,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogView
     @Override
     public DialogViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_dialog_item, viewGroup,false);
-        DialogViewHolder chatViewHolder = new DialogViewHolder(v);
+        DialogViewHolder chatViewHolder = new DialogViewHolder(v, clickListener);
         return chatViewHolder;
     }
 
@@ -59,5 +67,9 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogView
     @Override
     public int getItemCount() {
         return conversations.size();
+    }
+
+    public interface DialogClickListener {
+        void onClick(View view, int position);
     }
 }

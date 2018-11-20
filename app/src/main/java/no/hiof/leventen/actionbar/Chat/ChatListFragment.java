@@ -13,9 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import no.hiof.leventen.actionbar.R;
 
@@ -27,7 +25,7 @@ public class ChatListFragment extends Fragment {
     RecyclerView recyclerView;
     EditText messageInupt;
     ImageButton btnSend;
-    private List<Conversation> conversationList;
+    //private List<Conversation> conversationList;
     private Conversation con;
     private String lastMessage;
     private String dialogUser;
@@ -74,18 +72,23 @@ public class ChatListFragment extends Fragment {
         return view;
     }
     private void initializeData(){
-        con = new Conversation("1", "Fredrik Kalsberg");
-        con.addMessage(new Message("1","Hei du! Jeg vil gjerne passe ungen din!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
-        con.addMessage(new Message("2","Hei du! Jeg har ingen unger jeg!","Joakim Granaas","Fredrik Kalsberg",new Date(81996972)));
-        con.addMessage(new Message("3","Uff, det var dumt!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
-        con.addMessage(new Message("4","Men jeg kjenner en person som har unger da!","Joakim Granaas", "Fredrik Kalsberg",new Date(81996972)));
-        con.addMessage(new Message("5","Javell? Hvem da?","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
-        con.addMessage(new Message("6","Han heter Petter!","Joakim Granaas","Fredrik Kalsberg",new Date()));
+        this.con = new Conversation("1", "Fredrik Kalsberg");
+        this.con.addMessage(new Message("1","Hei du! Jeg vil gjerne passe ungen din!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+        this.con.addMessage(new Message("2","Hei du! Jeg har ingen unger jeg!","Joakim Granaas","Fredrik Kalsberg",new Date(81996972)));
+        this.con.addMessage(new Message("3","Uff, det var dumt!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+        this.con.addMessage(new Message("4","Men jeg kjenner en person som har unger da!","Joakim Granaas", "Fredrik Kalsberg",new Date(81996972)));
+        this.con.addMessage(new Message("5","Javell? Hvem da?","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+        this.con.addMessage(new Message("6","Han heter Petter!","Joakim Granaas","Fredrik Kalsberg",new Date()));
 
-        conversationList = new ArrayList<>();
-        conversationList.add(con);
+     //   conversationList = new ArrayList<>();
+     //   conversationList.add(con);
 
     }
+
+    private void initializeData(Conversation conversation){
+        this.con = conversation;
+    }
+
     private void initializeAdapter(){
         ChatAdapter adapter = new ChatAdapter(con);
         recyclerView.setAdapter(adapter);
@@ -99,6 +102,12 @@ public class ChatListFragment extends Fragment {
             // TODO - Send til database og legg til i listen slik at man slipper å hente data fra database hver gang man sender mld
             messageInupt.setText("");
         }
+    }
+    public void setDisplayedValues(Conversation conversation) {
+ /*       this.con = new Conversation(conversation.getId(), conversation.getOtherUser());
+        for(Message m : conversation.getConversationMessages())
+            this.con.addMessage(m);
+    //    initializeAdapter();*/
     }
 }
 
