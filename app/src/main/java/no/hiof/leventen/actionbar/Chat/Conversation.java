@@ -1,50 +1,62 @@
 package no.hiof.leventen.actionbar.Chat;
 
-import android.support.v7.widget.RecyclerView;
-
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Conversation {
-    RecyclerView recyclerView;
-    private ArrayList<Message> dialogList;
-    String to;
-    private String conversationId;
+    private String id, otherUser;
+    private ArrayList<Message> conversation;
 
-    public Conversation() {
-        dialogList = new ArrayList<Message>();
+    public Conversation(String id, String otherUser) {
+        this.id = id;
+        this.otherUser = otherUser;
+        this.conversation = new ArrayList<Message>();
     }
+
     public void addMessage(Message message) {
-        dialogList.add(message);
+        conversation.add(message);
+    }
+
+    public Message getMessage(int i) {
+        return conversation.get(i);
+    }
+
+    public Message getLastMessage() {
+        // TODO - Mekke ordentlig Dato-referanse som kan sammenliknes, eller bare bruke string og lete i den...
+        //Date date = new Date();
+        Message msg = null;
+        for (int i = 0; i < conversation.size(); i++) {
+            // TODO - Hvis datoen i dette objektet er nyere enn date; overskriv tmpMsg.getDate()!
+            if(i == conversation.size() -1) {
+                msg = conversation.get(i);
+            }
+        }
+        return msg;
+
     }
 
     public void removeMessage(Message message) {
-        for (int i = 0; i < dialogList.size(); i++) {
-            if (dialogList.get(i) == message)
-                dialogList.remove(i);
+        for (int i = 0; i < conversation.size(); i++) {
+            if (conversation.get(i) == message)
+                conversation.remove(i);
         }
     }
 
-    public ArrayList<Message> getDialogList() {
-        return dialogList;
+    public String getId() {
+        return id;
     }
 
-    public void setDialogList(ArrayList<Message> dialogList) {
-        this.dialogList = dialogList;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getTo() {
-        return to;
+    public String getOtherUser() { return otherUser; }
+
+    public void setOtherUser(String otherUser) { this.otherUser = otherUser; }
+
+    public ArrayList<Message> getConversationMessages() {
+        return conversation;
     }
 
-    public void setTo(String to) {
-        this.to = to;
-    }
-
-    public String getConversationId() {
-        return conversationId;
-    }
-
-    public void setConversationId(String conversationId) {
-        this.conversationId = conversationId;
-    }
+    public void setConversationMessages(ArrayList<Message> conversation) { this.conversation = conversation; }
 }

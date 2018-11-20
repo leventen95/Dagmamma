@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.data.model.User;
@@ -113,13 +114,12 @@ public class RegistrerActivity extends AppCompatActivity {
         System.out.println(email + pass + navn + fDato + beskrivelse);
 
         if(email.isEmpty() || pass.isEmpty()){
-            System.out.println("Email og password is empty, please fill them out");
+            Toast.makeText(getApplicationContext(),"Fyll inn begge felter", Toast.LENGTH_LONG);
             return;
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-
-            System.out.println("Email formatted wrong, please fix");
+            Toast.makeText(getApplicationContext(), "Skriv inn en epost-adresse", Toast.LENGTH_LONG);
             return;
         }
 

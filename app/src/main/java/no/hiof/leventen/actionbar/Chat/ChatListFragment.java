@@ -13,8 +13,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +28,7 @@ public class ChatListFragment extends Fragment {
     EditText messageInupt;
     ImageButton btnSend;
     private List<Conversation> conversationList;
-    private List<Message> d1;
+    private Conversation con;
     private String lastMessage;
     private String dialogUser;
     private String lastMessageTime;
@@ -76,21 +74,20 @@ public class ChatListFragment extends Fragment {
         return view;
     }
     private void initializeData(){
-        d1 = new ArrayList<Message>();
-        Conversation d2 = new Conversation();
-        d1.add(new Message("Hei du! Jeg vil gjerne passe ungen din!", "Fredrik Kalsberg", new Date(81996972)));
-        d1.add(new Message("Hei du! Jeg har ingen unger jeg!", "Joakim Granaas", new Date(81996972)));
-        d1.add(new Message("Uff, det var dumt!", "Fredrik Kalsberg", new Date(81996972)));
-        d1.add(new Message("Men jeg kjenner en person som har unger da!", "Joakim Granaas", new Date(81996972)));
-        d1.add(new Message("Javell? Hvem da?", "Fredrik Kalsberg", new Date(81996972)));
-        d1.add(new Message("Han heter Petter!", "Joakim Granaas", new Date()));
+        con = new Conversation("1", "Fredrik Kalsberg");
+        con.addMessage(new Message("1","Hei du! Jeg vil gjerne passe ungen din!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+        con.addMessage(new Message("2","Hei du! Jeg har ingen unger jeg!","Joakim Granaas","Fredrik Kalsberg",new Date(81996972)));
+        con.addMessage(new Message("3","Uff, det var dumt!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+        con.addMessage(new Message("4","Men jeg kjenner en person som har unger da!","Joakim Granaas", "Fredrik Kalsberg",new Date(81996972)));
+        con.addMessage(new Message("5","Javell? Hvem da?","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+        con.addMessage(new Message("6","Han heter Petter!","Joakim Granaas","Fredrik Kalsberg",new Date()));
 
         conversationList = new ArrayList<>();
-        conversationList.add(d2);
+        conversationList.add(con);
 
     }
     private void initializeAdapter(){
-        ChatAdapter adapter = new ChatAdapter(d1);
+        ChatAdapter adapter = new ChatAdapter(con);
         recyclerView.setAdapter(adapter);
     }
     private void sendAction(View view) {
