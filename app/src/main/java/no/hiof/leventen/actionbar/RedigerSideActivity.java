@@ -11,10 +11,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class RedigerSideActivity extends AppCompatActivity {
 
-    Button button;
+    TextView email, navn, fDato, by, beskrivelse;
+    Button redigerLagreButton, redigerBildeButton;
+
     private static final int PICK_IMAGE = 100;
     Uri imageUri;
 
@@ -23,8 +26,22 @@ public class RedigerSideActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rediger_side);
 
-        Button redigerLagreButton = findViewById(R.id.redigerLagreButton);
-        Button redigerBildeButton = findViewById(R.id.redigerBildeButton);
+        email = findViewById(R.id.redigerEmailEdit);
+        navn = findViewById(R.id.redigerNavnEdit);
+        fDato = findViewById(R.id.redigerFodselEdit);
+        by = findViewById(R.id.redigerByEdit);
+        beskrivelse = findViewById(R.id.redigerDescriptionView);
+
+        if(Person.getCurrentUser() != null) {
+            email.setText(Person.getCurrentUser().getEmail());
+            navn.setText(Person.getCurrentUser().getName());
+            fDato.setText(Person.getCurrentUser().getfDato());
+            by.setText(Person.getCurrentUser().getBy());
+            beskrivelse.setText(Person.getCurrentUser().getProfilBeskrivelse());
+        }
+
+        redigerLagreButton = findViewById(R.id.redigerLagreButton);
+        redigerBildeButton = findViewById(R.id.redigerBildeButton);
 
         redigerLagreButton.setOnClickListener(new View.OnClickListener() {
             @Override

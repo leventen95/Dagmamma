@@ -53,16 +53,27 @@ public class DialogListFragment extends Fragment {
                 conversationsList = conversations;
             }
         });
-*/
+*/      initializeData();
         initializeAdapter();
         return view;
     }
 
+    private void initializeData(){
+        conversationsList = new ArrayList<Conversation>();
+        Conversation con = new Conversation("1", "Fredrik Kalsberg");
+        con.addMessage(new Message("1","Hei du! Jeg vil gjerne passe ungen din!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+        con.addMessage(new Message("2","Hei du! Jeg har ingen unger jeg!","Joakim Granaas","Fredrik Kalsberg",new Date(81996972)));
+        con.addMessage(new Message("3","Uff, det var dumt!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+        con.addMessage(new Message("4","Men jeg kjenner en person som har unger da!","Joakim Granaas", "Fredrik Kalsberg",new Date(81996972)));
+        con.addMessage(new Message("5","Javell? Hvem da?","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
+        con.addMessage(new Message("6","Han heter Petter!","Joakim Granaas","Fredrik Kalsberg",new Date()));
+        conversationsList.add(con);
+    }
     private void initializeAdapter(){
         DialogAdapter.DialogClickListener clickListener = new DialogAdapter.DialogClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Toast.makeText(getActivity(), conversationsList.get(position).getOtherUser(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), conversationsList.get(position).getOtherUser(), Toast.LENGTH_SHORT).show();
                 Conversation con = new Conversation("1", "Fredrik Karlsberg");
                 //= conversations.get(position);
                 con.addMessage(new Message("1","Hei du! Jeg vil gjerne passe ungen din!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
