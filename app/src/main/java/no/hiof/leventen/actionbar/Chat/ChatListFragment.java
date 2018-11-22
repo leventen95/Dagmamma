@@ -1,6 +1,5 @@
 package no.hiof.leventen.actionbar.Chat;
 
-
 import android.os.Bundle;;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -80,7 +79,6 @@ public class ChatListFragment extends Fragment {
         } else {
             // TODO - Send til database og legg til i listen slik at man slipper å hente data fra database hver gang man sender mld
             conversation.addMessage(new Message(msg, Person.getCurrentUser().getEmail(), new Date()));
-  //          addMessageToList(msg);
             adapter.notifyDataSetChanged();
             messageInupt.setText("");
         }
@@ -92,12 +90,5 @@ public class ChatListFragment extends Fragment {
             this.conversation.addMessage(conversation.getMessage(i));
 
         initializeAdapter();
-    }
-    private void addMessageToList(String msg) {     // TODO - Bruk Deque<Message> deque = new LinkedList<Message>();
-        Conversation con = new Conversation(conversation.getId(), conversation.getOtherUser());
-        con.addMessage(new Message(msg, Person.getCurrentUser().getEmail(), new Date()));
-        for(Message m : conversation.getConversationMessages())
-            con.addMessage(m);
-        this.conversation = con;
     }
 }
