@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+
 import java.util.Date;
 
 import no.hiof.leventen.actionbar.Person;
@@ -27,11 +29,7 @@ public class ChatListFragment extends Fragment {
     EditText messageInupt;
     ImageButton btnSend;
     ChatAdapter adapter;
-    //private List<Conversation> conversationList;
-    private Conversation con;
-    private String lastMessage;
-    private String dialogUser;
-    private String lastMessageTime;
+    private Conversation conversation;
     //private FirebaseRecyclerAdapter;
 
     public ChatListFragment() {
@@ -46,9 +44,8 @@ public class ChatListFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_chat_list, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.fragment_chat);
         recyclerView.hasFixedSize();
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
 
-        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true));
         messageInupt = view.findViewById(R.id.input);
         messageInupt.setOnKeyListener(new View.OnKeyListener() {
             @Override
@@ -69,30 +66,11 @@ public class ChatListFragment extends Fragment {
                 sendAction(view);
             }
         });
-        initializeData();
-        initializeAdapter();
         return view;
-    }
-    private void initializeData(){
-        this.con = new Conversation("1", "Fredrik Kalsberg");
-        this.con.addMessage(new Message("1","Hei du! Jeg vil gjerne passe ungen din!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
-        this.con.addMessage(new Message("2","Hei du! Jeg har ingen unger jeg!","Joakim Granaas","Fredrik Kalsberg",new Date(81996972)));
-        this.con.addMessage(new Message("3","Uff, det var dumt!","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
-        this.con.addMessage(new Message("4","Men jeg kjenner en person som har unger da!","Joakim Granaas", "Fredrik Kalsberg",new Date(81996972)));
-        this.con.addMessage(new Message("5","Javell? Hvem da?","Fredrik Kalsberg","Joakim Granaas",new Date(81996972)));
-        this.con.addMessage(new Message("6","Han heter Petter!","Joakim Granaas","Fredrik Kalsberg",new Date()));
-
-     //   conversationList = new ArrayList<>();
-     //   conversationList.add(con);
-
-    }
-
-    private void initializeData(Conversation conversation){
-        this.con = conversation;
     }
 
     private void initializeAdapter(){
-        adapter = new ChatAdapter(con);
+        adapter = new ChatAdapter(conversation);
         recyclerView.setAdapter(adapter);
     }
     private void sendAction(View view) {
@@ -100,23 +78,26 @@ public class ChatListFragment extends Fragment {
         if(msg.matches("")) {
             Toast.makeText(getContext(), "Skriv melding først!", Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(getContext(), "Sender melding..", Toast.LENGTH_LONG).show();
             // TODO - Send til database og legg til i listen slik at man slipper å hente data fra database hver gang man sender mld
-            con.addMessage(new Message(messageInupt.getText().toString(), Person.getCurrentUser().getEmail(), "Fredrik", new Date()));
-         //   adapter.notifyDataSetChanged();
-         //   adapter.notifyItemInserted(con.getConversationMessages().size() - 1);
-          //  adapter = new ChatAdapter(con);
-          //  recyclerView.setAdapter(adapter);
+            conversation.addMessage(new Message(msg, Person.getCurrentUser().getEmail(), new Date()));
+  //          addMessageToList(msg);
+            adapter.notifyDataSetChanged();
             messageInupt.setText("");
         }
     }
     public void setDisplayedValues(Conversation conversation) {
- /*       this.con = new Conversation(conversation.getId(), conversation.getOtherUser());
+        this.conversation = new Conversation(conversation.getId(), conversation.getOtherUser());
+
+        for(int i = conversation.getConversationMessages().size() -1; i >= 0; i--)
+            this.conversation.addMessage(conversation.getMessage(i));
+
+        initializeAdapter();
+    }
+    private void addMessageToList(String msg) {     // TODO - Bruk Deque<Message> deque = new LinkedList<Message>();
+        Conversation con = new Conversation(conversation.getId(), conversation.getOtherUser());
+        con.addMessage(new Message(msg, Person.getCurrentUser().getEmail(), new Date()));
         for(Message m : conversation.getConversationMessages())
-            this.con.addMessage(m);
-    //    initializeAdapter();*/
+            con.addMessage(m);
+        this.conversation = con;
     }
 }
-
-
-

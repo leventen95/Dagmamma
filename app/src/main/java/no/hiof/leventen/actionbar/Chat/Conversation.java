@@ -7,23 +7,19 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Conversation implements Parcelable {
-    private String id, otherUser;
-    private ArrayList<Message> conversation;
+    private int id;
+    private String otherUser;
+    private ArrayList<Message> conversationList;
 
-    public Conversation(String id, String otherUser) {
+    public Conversation(int id, String otherUser) {
         this.id = id;
         this.otherUser = otherUser;
-        this.conversation = new ArrayList<Message>();
+        this.conversationList = new ArrayList<Message>();
     }
 
     public Conversation(Parcel in) {
-        readFromParcel(in);
-    }
-
-    private void readFromParcel(Parcel in) {
-        id = in.readString();
+        id = in.readInt();
         otherUser = in.readString();
-
     }
 
     public static final Creator<Conversation> CREATOR = new Creator<Conversation>() {
@@ -39,21 +35,21 @@ public class Conversation implements Parcelable {
     };
 
     public void addMessage(Message message) {
-        conversation.add(message);
+        conversationList.add(message);
     }
 
     public Message getMessage(int i) {
-        return conversation.get(i);
+        return conversationList.get(i);
     }
 
     public Message getLastMessage() {
         // TODO - Mekke ordentlig Dato-referanse som kan sammenliknes, eller bare bruke string og lete i den...
         //Date date = new Date();
         Message msg = null;
-        for (int i = 0; i < conversation.size(); i++) {
+        for (int i = 0; i < conversationList.size(); i++) {
             // TODO - Hvis datoen i dette objektet er nyere enn date; overskriv tmpMsg.getDate()!
-            if(i == conversation.size() -1) {
-                msg = conversation.get(i);
+            if(i == conversationList.size() -1) {
+                msg = conversationList.get(i);
             }
         }
         return msg;
@@ -61,17 +57,17 @@ public class Conversation implements Parcelable {
     }
 
     public void removeMessage(Message message) {
-        for (int i = 0; i < conversation.size(); i++) {
-            if (conversation.get(i) == message)
-                conversation.remove(i);
+        for (int i = 0; i < conversationList.size(); i++) {
+            if (conversationList.get(i) == message)
+                conversationList.remove(i);
         }
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -80,10 +76,10 @@ public class Conversation implements Parcelable {
     public void setOtherUser(String otherUser) { this.otherUser = otherUser; }
 
     public ArrayList<Message> getConversationMessages() {
-        return conversation;
+        return conversationList;
     }
 
-    public void setConversationMessages(ArrayList<Message> conversation) { this.conversation = conversation; }
+    public void setConversationMessages(ArrayList<Message> conversationList) { this.conversationList = conversationList; }
 
     @Override
     public int describeContents() {
@@ -92,7 +88,7 @@ public class Conversation implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(id);
+        parcel.writeInt(id);
         parcel.writeString(otherUser);
     }
 }

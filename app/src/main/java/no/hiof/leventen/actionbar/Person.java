@@ -3,13 +3,17 @@ package no.hiof.leventen.actionbar;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import no.hiof.leventen.actionbar.Chat.Conversation;
+import no.hiof.leventen.actionbar.Chat.Message;
 
 public class Person {
     String name;
     int photoId;
     private String email;
-    private List<String> chatConversations;
+    private ArrayList<Conversation> conversations;
     private static Person currentUser;
     private String firebaseUid;
     private String profilBeskrivelse;
@@ -25,7 +29,26 @@ public class Person {
         this.userType = userType;
         this.by = by;
         this.fDato = fDato;
-        this.chatConversations = new ArrayList<String>();
+        this.conversations = new ArrayList<Conversation>();
+        Conversation con1 = new Conversation(0, "Fredrik Kalsberg");
+        con1.addMessage(new Message("Hei du! Jeg vil gjerne passe ungen din! Hilsen Fredrik","Fredrik Kalsberg",new Date(81996972)));
+        con1.addMessage(new Message("Hei du! Jeg har ingen unger jeg!","Joakim Granaas",new Date(81996972)));
+        con1.addMessage(new Message("Uff, det var dumt!","Fredrik Kalsberg",new Date(81996972)));
+        con1.addMessage(new Message("Men jeg kjenner en person som har unger da!","Fredrik Kalsberg",new Date(81996972)));
+        con1.addMessage(new Message("Javell? Hvem da?","Fredrik Kalsberg",new Date(81996972)));
+        con1.addMessage(new Message("Han heter Petter!","Joakim Granaas",new Date()));
+
+        Conversation con2 = new Conversation(1, "Fittetryne");
+        con2.addMessage(new Message("Hei du! Jeg vil gjerne passe ungen din! Hilsen Fittetryne","Fittetryne",new Date(81996972)));
+        con2.addMessage(new Message("Hei du! Jeg har ingen unger jeg!","Joakim Granaas",new Date(81996972)));
+        con2.addMessage(new Message("Uff, det var dumt!","Fittetryne",new Date(81996972)));
+        con2.addMessage(new Message("Men jeg kjenner en person som har unger da!","Fittetryne",new Date(81996972)));
+        con2.addMessage(new Message("Javell? Hvem da?","Fittetryne",new Date(81996972)));
+        con2.addMessage(new Message("Han heter Petter!","Joakim Granaas",new Date()));
+
+        this.conversations.add(con1);
+        this.conversations.add(con2);
+
         if(isThisUser) {
             this.currentUser = this;
             this.currentUser.setFirebaseUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
@@ -33,6 +56,9 @@ public class Person {
         }else{
             this.setProfilBeskrivelse(profilBeskrivelse);
         }
+
+    }
+    public Person() {
 
     }
 
@@ -88,12 +114,12 @@ public class Person {
         this.firebaseUid = firebaseUid;
     }
 
-    public List<String> getChatConversations() {
-        return chatConversations;
+    public ArrayList<Conversation> getConversations() {
+        return conversations;
     }
 
-    public void setChatConversations(List<String> chatConversations) {
-        this.chatConversations = chatConversations;
+    public void setConversations(ArrayList<Conversation> conversations) {
+        this.conversations = conversations;
     }
 
     public static Person getCurrentUser() {

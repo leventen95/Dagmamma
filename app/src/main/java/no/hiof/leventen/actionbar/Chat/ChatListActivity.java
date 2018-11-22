@@ -4,7 +4,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
+import java.util.List;
+
+import no.hiof.leventen.actionbar.Person;
 import no.hiof.leventen.actionbar.R;
 
 /**
@@ -19,11 +23,19 @@ public class ChatListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_chat_list);
-        Conversation con = getIntent().getParcelableExtra("conversation");
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        ChatListFragment chatListFragment = (ChatListFragment) fragmentManager.findFragmentById(R.id.fragment_chat_list);
-        chatListFragment.setDisplayedValues(con);
+
+        int id = getIntent().getIntExtra("id", -1);
+
+        List<Conversation> conversations = Person.getCurrentUser().getConversations();
+        for (Conversation c : conversations) {
+            if(c.getId() == id) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                ChatListFragment chatListFragment = (ChatListFragment) fragmentManager.findFragmentById(R.id.fragment_chat_list);
+                chatListFragment.setDisplayedValues(c);
+            } else {
+                Toast.makeText(getApplicationContext(), "Noe gikk galt!", Toast.LENGTH_LONG);
+            }
+        }
     }
 }

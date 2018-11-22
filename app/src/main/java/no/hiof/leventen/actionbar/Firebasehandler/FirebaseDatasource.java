@@ -208,7 +208,8 @@ public class FirebaseDatasource {
 
     }
 
-
+/*  HAR ENDRET int getChatConversationIds() til List<Conversation> getConversations slik at jeg kan sende inn en
+    conversationId fra DialogFragment til ChatFragment i stedet for hele Conversation-objektet.
     public void getConversations(Person thisUser, ConversationCallback callback){
         DatabaseReference chatRef = dbRef.child("chat");
         final List<Conversation> convList = new ArrayList<>();
@@ -228,12 +229,12 @@ public class FirebaseDatasource {
                         Conversation conv;
 
                         if(dataSnapshot.child("uid1").getValue().toString() == FirebaseAuth.getInstance().getCurrentUser().getUid()) {
-                            conv = new Conversation(dataSnapshot.getKey(), dataSnapshot.child("uid2").getValue().toString());
+                            conv = new Conversation(Integer.parseInt(dataSnapshot.getKey()), dataSnapshot.child("uid2").getValue().toString());
                             convList.add(conv);
                         }
 
                         if(dataSnapshot.child("uid2").getValue().toString() == FirebaseAuth.getInstance().getCurrentUser().getUid()) {
-                            conv = new Conversation(dataSnapshot.getKey(), dataSnapshot.child("uid1").getValue().toString());
+                            conv = new Conversation(Integer.parseInt(dataSnapshot.getKey()), dataSnapshot.child("uid1").getValue().toString());
                             convList.add(conv);
                         }
 
@@ -250,7 +251,7 @@ public class FirebaseDatasource {
             callback.didRecieve(convList);
         }
 
-    }
+    }*/
 
     public void addExtraInfoForUser(Person person, String userUid,String userType, DidCreateUserCallback callback){
 

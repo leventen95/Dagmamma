@@ -1,29 +1,44 @@
 package no.hiof.leventen.actionbar.Chat;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class Message {
-    private String id;
+public class Message implements Parcelable {
+    private int id;
     private String messageText;
     private String fromUser;
     private String toUser;
     private Date date;
 
-    public Message(String id, String messageText, String fromUser, String toUser, Date date) {
-        this.id = id;
-        this.messageText = messageText;
-        this.fromUser = fromUser;
-        this.date = date;
-    }
-    public Message(String messageText, String fromUser, String toUser, Date date) {
+    public Message(String messageText, String fromUser, Date date) {
         this.messageText = messageText;
         this.fromUser = fromUser;
         this.date = date;
     }
 
-    public String getId() { return id; }
+    protected Message(Parcel in) {
+        messageText = in.readString();
+        fromUser = in.readString();
+        this.date = date;
+    }
 
-    public void setId(String id) { this.id = id; }
+    public static final Creator<Message> CREATOR = new Creator<Message>() {
+        @Override
+        public Message createFromParcel(Parcel in) {
+            return new Message(in);
+        }
+
+        @Override
+        public Message[] newArray(int size) {
+            return new Message[size];
+        }
+    };
+
+    public int getId() { return id; }
+
+    public void setId(int id) { this.id = id; }
 
     public String getMessageText() { return messageText; }
 
@@ -40,4 +55,17 @@ public class Message {
     public Date getDate() { return date; }
 
     public void setDate(Date date) { this.date = date; }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeInt(id);
+        parcel.writeString(messageText);
+        parcel.writeString(fromUser);
+        parcel.writeString(toUser);
+    }
 }
