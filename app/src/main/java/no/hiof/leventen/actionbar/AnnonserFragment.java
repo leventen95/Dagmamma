@@ -1,6 +1,5 @@
 package no.hiof.leventen.actionbar;
 
-
 import android.content.Intent;
 import android.os.Bundle;;
 import android.support.v4.app.Fragment;
@@ -19,7 +18,6 @@ import no.hiof.leventen.actionbar.Classes.UserType;
 import no.hiof.leventen.actionbar.Firebasehandler.DidGetUsersCallBack;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 
-
 public class AnnonserFragment extends Fragment {
     RecyclerView recyclerView;
     private List<Person> userList;
@@ -29,7 +27,6 @@ public class AnnonserFragment extends Fragment {
     public AnnonserFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,8 +42,6 @@ public class AnnonserFragment extends Fragment {
 
         initializeData();
 
-
-
         goToSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +50,7 @@ public class AnnonserFragment extends Fragment {
         });
         return fragment_annonser;
     }
+
     private void initializeData(){
         userList = new ArrayList<>();
         datasource.getAllUsers(UserType.DAGMAMMA, new DidGetUsersCallBack() {
@@ -64,8 +60,8 @@ public class AnnonserFragment extends Fragment {
                 initializeAdapter();
             }
         });
-
     }
+
     private void initializeAdapter(){
         RecyclerViewAdapter.RecyclerViewClickListener clickListener = new RecyclerViewAdapter.RecyclerViewClickListener() {
             @Override
@@ -84,12 +80,10 @@ public class AnnonserFragment extends Fragment {
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(userList, clickListener);
         recyclerView.setAdapter(adapter);
-
     }
 
     private void goToSearchMethod(){
         Intent intent = new Intent(getActivity(), SearchActivity.class);
         startActivity(intent);
     }
-
 }

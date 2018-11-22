@@ -1,23 +1,17 @@
 package no.hiof.leventen.actionbar.Dialog;
 
 import android.content.Intent;
-import android.os.Bundle;;
-import android.os.Parcelable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import no.hiof.leventen.actionbar.Chat.ChatListActivity;
 import no.hiof.leventen.actionbar.Chat.Conversation;
-import no.hiof.leventen.actionbar.Chat.Message;
 import no.hiof.leventen.actionbar.Firebasehandler.ConversationCallback;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 import no.hiof.leventen.actionbar.Person;
@@ -54,14 +48,8 @@ public class DialogListFragment extends Fragment {
             }
         });
 
-*/      initializeData();
+*/      initializeAdapter();
         return view;
-    }
-
-    private void initializeData(){
-     //   ArrayList<Conversation> con = Person.getCurrentUser().getConversations();
-     //   conversationsList = con;
-        initializeAdapter();
     }
 
     private void initializeAdapter(){
