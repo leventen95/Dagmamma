@@ -59,8 +59,8 @@ public class DialogListFragment extends Fragment {
     }
 
     private void initializeData(){
-        ArrayList<Conversation> con = Person.getCurrentUser().getConversations();
-        conversationsList = con;
+     //   ArrayList<Conversation> con = Person.getCurrentUser().getConversations();
+     //   conversationsList = con;
         initializeAdapter();
     }
 
@@ -75,7 +75,7 @@ public class DialogListFragment extends Fragment {
             }
         };
 
-        DialogAdapter adapter = new DialogAdapter(conversationsList, clickListener);
+        DialogAdapter adapter = new DialogAdapter(Person.getCurrentUser().getConversations(), clickListener);
         recyclerView.setAdapter(adapter);
     }
 }

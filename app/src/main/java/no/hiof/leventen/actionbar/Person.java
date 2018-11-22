@@ -13,7 +13,7 @@ public class Person {
     String name;
     int photoId;
     private String email;
-    private ArrayList<Conversation> conversations;
+    private List<Conversation> conversations;
     private static Person currentUser;
     private String firebaseUid;
     private String profilBeskrivelse;
@@ -114,11 +114,11 @@ public class Person {
         this.firebaseUid = firebaseUid;
     }
 
-    public ArrayList<Conversation> getConversations() {
+    public List<Conversation> getConversations() {
         return conversations;
     }
 
-    public void setConversations(ArrayList<Conversation> conversations) {
+    public void setConversations(List<Conversation> conversations) {
         this.conversations = conversations;
     }
 
