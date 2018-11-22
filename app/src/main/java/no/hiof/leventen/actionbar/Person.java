@@ -32,19 +32,19 @@ public class Person {
         this.conversations = new ArrayList<Conversation>();
         Conversation con1 = new Conversation(0, "Fredrik Kalsberg");
         con1.addMessage(new Message("Hei du! Jeg vil gjerne passe ungen din! Hilsen Fredrik","Fredrik Kalsberg",new Date(81996972)));
-        con1.addMessage(new Message("Hei du! Jeg har ingen unger jeg!","Joakim Granaas",new Date(81996972)));
+        con1.addMessage(new Message("Hei du! Jeg har ingen unger jeg!","it mannen",new Date(81996972)));
         con1.addMessage(new Message("Uff, det var dumt!","Fredrik Kalsberg",new Date(81996972)));
-        con1.addMessage(new Message("Men jeg kjenner en person som har unger da!","Fredrik Kalsberg",new Date(81996972)));
+        con1.addMessage(new Message("Men jeg kjenner en person som har unger da!","it mannen",new Date(81996972)));
         con1.addMessage(new Message("Javell? Hvem da?","Fredrik Kalsberg",new Date(81996972)));
-        con1.addMessage(new Message("Han heter Petter!","Joakim Granaas",new Date()));
+        con1.addMessage(new Message("Han heter Petter!","it mannen",new Date()));
 
         Conversation con2 = new Conversation(1, "Fittetryne");
         con2.addMessage(new Message("Hei du! Jeg vil gjerne passe ungen din! Hilsen Fittetryne","Fittetryne",new Date(81996972)));
-        con2.addMessage(new Message("Hei du! Jeg har ingen unger jeg!","Joakim Granaas",new Date(81996972)));
+        con2.addMessage(new Message("Hei du! Jeg har ingen unger jeg!","it mannen",new Date(81996972)));
         con2.addMessage(new Message("Uff, det var dumt!","Fittetryne",new Date(81996972)));
-        con2.addMessage(new Message("Men jeg kjenner en person som har unger da!","Fittetryne",new Date(81996972)));
+        con2.addMessage(new Message("Men jeg kjenner en person som har unger da!","it mannen",new Date(81996972)));
         con2.addMessage(new Message("Javell? Hvem da?","Fittetryne",new Date(81996972)));
-        con2.addMessage(new Message("Han heter Petter!","Joakim Granaas",new Date()));
+        con2.addMessage(new Message("Han heter Petter!","it mannen",new Date()));
 
         this.conversations.add(con1);
         this.conversations.add(con2);

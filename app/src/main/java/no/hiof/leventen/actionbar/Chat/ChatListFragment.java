@@ -79,7 +79,8 @@ public class ChatListFragment extends Fragment {
             Toast.makeText(getContext(), "Skriv melding først!", Toast.LENGTH_LONG).show();
         } else {
             // TODO - Send til database og legg til i listen slik at man slipper å hente data fra database hver gang man sender mld
-            Person.getCurrentUser().getConversations().get(conversationId).addMessage(new Message(msg, Person.getCurrentUser().getEmail(), new Date()));
+            //Person.getCurrentUser().getEmail() er vel bedre enn getName()? Legge til navn i conversationklassen?
+            Person.getCurrentUser().getConversations().get(conversationId).addMessage(new Message(msg, /*Person.getCurrentUser().getName()*/"it mannen", new Date()));
             adapter.notifyDataSetChanged();
             messageInupt.setText("");
         }
