@@ -28,7 +28,7 @@ public class ChatListFragment extends Fragment {
     EditText messageInupt;
     ImageButton btnSend;
     ChatAdapter adapter;
-    private Conversation conversation;
+    private int conversationId;
     //private FirebaseRecyclerAdapter;
 
     public ChatListFragment() {
@@ -68,8 +68,9 @@ public class ChatListFragment extends Fragment {
         return view;
     }
 
-    private void initializeAdapter(){
-        adapter = new ChatAdapter(conversation);
+    public void initializeAdapter(int id){
+        conversationId = id;
+        adapter = new ChatAdapter(Person.getCurrentUser().getConversations().get(id));
         recyclerView.setAdapter(adapter);
     }
     private void sendAction(View view) {
@@ -78,17 +79,9 @@ public class ChatListFragment extends Fragment {
             Toast.makeText(getContext(), "Skriv melding først!", Toast.LENGTH_LONG).show();
         } else {
             // TODO - Send til database og legg til i listen slik at man slipper å hente data fra database hver gang man sender mld
-            conversation.addMessage(new Message(msg, Person.getCurrentUser().getEmail(), new Date()));
+            Person.getCurrentUser().getConversations().get(conversationId).addMessage(new Message(msg, Person.getCurrentUser().getEmail(), new Date()));
             adapter.notifyDataSetChanged();
             messageInupt.setText("");
         }
-    }
-    public void setDisplayedValues(Conversation conversation) {
-        this.conversation = new Conversation(conversation.getId(), conversation.getOtherUser());
-
-        for(int i = conversation.getConversationMessages().size() -1; i >= 0; i--)
-            this.conversation.addMessage(conversation.getMessage(i));
-
-        initializeAdapter();
     }
 }

@@ -26,16 +26,8 @@ public class ChatListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_list);
 
         int id = getIntent().getIntExtra("id", -1);
-
-        List<Conversation> conversations = Person.getCurrentUser().getConversations();
-        for (Conversation c : conversations) {
-            if(c.getId() == id) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                ChatListFragment chatListFragment = (ChatListFragment) fragmentManager.findFragmentById(R.id.fragment_chat_list);
-                chatListFragment.setDisplayedValues(c);
-            } else {
-                Toast.makeText(getApplicationContext(), "Noe gikk galt!", Toast.LENGTH_LONG);
-            }
-        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        ChatListFragment chatListFragment = (ChatListFragment) fragmentManager.findFragmentById(R.id.fragment_chat_list);
+        chatListFragment.initializeAdapter(id);
     }
 }
