@@ -5,11 +5,12 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Conversation implements Parcelable {
     private int id;
     private String otherUser;
-    private ArrayList<Message> conversationList;
+    private List<Message> conversationList;
 
     public Conversation(int id, String otherUser) {
         this.id = id;
@@ -35,7 +36,7 @@ public class Conversation implements Parcelable {
     };
 
     public void addMessage(Message message) {
-        conversationList.add(message);
+        conversationList.add(0, message);
     }
 
     public Message getMessage(int i) {
@@ -75,7 +76,7 @@ public class Conversation implements Parcelable {
 
     public void setOtherUser(String otherUser) { this.otherUser = otherUser; }
 
-    public ArrayList<Message> getConversationMessages() {
+    public List<Message> getConversationMessages() {
         return conversationList;
     }
 
