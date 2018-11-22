@@ -44,17 +44,7 @@ public class Conversation implements Parcelable {
     }
 
     public Message getLastMessage() {
-        // TODO - Mekke ordentlig Dato-referanse som kan sammenliknes, eller bare bruke string og lete i den...
-        //Date date = new Date();
-        Message msg = null;
-        for (int i = 0; i < conversationList.size(); i++) {
-            // TODO - Hvis datoen i dette objektet er nyere enn date; overskriv tmpMsg.getDate()!
-            if(i == conversationList.size() -1) {
-                msg = conversationList.get(i);
-            }
-        }
-        return msg;
-
+        return conversationList.get(0);
     }
 
     public void removeMessage(Message message) {
