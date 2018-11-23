@@ -25,11 +25,11 @@
         android:background="@layout/search_layout"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint="Søk her..."
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingRight="20dp"
         android:paddingBottom="10dp"
-        android:text="Search Here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
