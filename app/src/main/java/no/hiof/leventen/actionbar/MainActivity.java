@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        setFragment(annonserFragment);
     }
 
     private void setFragment(Fragment fragment) {
