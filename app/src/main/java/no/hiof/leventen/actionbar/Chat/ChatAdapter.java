@@ -70,11 +70,11 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         if(viewHolder.getItemViewType() == 0) {
             MessageOutViewHolder vh = (MessageOutViewHolder) viewHolder;
             vh.messageOut.setText(conversation.getConversationMessages().get(i).getMessageText());
-            vh.messageOutDate.setText(new SimpleDateFormat("MM/dd/yyyy").format(conversation.getConversationMessages().get(i).getDate()));
+            vh.messageOutDate.setText(new SimpleDateFormat("dd MMM ''''yy 'kl' HH:MM").format(conversation.getConversationMessages().get(i).getDate()));
         } else {
             MessageInViewHolder vh = (MessageInViewHolder) viewHolder;
             vh.messageIn.setText(conversation.getConversationMessages().get(i).getMessageText());
-            vh.messageInDate.setText(new SimpleDateFormat("MM/dd/yyyy").format(conversation.getConversationMessages().get(i).getDate()));
+            vh.messageInDate.setText(new SimpleDateFormat("dd MMM ''''yy 'kl' HH:MM").format(conversation.getConversationMessages().get(i).getDate()));
         }
     }
 
