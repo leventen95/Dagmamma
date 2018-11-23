@@ -1,7 +1,6 @@
 package no.hiof.leventen.actionbar.Dialog;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +46,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogView
     @NonNull
     @Override
     public DialogViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_dialog_item, viewGroup,false);
+        View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dialog_item, viewGroup,false);
         DialogViewHolder chatViewHolder = new DialogViewHolder(v, clickListener);
         return chatViewHolder;
     }

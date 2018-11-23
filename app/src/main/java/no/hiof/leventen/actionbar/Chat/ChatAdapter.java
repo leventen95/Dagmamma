@@ -62,9 +62,9 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         if(i == 0) {
-            return new MessageOutViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_message_out, viewGroup,false));
+            return new MessageOutViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chat_buble_message_out, viewGroup,false));
         } else {
-            return new MessageInViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cardview_message_in, viewGroup,false));
+            return new MessageInViewHolder(LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.chat_buble_message_in, viewGroup,false));
         }
     }
 

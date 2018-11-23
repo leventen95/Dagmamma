@@ -12,7 +12,6 @@ import java.util.List;
 
 import no.hiof.leventen.actionbar.Chat.ChatListActivity;
 import no.hiof.leventen.actionbar.Chat.Conversation;
-import no.hiof.leventen.actionbar.Firebasehandler.ConversationCallback;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 import no.hiof.leventen.actionbar.Person;
 import no.hiof.leventen.actionbar.R;
@@ -34,7 +33,7 @@ public class DialogListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.cardview_dialog_list, container, false);
+        View view = inflater.inflate(R.layout.dialog_list, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.dialogRecyclerView);
         recyclerView.hasFixedSize();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
