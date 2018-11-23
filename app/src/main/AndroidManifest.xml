@@ -16,7 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity" android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".PersonDetailedActivity" />
 
         <meta-data
@@ -28,5 +28,6 @@
         <activity android:name=".SearchActivity" />
         <activity android:name=".Chat.ChatListActivity"></activity>
     </application>
+
 
 </manifest>
