@@ -9,18 +9,21 @@ import java.util.List;
 
 public class Conversation implements Parcelable {
     private int id;
-    private String otherUser;
+    private String otherUserEmail;
+    private String otherUserName;
     private List<Message> conversationList;
 
-    public Conversation(int id, String otherUser) {
+    public Conversation(int id, String otherUserEmail, String otherUserName) {
         this.id = id;
-        this.otherUser = otherUser;
+        this.otherUserEmail = otherUserEmail;
+        this.otherUserName = otherUserName;
         this.conversationList = new ArrayList<Message>();
     }
 
     public Conversation(Parcel in) {
         id = in.readInt();
-        otherUser = in.readString();
+        otherUserEmail = in.readString();
+        otherUserName = in.readString();
     }
 
     public static final Creator<Conversation> CREATOR = new Creator<Conversation>() {
@@ -62,9 +65,13 @@ public class Conversation implements Parcelable {
         this.id = id;
     }
 
-    public String getOtherUser() { return otherUser; }
+    public String getOtherUserEmail() { return otherUserEmail; }
 
-    public void setOtherUser(String otherUser) { this.otherUser = otherUser; }
+    public void setOtherUserEmail(String otherUserEmail) { this.otherUserEmail = otherUserEmail; }
+
+    public String getOtherUserName() { return otherUserName; }
+
+    public void setOtherUserName(String otherUserName) { this.otherUserName = otherUserName; }
 
     public List<Message> getConversationMessages() {
         return conversationList;
@@ -80,6 +87,7 @@ public class Conversation implements Parcelable {
     @Override
     public void writeToParcel(Parcel parcel, int i) {
         parcel.writeInt(id);
-        parcel.writeString(otherUser);
+        parcel.writeString(otherUserEmail);
+        parcel.writeString(otherUserName);
     }
 }

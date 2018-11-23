@@ -210,6 +210,7 @@ public class AnnonserFragment extends Fragment {
                 intent.putExtra("alder",thisUser.getfDato());
                 intent.putExtra("bilde","");
                 intent.putExtra("desc",thisUser.getProfilBeskrivelse());
+                intent.putExtra("email", thisUser.getEmail());
                 startActivity(intent);
             }
         };

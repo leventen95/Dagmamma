@@ -1,10 +1,8 @@
 package no.hiof.leventen.actionbar;
 
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
-
 
 
 public class PersonDetailedFragment extends Fragment {
@@ -28,6 +25,7 @@ public class PersonDetailedFragment extends Fragment {
     private ImageView personImageView;
     private int personIndex;
     private Button goChat;
+    private String email;
 
 
     public PersonDetailedFragment() {
@@ -58,7 +56,6 @@ public class PersonDetailedFragment extends Fragment {
                 toast.show();
             }
         });
-
         return view;
     }
 
@@ -67,9 +64,9 @@ public class PersonDetailedFragment extends Fragment {
         outState.putInt(PERSON_INDEX,personIndex);
     }
 
-    public void setDisplayedPersonDetail(String name, String alder, String desc, String by) {
+    public void setDisplayedPersonDetail(String name, String alder, String desc, String by, String email) {
 
-
+        this.email = email;
         personNameTextView.setText(name);
         personAlderTextView.setText(alder);
         personDescriptionTextView.setText(desc);

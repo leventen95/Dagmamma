@@ -16,12 +16,13 @@ import no.hiof.leventen.actionbar.R;
 
 public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogViewHolder> {
 
+    private DialogClickListener clickListener;
     private List<Conversation> conversations;
+
     public DialogAdapter(List<Conversation> conversations, DialogClickListener clickListener) {
         this.conversations = conversations;
         this.clickListener = clickListener;
     }
-    private DialogClickListener clickListener;
 
     public static class DialogViewHolder extends RecyclerView.ViewHolder{
         ImageView userImage;
@@ -54,7 +55,7 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogView
     @Override
     public void onBindViewHolder(@NonNull DialogViewHolder dialogViewHolder, int i) {
         //dialogViewHolder.userImage.setImageBitmap(conversations.get(i).getOtherUser().get);
-        dialogViewHolder.userFullName.setText(conversations.get(i).getOtherUser());
+        dialogViewHolder.userFullName.setText(conversations.get(i).getOtherUserName());
         dialogViewHolder.lastMessage.setText(conversations.get(i).getLastMessage().getMessageText());
     }
 

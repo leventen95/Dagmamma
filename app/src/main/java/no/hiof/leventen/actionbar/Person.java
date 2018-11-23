@@ -30,7 +30,7 @@ public class Person {
         this.by = by;
         this.fDato = fDato;
         this.conversations = new ArrayList<Conversation>();
-        Conversation con1 = new Conversation(0, "Fredrik Kalsberg");
+        Conversation con1 = new Conversation(0,"mail@mail.com","Fredrik Kalsberg");
         con1.addMessage(new Message("Hei du! Jeg vil gjerne passe ungen din! Hilsen Fredrik","Fredrik Kalsberg",new Date(81996972)));
         con1.addMessage(new Message("Hei du! Jeg har ingen unger jeg!","it mannen",new Date(81996972)));
         con1.addMessage(new Message("Uff, det var dumt!","Fredrik Kalsberg",new Date(81996972)));
@@ -38,8 +38,8 @@ public class Person {
         con1.addMessage(new Message("Javell? Hvem da?","Fredrik Kalsberg",new Date(81996972)));
         con1.addMessage(new Message("Han heter Petter!","it mannen",new Date()));
 
-        Conversation con2 = new Conversation(1, "Fittetryne");
-        con2.addMessage(new Message("Hei du! Jeg vil gjerne passe ungen din! Hilsen Fittetryne","Fittetryne",new Date(81996972)));
+        Conversation con2 = new Conversation(1,"hansegutt@haha.lol","Hans Larsson");
+        con2.addMessage(new Message("Hei du! Jeg vil gjerne passe ungen din! Hilsen Hans","Fittetryne",new Date(81996972)));
         con2.addMessage(new Message("Hei du! Jeg har ingen unger jeg!","it mannen",new Date(81996972)));
         con2.addMessage(new Message("Uff, det var dumt!","Fittetryne",new Date(81996972)));
         con2.addMessage(new Message("Men jeg kjenner en person som har unger da!","it mannen",new Date(81996972)));
