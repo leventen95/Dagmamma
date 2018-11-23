@@ -1,5 +1,8 @@
 package no.hiof.leventen.actionbar.Chat;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 
@@ -68,13 +72,33 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
 
         if(viewHolder.getItemViewType() == 0) {
-            MessageOutViewHolder vh = (MessageOutViewHolder) viewHolder;
+            final MessageOutViewHolder vh = (MessageOutViewHolder) viewHolder;
             vh.messageOut.setText(conversation.getConversationMessages().get(i).getMessageText());
             vh.messageOutDate.setText(new SimpleDateFormat("dd MMM ''''yy 'kl' HH:MM").format(conversation.getConversationMessages().get(i).getDate()));
+            vh.messageOut.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    ClipboardManager clipboard = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("Message",vh.messageOut.getText());
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(view.getContext(), "Melding kopiert", Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            });
         } else {
-            MessageInViewHolder vh = (MessageInViewHolder) viewHolder;
+            final MessageInViewHolder vh = (MessageInViewHolder) viewHolder;
             vh.messageIn.setText(conversation.getConversationMessages().get(i).getMessageText());
             vh.messageInDate.setText(new SimpleDateFormat("dd MMM ''''yy 'kl' HH:MM").format(conversation.getConversationMessages().get(i).getDate()));
+            vh.messageIn.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    ClipboardManager clipboard = (ClipboardManager) view.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                    ClipData clip = ClipData.newPlainText("Message",vh.messageIn.getText());
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(view.getContext(), "Melding kopiert", Toast.LENGTH_LONG).show();
+                    return false;
+                }
+            });
         }
     }
 
