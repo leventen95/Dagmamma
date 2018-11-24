@@ -20,6 +20,6 @@ public class PersonDetailedActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         PersonDetailedFragment personDetailedFragment = (PersonDetailedFragment) fragmentManager.findFragmentById(R.id.personDetailedFragment);
 
-        personDetailedFragment.setDisplayedPersonDetail(name,alder,desc,by, email);
+        personDetailedFragment.setDisplayedPersonDetail(name,alder,desc,by,email);
     }
 }

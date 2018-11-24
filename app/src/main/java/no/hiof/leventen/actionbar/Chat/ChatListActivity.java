@@ -23,6 +23,8 @@ public class ChatListActivity extends AppCompatActivity {
         int id = getIntent().getIntExtra("id", -1);
         FragmentManager fragmentManager = getSupportFragmentManager();
         ChatListFragment chatListFragment = (ChatListFragment) fragmentManager.findFragmentById(R.id.fragment_chat_list);
-        chatListFragment.initializeAdapter(id);
+        if (id != -1) {
+            chatListFragment.initializeAdapter(id);
+        }
     }
 }

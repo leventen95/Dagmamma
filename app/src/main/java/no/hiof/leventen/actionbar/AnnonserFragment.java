@@ -147,6 +147,7 @@ public class AnnonserFragment extends Fragment {
                                 intent.putExtra("by", thisUser.getBy());
                                 intent.putExtra("bilde", "");
                                 intent.putExtra("desc", thisUser.getProfilBeskrivelse());
+                                intent.putExtra("email", thisUser.getEmail());
                                 startActivity(intent);
                             }
                         }
@@ -194,31 +195,9 @@ public class AnnonserFragment extends Fragment {
             @Override
             public void didRecieve(List<Person> personList) {
                 userList = personList;
-                //initializeAdapter();
             }
         });
 
     }
-    private void initializeAdapter(){
-        RecyclerViewAdapter.RecyclerViewClickListener clickListener = new RecyclerViewAdapter.RecyclerViewClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Toast.makeText(getActivity(), userList.get(position).getName(), Toast.LENGTH_SHORT).show();
-                Person thisUser = userList.get(position);
-                Intent intent = new Intent(getActivity(), PersonDetailedActivity.class);
-                intent.putExtra("name",thisUser.getName());
-                intent.putExtra("alder",thisUser.getfDato());
-                intent.putExtra("bilde","");
-                intent.putExtra("desc",thisUser.getProfilBeskrivelse());
-                intent.putExtra("email", thisUser.getEmail());
-                startActivity(intent);
-            }
-        };
-
-        RecyclerViewAdapter adapter = new RecyclerViewAdapter(userList, clickListener);
-        //recyclerView.setAdapter(adapter);
-
-    }
-
 }
 
