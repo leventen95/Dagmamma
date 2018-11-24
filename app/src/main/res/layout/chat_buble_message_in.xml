@@ -30,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Melding fra annen bruker av appen."
+            android:textColor="@color/colorBlack"
             android:padding="10dp"/>
 
         <ImageView

@@ -31,6 +31,7 @@
                 android:layout_marginTop="8dp"
                 android:text="User Name"
                 android:textSize="30sp"
+                android:textColor="@color/colorBlack"
                 android:layout_toRightOf="@+id/dialogs_user_image"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -40,6 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="Last message from user"
+                android:textColor="@color/colorBlack"
                 android:layout_toRightOf="@+id/dialogs_user_image"
                 android:layout_below="@+id/dialogs_user_name"/>
 
