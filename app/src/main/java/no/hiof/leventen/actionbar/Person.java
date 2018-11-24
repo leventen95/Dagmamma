@@ -39,12 +39,11 @@ public class Person {
         con1.addMessage(new Message("Han heter Petter!","it mannen",new Date()));
 
         Conversation con2 = new Conversation(1,"hansegutt@haha.lol","Hans Larsson");
-        con2.addMessage(new Message("Hei du! Jeg vil gjerne passe ungen din! Hilsen Hans","Fittetryne",new Date(81996972)));
+        con2.addMessage(new Message("Hei du! Jeg vil gjerne passe ungen din! Hilsen Hans","Hans Larsson",new Date(81996972)));
         con2.addMessage(new Message("Hei du! Jeg har ingen unger jeg!","it mannen",new Date(81996972)));
-        con2.addMessage(new Message("Uff, det var dumt!","Fittetryne",new Date(81996972)));
+        con2.addMessage(new Message("Uff, det var dumt!","Hans Larsson",new Date(81996972)));
         con2.addMessage(new Message("Men jeg kjenner en person som har unger da!","it mannen",new Date(81996972)));
-        con2.addMessage(new Message("Javell? Hvem da?","Fittetryne",new Date(81996972)));
-        con2.addMessage(new Message("Han heter Petter!","it mannen",new Date()));
+        con2.addMessage(new Message("Javell? Hvem da?","Hans Larsson",new Date(81996972)));
 
         this.conversations.add(con1);
         this.conversations.add(con2);

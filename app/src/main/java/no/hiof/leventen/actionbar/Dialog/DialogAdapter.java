@@ -2,6 +2,7 @@ package no.hiof.leventen.actionbar.Dialog;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import no.hiof.leventen.actionbar.Chat.Conversation;
+import no.hiof.leventen.actionbar.Person;
 import no.hiof.leventen.actionbar.R;
 
 
@@ -57,7 +59,11 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogView
         if(conversations.get(i).getConversationMessages().size() != 0) {
             //dialogViewHolder.userImage.setImageBitmap(conversations.get(i).getOtherUser().get);
             dialogViewHolder.userFullName.setText(conversations.get(i).getOtherUserName());
-            dialogViewHolder.lastMessage.setText(conversations.get(i).getLastMessage().getMessageText());
+            if (Person.getCurrentUser().getConversations().get(i).getOtherUserName() == conversations.get(i).getLastMessage().getFromUser()) {
+                dialogViewHolder.lastMessage.setText(Html.fromHtml("<i>"+conversations.get(i).getLastMessage().getMessageText()+"</i>"));
+            } else {
+                dialogViewHolder.lastMessage.setText(Html.fromHtml("<b>Du:</b> "+"<i>"+conversations.get(i).getLastMessage().getMessageText()+"</i>"));
+            }
         }
     }
 
