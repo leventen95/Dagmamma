@@ -1,6 +1,7 @@
 package no.hiof.leventen.actionbar;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,9 +10,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
+
+import no.hiof.leventen.actionbar.Chat.ChatListActivity;
+import no.hiof.leventen.actionbar.Chat.Conversation;
 
 
 public class PersonDetailedFragment extends Fragment {
@@ -26,6 +29,7 @@ public class PersonDetailedFragment extends Fragment {
     private int personIndex;
     private Button goChat;
     private String email;
+    private View view;
 
 
     public PersonDetailedFragment() {
@@ -37,7 +41,7 @@ public class PersonDetailedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         personList = Person.getData();
-        View view = inflater.inflate(R.layout.fragment_person_detailed, container, false);
+        view = inflater.inflate(R.layout.fragment_person_detailed, container, false);
 
         personNameTextView = view.findViewById(R.id.textViewNavn);
         personAlderTextView = view.findViewById(R.id.textViewAlder);
@@ -45,17 +49,21 @@ public class PersonDetailedFragment extends Fragment {
         personImageView = view.findViewById(R.id.imageViewPerson);
         personByTextView = view.findViewById(R.id.textViewBy);
         goChat = view.findViewById(R.id.goToChatBtn);
+        goChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Person.getCurrentUser().getConversations().add(
+                        new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
+                Intent intent = new Intent(getActivity(), ChatListActivity.class);
+                intent.putExtra("id", Person.getCurrentUser().getConversations().size() -1);
+                startActivity(intent);
+            }
+        });
 
         personIndex = savedInstanceState == null? DEFAULT_PERSON_INDEX : savedInstanceState.getInt(PERSON_INDEX, DEFAULT_PERSON_INDEX);
         //setDisplayedPersonDetail(personIndex);
 
-        goChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast toast = Toast.makeText(getActivity(),"Sorry not sorry",Toast.LENGTH_LONG);
-                toast.show();
-            }
-        });
+
         return view;
     }
 
@@ -64,7 +72,7 @@ public class PersonDetailedFragment extends Fragment {
         outState.putInt(PERSON_INDEX,personIndex);
     }
 
-    public void setDisplayedPersonDetail(String name, String alder, String desc, String by, String email) {
+    public void setDisplayedPersonDetail(String name, String alder, String desc, String by, final String email) {
 
         this.email = email;
         personNameTextView.setText(name);
@@ -72,6 +80,20 @@ public class PersonDetailedFragment extends Fragment {
         personDescriptionTextView.setText(desc);
         personByTextView.setText(by);
 
+        for(final Conversation c : Person.getCurrentUser().getConversations()) {
+            if(c.getOtherUserEmail().equals(email)) {
+                goChat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Person.getCurrentUser().getConversations().add(
+                                new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
+                        Intent intent = new Intent(getActivity(), ChatListActivity.class);
+                        intent.putExtra("id", c.getId());
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
     }
 
 }

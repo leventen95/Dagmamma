@@ -73,6 +73,7 @@ public class ChatListFragment extends Fragment {
         adapter = new ChatAdapter(Person.getCurrentUser().getConversations().get(id));
         recyclerView.setAdapter(adapter);
     }
+
     private void sendAction(View view) {
         String msg = messageInupt.getText().toString();
         if(msg.matches("")) {

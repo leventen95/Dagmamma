@@ -48,15 +48,17 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogView
     @Override
     public DialogViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.dialog_item, viewGroup,false);
-        DialogViewHolder chatViewHolder = new DialogViewHolder(v, clickListener);
-        return chatViewHolder;
+        DialogViewHolder dialogViewHolder = new DialogViewHolder(v, clickListener);
+        return dialogViewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull DialogViewHolder dialogViewHolder, int i) {
-        //dialogViewHolder.userImage.setImageBitmap(conversations.get(i).getOtherUser().get);
-        dialogViewHolder.userFullName.setText(conversations.get(i).getOtherUserName());
-        dialogViewHolder.lastMessage.setText(conversations.get(i).getLastMessage().getMessageText());
+        if(conversations.get(i).getConversationMessages().size() != 0) {
+            //dialogViewHolder.userImage.setImageBitmap(conversations.get(i).getOtherUser().get);
+            dialogViewHolder.userFullName.setText(conversations.get(i).getOtherUserName());
+            dialogViewHolder.lastMessage.setText(conversations.get(i).getLastMessage().getMessageText());
+        }
     }
 
     @Override
@@ -66,7 +68,13 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.DialogView
 
     @Override
     public int getItemCount() {
-        return conversations.size();
+        int size = conversations.size();
+        for(Conversation c : conversations) {
+            if(c.getConversationMessages().size() == 0) {
+                size--;
+            }
+        }
+        return size;
     }
 
     public interface DialogClickListener {
