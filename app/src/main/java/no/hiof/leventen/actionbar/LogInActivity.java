@@ -85,7 +85,7 @@ public class LogInActivity extends AppCompatActivity {
         String passord = passwordInput.getText().toString();
 
         if(email.isEmpty() || passord.isEmpty()){
-            Toast.makeText(getApplicationContext(), "Fyll inn begge felter", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "Fyll inn begge felter", Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -93,10 +93,10 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Innlogging vellykket!", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "Innlogging vellykket!", Toast.LENGTH_LONG).show();
                     startActivity(intent);
                 }else{
-                    Toast.makeText(getApplicationContext(), "Innlogging feilet", Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(), "Innlogging feilet", Toast.LENGTH_LONG).show();
                     System.out.println(task.getException().toString());
                 }
             }
