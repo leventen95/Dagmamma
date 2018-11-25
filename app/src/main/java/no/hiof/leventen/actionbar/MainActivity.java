@@ -9,6 +9,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
+
+import com.google.firebase.auth.FirebaseAuth;
+
 import no.hiof.leventen.actionbar.Chat.ChatListFragment;
 import no.hiof.leventen.actionbar.Dialog.DialogListFragment;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
@@ -22,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
     private DialogListFragment dialogListFragment;
     private MinSideFragment minSideFragment;
     public FirebaseDatasource test = new FirebaseDatasource();
+
+    private FirebaseAuth mAuth;
+    Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +64,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         setFragment(annonserFragment);
+
+        FirebaseDatasource datasource = new FirebaseDatasource();
+
+        intent = new Intent(MainActivity.this, LogInActivity.class);
+        if(FirebaseAuth.getInstance().getCurrentUser() != null){
+
+            datasource.getUser(FirebaseAuth.getInstance().getCurrentUser().getUid(),true);
+            mAuth = FirebaseAuth.getInstance();
+        }
+        else {
+            startActivity(intent);
+        }
+
+
+
     }
 
     private void setFragment(Fragment fragment) {
@@ -65,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
 
     }
+
+
 
 
     private void testCreate(){
