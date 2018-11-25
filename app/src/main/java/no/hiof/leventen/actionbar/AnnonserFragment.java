@@ -50,8 +50,8 @@ public class AnnonserFragment extends Fragment {
     private DatabaseReference mUserDatabase;
     //private CheckBox byCheckBox, navnCheckBox;
     private int clicked = 0;
-    public RadioGroup radioGroup;
-    public RadioButton radio_by,radio_navn;
+    public RadioGroup radioGroup,radioGroupForeldre;
+    public RadioButton radio_by,radio_navn,radio_dagmamma,radio_foreldre;
     public int radio_checked = 1;
 
 
@@ -69,17 +69,40 @@ public class AnnonserFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
 
+        searchField = (EditText) fragment_annonser.findViewById(R.id.search_field);//
+        searchBtn = (ImageButton) fragment_annonser.findViewById(R.id.imageButton);//
+        radioGroup = (RadioGroup) fragment_annonser.findViewById(R.id.radioGroup);
+        radioGroupForeldre = (RadioGroup) fragment_annonser.findViewById(R.id.radioGroupForeldre);
+        radio_dagmamma = (RadioButton) fragment_annonser.findViewById(R.id.radio_Dagmamma);
+        radio_foreldre = (RadioButton) fragment_annonser.findViewById(R.id.radio_Foreldre);
+        radio_by = (RadioButton) fragment_annonser.findViewById(R.id.radio_by);
+        radio_navn = (RadioButton) fragment_annonser.findViewById(R.id.radio_navn);
+
+        radio_dagmamma.setChecked(true);
+
         datasource = new FirebaseDatasource();
 
         initializeData();
 
-
         mUserDatabase = FirebaseDatabase.getInstance().getReference("users/dagmamma/");
-        searchField = (EditText) fragment_annonser.findViewById(R.id.search_field);//
-        searchBtn = (ImageButton) fragment_annonser.findViewById(R.id.imageButton);//
-        radioGroup = (RadioGroup) fragment_annonser.findViewById(R.id.radioGroup);
-        radio_by = (RadioButton) fragment_annonser.findViewById(R.id.radio_by);
-        radio_navn = (RadioButton) fragment_annonser.findViewById(R.id.radio_navn);
+
+        radioGroupForeldre.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.radio_Dagmamma:
+                        mUserDatabase = FirebaseDatabase.getInstance().getReference("users/dagmamma/");
+                        String searchText = searchField.getText().toString();
+                        firebaseUserSearch(searchText);
+                        break;
+                    case R.id.radio_Foreldre:
+                        mUserDatabase = FirebaseDatabase.getInstance().getReference("users/foreldre/");
+                        String searchText1 = searchField.getText().toString();
+                        firebaseUserSearch(searchText1);
+                        break;
+                }
+            }
+        });
 
 
         radio_by.setChecked(true);
@@ -95,9 +118,13 @@ public class AnnonserFragment extends Fragment {
                 switch (checkedId){
                     case R.id.radio_by:
                         radio_checked = 1;
+                        String searchText = searchField.getText().toString();
+                        firebaseUserSearch(searchText);
                         break;
                     case R.id.radio_navn:
                         radio_checked = 2;
+                        String searchText1 = searchField.getText().toString();
+                        firebaseUserSearch(searchText1);
                         break;
                 }
             }
