@@ -65,7 +65,6 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(byCheckBox.isChecked()){
-
                     //changeQuery("by",searchField.getText().toString());
                 }
             }

@@ -1,13 +1,16 @@
 package no.hiof.leventen.actionbar;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -83,16 +86,15 @@ public class RegistrerActivity extends AppCompatActivity {
         registrerProfilBildeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPictureDialog();
+                    showPictureDialog();
+
             }
         });
 
         registrerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 registerUser();
-
             }
         });
     }
@@ -109,10 +111,24 @@ public class RegistrerActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                choosePhotoFromGallary();
+                                if(isStoragePermissionGranted()){
+                                    choosePhotoFromGallary();
+                                }
+                                else{
+                                    ActivityCompat.requestPermissions(RegistrerActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                                    if(isStoragePermissionGranted())
+                                        choosePhotoFromGallary();
+                                }
                                 break;
                             case 1:
-                                takePhotoFromCamera();
+                                if(isCameraPermissionGranted()) {
+                                    takePhotoFromCamera();
+                                }
+                                else{
+                                    ActivityCompat.requestPermissions(RegistrerActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
+                                    if(isCameraPermissionGranted())
+                                        takePhotoFromCamera();
+                                }
                                 break;
                         }
                     }
@@ -279,4 +295,25 @@ public class RegistrerActivity extends AppCompatActivity {
 
 
     }
+    public  boolean isStoragePermissionGranted() {
+        if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            return false;
+        }
+    }
+    public  boolean isCameraPermissionGranted() {
+        if (checkSelfPermission(android.Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED) {
+            return true;
+        }
+        else {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+            return false;
+        }
+    }
+    //https://stackoverflow.com/questions/33162152/storage-permission-error-in-marshmallow
 }
