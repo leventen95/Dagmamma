@@ -54,15 +54,11 @@ public class PersonDetailedFragment extends Fragment {
         goChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!(email.equals(Person.getCurrentUser().getEmail()))) {
-                    Person.getCurrentUser().getConversations().add(
-                            new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
-                    Intent intent = new Intent(getActivity(), ChatListActivity.class);
-                    intent.putExtra("id", Person.getCurrentUser().getConversations().size() -1);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getContext(), "Dette er jo deg din tulling!", Toast.LENGTH_SHORT).show();
-                }
+                Person.getCurrentUser().getConversations().add(
+                        new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
+                Intent intent = new Intent(getActivity(), ChatListActivity.class);
+                intent.putExtra("id", Person.getCurrentUser().getConversations().size() -1);
+                startActivity(intent);
             }
         });
 
