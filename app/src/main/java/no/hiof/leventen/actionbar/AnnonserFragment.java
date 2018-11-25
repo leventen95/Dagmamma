@@ -184,8 +184,10 @@ public class AnnonserFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull SearchActivity.UsersViewHolder viewHolder, final int position, @NonNull final Person model) {
-                if (!(model.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())))
+                    //if((!(model.getFirebaseUid() == FirebaseAuth.getInstance().getCurrentUser().getUid())))
                     viewHolder.setDetails(model);
+
+
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

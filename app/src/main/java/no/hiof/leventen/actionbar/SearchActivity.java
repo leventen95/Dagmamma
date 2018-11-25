@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import no.hiof.leventen.actionbar.Firebasehandler.DidReceiveProfile;
@@ -67,7 +68,6 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(byCheckBox.isChecked()){
-
                     //changeQuery("by",searchField.getText().toString());
                 }
             }
@@ -85,17 +85,6 @@ public class SearchActivity extends AppCompatActivity {
                 firebaseUserSearch(searchText);
             }
         });
-
-        /*searchField.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                    searchField.setText("");
-
-                    String searchText = searchField.getText().toString();
-                    firebaseUserSearch(searchText);
-                return true;
-            }
-        });*/
 
         searchField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -155,14 +144,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-
-
-        /*FirebaseRecyclerOptions<Users> options = new FirebaseRecyclerOptions.Builder<Users>()
-                .setQuery(query,Users.class)
-                .build();
-        FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users,
-                UsersViewHolder>(
-                options) {*/
         FirebaseRecyclerOptions<Person> options = new FirebaseRecyclerOptions.Builder<Person>()// Disse skal slettes hvis kommentaren ovenfor fjernes
                 .setQuery(query, Person.class)
                 .setLifecycleOwner(this)
@@ -205,6 +186,7 @@ public class SearchActivity extends AppCompatActivity {
             TextView user_name = (TextView) mView.findViewById(R.id.person_name);
             TextView textViewBy = (TextView) mView.findViewById(R.id.textViewBy);
             TextView textViewAlder = (TextView) mView.findViewById(R.id.person_age);
+<<<<<<< HEAD
             final ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
 
             datasource.getImage(person.getFirebaseUid(), new DidReceiveProfile() {
@@ -218,13 +200,14 @@ public class SearchActivity extends AppCompatActivity {
             textViewBy.setText(person.getBy());
             textViewAlder.setText("40");
 
+=======
+            //TextView user_description = (TextView) mView.findViewById(R.id.textViewDescription);
+            ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
+                user_name.setText(person.getName());
+                textViewBy.setText(person.getBy());
+                textViewAlder.setText("44");
+>>>>>>> 962454a47b4cfc03efbc916cb704fad9804a0f34
 
         }
     }
-   /* public void changeQuery(String string, String searchText){
-        Query query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
-    }
-    public Query getQuery(){
-        //return query;
-    }*/
 }
