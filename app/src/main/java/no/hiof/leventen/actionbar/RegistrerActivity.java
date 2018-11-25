@@ -114,12 +114,12 @@ public class RegistrerActivity extends AppCompatActivity {
         System.out.println(email + pass + navn + fDato + beskrivelse);
 
         if(email.isEmpty() || pass.isEmpty()){
-            Toast.makeText(getApplicationContext(),"Fyll inn begge felter", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(),"Fyll inn begge felter", Toast.LENGTH_LONG).show();
             return;
         }
 
         if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
-            Toast.makeText(getApplicationContext(), "Skriv inn en epost-adresse", Toast.LENGTH_LONG);
+            Toast.makeText(getApplicationContext(), "Skriv inn en epost-adresse", Toast.LENGTH_LONG).show();
             return;
         }
 
