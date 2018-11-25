@@ -27,6 +27,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import no.hiof.leventen.actionbar.Person;
@@ -82,17 +83,6 @@ public class SearchActivity extends AppCompatActivity {
                 firebaseUserSearch(searchText);
             }
         });
-
-        /*searchField.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                    searchField.setText("");
-
-                    String searchText = searchField.getText().toString();
-                    firebaseUserSearch(searchText);
-                return true;
-            }
-        });*/
 
         searchField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -152,14 +142,6 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-
-
-        /*FirebaseRecyclerOptions<Users> options = new FirebaseRecyclerOptions.Builder<Users>()
-                .setQuery(query,Users.class)
-                .build();
-        FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users,
-                UsersViewHolder>(
-                options) {*/
         FirebaseRecyclerOptions<Person> options = new FirebaseRecyclerOptions.Builder<Person>()// Disse skal slettes hvis kommentaren ovenfor fjernes
                 .setQuery(query, Person.class)
                 .setLifecycleOwner(this)
@@ -203,18 +185,10 @@ public class SearchActivity extends AppCompatActivity {
             TextView textViewAlder = (TextView) mView.findViewById(R.id.person_age);
             //TextView user_description = (TextView) mView.findViewById(R.id.textViewDescription);
             ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
-
-            user_name.setText(person.getName());
-            textViewBy.setText(person.getBy());
-            textViewAlder.setText("40");
-
+                user_name.setText(person.getName());
+                textViewBy.setText(person.getBy());
+                textViewAlder.setText("44");
 
         }
     }
-   /* public void changeQuery(String string, String searchText){
-        Query query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
-    }
-    public Query getQuery(){
-        //return query;
-    }*/
 }
