@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,6 +26,9 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+
+import java.util.Date;
+
 import no.hiof.leventen.actionbar.Person;
 
 public class SearchActivity extends AppCompatActivity {
@@ -195,10 +199,14 @@ public class SearchActivity extends AppCompatActivity {
 
         public void setDetails(Person person){
             TextView user_name = (TextView) mView.findViewById(R.id.person_name);
+            TextView textViewBy = (TextView) mView.findViewById(R.id.textViewBy);
+            TextView textViewAlder = (TextView) mView.findViewById(R.id.person_age);
             //TextView user_description = (TextView) mView.findViewById(R.id.textViewDescription);
             ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
 
             user_name.setText(person.getName());
+            textViewBy.setText(person.getBy());
+            textViewAlder.setText("40");
 
 
         }
@@ -206,7 +214,7 @@ public class SearchActivity extends AppCompatActivity {
    /* public void changeQuery(String string, String searchText){
         Query query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
     }
-    /*public Query getQuery(){
+    public Query getQuery(){
         //return query;
     }*/
 }

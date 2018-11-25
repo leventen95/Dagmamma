@@ -2,12 +2,23 @@ package no.hiof.leventen.actionbar;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Year;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import no.hiof.leventen.actionbar.Chat.Conversation;
 import no.hiof.leventen.actionbar.Chat.Message;
+
+import static java.util.Calendar.DATE;
+import static java.util.Calendar.MONTH;
+import static java.util.Calendar.YEAR;
 
 public class Person {
     String name;
@@ -69,14 +80,27 @@ public class Person {
         this.fDato = fDato;
     }
 
-    public String parseFDato(String fDato) {
+    public static String parseFDato(String fDato) {
         if (fDato.length() == 6) {
             String day = fDato.substring(0, Math.min(fDato.length(), 2));
             String month = fDato.substring(2, Math.min(fDato.length(), 2));
             String year = fDato.substring(4, Math.min(fDato.length(), 2));
             return day + "-" + month + "-" + year;
         }
-        return null;
+
+        return "41";
+    }
+    public static int getDiffYears(Date first, Date last) {
+        Calendar a = getCalendar(first);
+        Calendar b = getCalendar(last);
+        int diff = b.get(YEAR) - a.get(YEAR);
+        return diff;
+    }
+
+    public static Calendar getCalendar(Date date) {
+        Calendar cal = Calendar.getInstance(Locale.US);
+        cal.setTime(date);
+        return cal;
     }
 
 

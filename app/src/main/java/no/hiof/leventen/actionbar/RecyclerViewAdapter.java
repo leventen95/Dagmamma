@@ -38,7 +38,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Istedenfor å bytte personens navn til Hei vil vi heller bli tatt med videre til personens profil. Dette blir implementert senere.
                     clickListener.onClick(view, getAdapterPosition());
                 }
             });
