@@ -9,7 +9,7 @@
     <string name="loginBrukerInput">Example@gmail.com</string>
     <string name="loginPassordInput">Passord</string>
     <string name="loginNyBruker">Ny bruker?</string>
-    <string name="loginButton">Login</string>
+    <string name="loginButton">Logg inn</string>
     <string name="loginRegistrer">Registrer deg med dine ønsker her</string>
     <string name="loginRegistrerButton">Registrer</string>
     <string name="loginPicture">kidsOnGrass</string>
