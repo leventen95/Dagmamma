@@ -38,7 +38,6 @@ public class LogInActivity extends AppCompatActivity {
         intent = new Intent(LogInActivity.this, MainActivity.class);
 
         if(FirebaseAuth.getInstance().getCurrentUser() != null){
-
             datasource.getUser(FirebaseAuth.getInstance().getCurrentUser().getUid(),true);
             startActivity(intent);
         }

@@ -1,10 +1,15 @@
 package no.hiof.leventen.actionbar.Firebasehandler;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
 import com.firebase.ui.auth.data.model.User;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,6 +23,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +47,9 @@ public class FirebaseDatasource {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 //    public Person(String name, String email, String firebaseUid, String profilBeskrivelse, String userType, String by, String fDato, boolean isThisUser) {
-
+                if(dataSnapshot.getValue() == null){
+                    return;
+                }
                 UserType type = UserType.DAGMAMMA;
                 Person person = new Person(dataSnapshot.child("name").getValue().toString(),
                         dataSnapshot.child("email").getValue().toString(),
@@ -181,27 +189,40 @@ public class FirebaseDatasource {
     }
 
     public void uploadImage(String uid, Uri imageUri){
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
+        StorageReference storage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://dagmamma-fd35a.appspot.com");
 
-        storageRef.child("profileImages");
+        StorageReference profileImagesRef = storage.child("profileImages/" + uid + ".png");
 
-        storageRef.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+        profileImagesRef.putFile(imageUri).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println("ERROR**********************");
+                System.out.println(e);
+            }
+        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
+                System.out.println("UPLOAD COMPLETE");
             }
         });
     }
 
-    public void getImage(String uid){
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference().child("profileImages").child(uid);
+    public void getImage(String uid, final DidReceiveProfile callback){
+        StorageReference storage = FirebaseStorage.getInstance().getReferenceFromUrl("gs://dagmamma-fd35a.appspot.com");
+
+        StorageReference profileImagesRef = storage.child("profileImages/" + uid + ".png");
         final long ONE_MEGABYTE = 1024 * 1024;
-        storageRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+        profileImagesRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
             @Override
             public void onSuccess(byte[] bytes) {
-
+                Bitmap bitmap = BitmapFactory.decodeByteArray(bytes,0,bytes.length);
+                callback.didRecieve(bitmap);
+                System.out.println("DOWNLOAD COMPLETE");
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(e);
             }
         });
     }

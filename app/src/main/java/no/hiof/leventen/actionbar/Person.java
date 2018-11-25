@@ -15,6 +15,7 @@ import java.util.Locale;
 
 import no.hiof.leventen.actionbar.Chat.Conversation;
 import no.hiof.leventen.actionbar.Chat.Message;
+import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 
 import static java.util.Calendar.DATE;
 import static java.util.Calendar.MONTH;
@@ -60,6 +61,7 @@ public class Person {
         this.conversations.add(con2);
 
         if(isThisUser) {
+            System.out.println("CURRENT USER SAT");
             this.currentUser = this;
             this.currentUser.setFirebaseUid(FirebaseAuth.getInstance().getCurrentUser().getUid());
             this.currentUser.setProfilBeskrivelse(profilBeskrivelse);
