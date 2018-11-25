@@ -1,6 +1,7 @@
 package no.hiof.leventen.actionbar;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,8 @@ import com.google.firebase.database.Query;
 import java.util.Calendar;
 import java.util.Date;
 
+import no.hiof.leventen.actionbar.Firebasehandler.DidReceiveProfile;
+import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 import no.hiof.leventen.actionbar.Person;
 
 public class SearchActivity extends AppCompatActivity {
@@ -171,6 +174,7 @@ public class SearchActivity extends AppCompatActivity {
     public static class UsersViewHolder extends RecyclerView.ViewHolder{
 
         View mView;
+        private FirebaseDatasource datasource = new FirebaseDatasource();
 
         public UsersViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -182,11 +186,27 @@ public class SearchActivity extends AppCompatActivity {
             TextView user_name = (TextView) mView.findViewById(R.id.person_name);
             TextView textViewBy = (TextView) mView.findViewById(R.id.textViewBy);
             TextView textViewAlder = (TextView) mView.findViewById(R.id.person_age);
+<<<<<<< HEAD
+            final ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
+
+            datasource.getImage(person.getFirebaseUid(), new DidReceiveProfile() {
+                @Override
+                public void didRecieve(Bitmap picture) {
+                    user_image.setImageBitmap(picture);
+                }
+            });
+
+            user_name.setText(person.getName());
+            textViewBy.setText(person.getBy());
+            textViewAlder.setText("40");
+
+=======
             //TextView user_description = (TextView) mView.findViewById(R.id.textViewDescription);
             ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
                 user_name.setText(person.getName());
                 textViewBy.setText(person.getBy());
                 textViewAlder.setText("44");
+>>>>>>> 962454a47b4cfc03efbc916cb704fad9804a0f34
 
         }
     }

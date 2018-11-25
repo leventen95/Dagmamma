@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
         dialogListFragment = new DialogListFragment();
         minSideFragment = new MinSideFragment();
 
-
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {

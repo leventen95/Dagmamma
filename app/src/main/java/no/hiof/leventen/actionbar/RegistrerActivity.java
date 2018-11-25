@@ -160,6 +160,7 @@ public class RegistrerActivity extends AppCompatActivity {
         if (requestCode == GALLERY) {
             if (data != null) {
                 Uri contentURI = data.getData();
+                imageUri = data.getData();
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), contentURI);
                     //String path = saveImage(bitmap);
@@ -263,8 +264,9 @@ public class RegistrerActivity extends AppCompatActivity {
                             fDato,
                             true);
 
-
-                    fb.uploadImage(newPerson.getFirebaseUid(),imageUri);
+                    if(imageUri != null) {
+                        fb.uploadImage(newPerson.getFirebaseUid(), imageUri);
+                    }
                     fb.addExtraInfoForUser(newPerson, FirebaseAuth.getInstance().getCurrentUser().getUid(),userType, new DidCreateUserCallback() {
                         @Override
                         public void didCreateUser(boolean didComplete) {
