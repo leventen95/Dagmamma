@@ -80,9 +80,6 @@ public class MinSideFragment extends Fragment {
             }
         });
 
-
-
-
         return view;
     }
 }

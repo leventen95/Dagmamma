@@ -23,12 +23,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
 
-import no.hiof.leventen.actionbar.Chat.Message;
-import no.hiof.leventen.actionbar.Chat.Conversation;
 import no.hiof.leventen.actionbar.Classes.UserType;
 import no.hiof.leventen.actionbar.Person;
 
@@ -46,7 +42,6 @@ public class FirebaseDatasource {
         selfRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //    public Person(String name, String email, String firebaseUid, String profilBeskrivelse, String userType, String by, String fDato, boolean isThisUser) {
                 if(dataSnapshot.getValue() == null){
                     return;
                 }
