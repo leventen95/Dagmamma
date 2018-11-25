@@ -18,22 +18,28 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
 
+import no.hiof.leventen.actionbar.Classes.UserType;
+import no.hiof.leventen.actionbar.Firebasehandler.DidCompleteCallback;
+import no.hiof.leventen.actionbar.Firebasehandler.DidReceiveProfile;
+import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
+
 import static android.media.MediaRecorder.VideoSource.CAMERA;
 
 public class RedigerSideActivity extends AppCompatActivity {
 
-    TextView email, navn, fDato, by, beskrivelse;
+    EditText email, navn, fDato, by, beskrivelse, password;
     Button redigerLagreButton, redigerBildeButton;
-
-    private static final int PICK_IMAGE = 100;
+    FirebaseDatasource datasource = new FirebaseDatasource();
+    ImageView imgView;
     Uri imageUri;
-    private static final int GALLERY = 100;
+    private static final int GALLERY = 110;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +51,9 @@ public class RedigerSideActivity extends AppCompatActivity {
         fDato = findViewById(R.id.redigerFodselEdit);
         by = findViewById(R.id.redigerByEdit);
         beskrivelse = findViewById(R.id.redigerDescriptionView);
+        password = findViewById(R.id.redigerPasswordEdit);
+        imgView = findViewById(R.id.redigerBildeView);
+
 
         if(Person.getCurrentUser() != null) {
             email.setText(Person.getCurrentUser().getEmail());
@@ -54,17 +63,51 @@ public class RedigerSideActivity extends AppCompatActivity {
             beskrivelse.setText(Person.getCurrentUser().getProfilBeskrivelse());
         }
 
+        datasource.getImage(Person.getCurrentUser().getFirebaseUid(), new DidReceiveProfile() {
+            @Override
+            public void didRecieve(Bitmap picture) {
+                imgView.setImageBitmap(picture);
+            }
+        });
+
         redigerLagreButton = findViewById(R.id.redigerLagreButton);
         redigerBildeButton = findViewById(R.id.redigerBildeButton);
 
         redigerLagreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Person newInfo = new Person(navn.getText().toString(),
+                        email.getText().toString(),
+                        "",
+                        beskrivelse.getText().toString(),
+                        UserType.DAGMAMMA.toString().toLowerCase(),
+                        by.getText().toString(),
+                        fDato.getText().toString(),
+                        true);
 
-                /*Her skal da all ny info lagres(eller overskrive den gamle)
-                slik at det igjen dukker opp på min side og i annonser.
-                 */
-            }
+            String pass;
+           if(imageUri != null) {
+               datasource.uploadImage(Person.getCurrentUser().getFirebaseUid(),imageUri);
+
+           }
+
+
+
+           if(password == null){
+               pass = "";
+           }else{
+               pass = password.getText().toString();
+           }
+
+               datasource.changeUserDetails(Person.getCurrentUser(), newInfo, pass, new DidCompleteCallback() {
+                   @Override
+                   public void didComplete(boolean didComplete) {
+                       if (didComplete) {
+                           System.out.println("Did change details");
+                       }
+                   }
+               });
+           }
         });
 
 
@@ -133,7 +176,7 @@ public class RedigerSideActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        ImageView registrerProfilBilde = findViewById(R.id.registrerBildeView);
+        ImageView registrerProfilBilde = findViewById(R.id.redigerBildeView);
 
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == this.RESULT_CANCELED) {
@@ -148,6 +191,8 @@ public class RedigerSideActivity extends AppCompatActivity {
                     //String path = saveImage(bitmap);
                     Toast.makeText(RedigerSideActivity.this, "Image Saved!", Toast.LENGTH_SHORT).show();
                     registrerProfilBilde.setImageBitmap(bitmap);
+
+
 
                 } catch (IOException e) {
                     e.printStackTrace();

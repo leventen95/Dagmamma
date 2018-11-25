@@ -64,14 +64,23 @@ public class FirebaseDatasource {
         });
     }
 
-    public void changeUserDetails(Person user, Person newUserData, DidCompleteCallback callback){
+    public void changeUserDetails(Person user, Person newUserData,String password, DidCompleteCallback callback) {
 
-        Task<Void> nameRef = dbRef.child("users").child(newUserData.getEmail()).child("username").setValue(newUserData.getName());
-        //Task<Void> ageRef = dbRef.child("users").child(newUserData.getEmail()).child("age").setValue(newUserData.getAge());
-        //Task<Void> tlfRef = dbRef.child("users").child(newUserData.getEmail()).child("tlfnr").setValue(newUserData.getTlfNr());
-        user = newUserData;
-
-        callback.didComplete(true);
+        Task<Void> nameRef = dbRef.child("users").child(user.getUserType().toLowerCase()).child(user.getFirebaseUid()).child("name").setValue(newUserData.getName()).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                System.out.println(e);
+            }
+        });
+        Task<Void> ageRef = dbRef.child("users").child(user.getUserType().toLowerCase()).child(user.getFirebaseUid()).child("fdato").setValue(newUserData.getfDato());
+        Task<Void> typeRef = dbRef.child("users").child(user.getUserType().toLowerCase()).child(user.getFirebaseUid()).child("tlfnr").setValue(newUserData.getUserType().toLowerCase());
+        Task<Void> beskrivelseRef = dbRef.child("users").child(user.getUserType().toLowerCase()).child(user.getFirebaseUid()).child("tlfnr").setValue(newUserData.getProfilBeskrivelse());
+        if (!password.isEmpty()) {
+            FirebaseAuth.getInstance().getCurrentUser().updatePassword(password);
+            {
+                callback.didComplete(true);
+            }
+        }
     }
 
     public void getAllUsers(UserType searchParam, final DidGetUsersCallBack callBack){
@@ -103,47 +112,6 @@ public class FirebaseDatasource {
             }
         });
     }
-
-    public void getChatMessages(String chatId, final ChatCallback callback){
-        DatabaseReference chatRef = dbRef.child("chat").child(chatId);
-        DatabaseReference messages = chatRef.child("messages");
-
-        chatRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-                //Message newMessage = new Message();
-
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-        //Hent user 1 og 2 fra chatref
-        //hent alle meldinger
-
-    }
-
 
     public void createConversation(String uid){
 

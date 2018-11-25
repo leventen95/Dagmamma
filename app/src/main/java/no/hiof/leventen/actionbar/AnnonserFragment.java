@@ -185,22 +185,18 @@ public class AnnonserFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull SearchActivity.UsersViewHolder viewHolder, final int position, @NonNull final Person model) {
-                if(position>userList.size() || userList.size() == 0){
-                    userCount = 0;
-                    return;
-                }
-                viewHolder.setDetails(userList.get(userCount));
 
-                if(userCount >= userList.size()) {
-                    userCount = 0;
-                }else{
-                    userCount++;
+                if(userList.size() > 0 || position <= userList.size() -1 || userCount <= userList.size() -1){
+
+                    Person p = userList.get(position);
+                    Person pp = userList.get(userCount);
+                    viewHolder.setDetails(userList.get(position));
                 }
 
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Person thisUser = userList.get(userCount);
+                        Person thisUser = userList.get(position);
                                 //thisUser = userList.get(i);
                                 Intent intent = new Intent(getActivity(), PersonDetailedActivity.class);
                                 intent.putExtra("name", thisUser.getName());
