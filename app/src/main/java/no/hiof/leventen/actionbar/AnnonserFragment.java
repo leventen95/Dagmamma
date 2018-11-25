@@ -42,13 +42,10 @@ import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 public class AnnonserFragment extends Fragment {
     RecyclerView recyclerView;
     private List<Person> userList;
-    RecyclerViewAdapter recyclerViewAdapter;
     FirebaseDatasource datasource;
     private EditText searchField; //
     private ImageButton searchBtn;//
-    private RecyclerView recyclerView1;//
     private DatabaseReference mUserDatabase;
-    //private CheckBox byCheckBox, navnCheckBox;
     private int clicked = 0;
     public RadioGroup radioGroup,radioGroupForeldre;
     public RadioButton radio_by,radio_navn,radio_dagmamma,radio_foreldre;
@@ -108,9 +105,7 @@ public class AnnonserFragment extends Fragment {
         radio_by.setChecked(true);
         searchField.setText("");
         String searchText = searchField.getText().toString();
-        //query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
 
-        //recyclerView.setHasFixedSize(true);
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -149,8 +144,7 @@ public class AnnonserFragment extends Fragment {
         firebaseUserSearch("");
         return fragment_annonser;
     }
-    /*public void onRadioButtonClicked(){
-    }*/
+
     private void detectChangeInEditText(EditText editText){
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -189,13 +183,13 @@ public class AnnonserFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull SearchActivity.UsersViewHolder viewHolder, final int position, @NonNull final Person model) {
-                viewHolder.setDetails(getActivity().getApplicationContext(),model.getName(), "Hei", "");
+
+                viewHolder.setDetails(model);
+
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Person thisUser = userList.get(position);
-                        for(int i=0; i<userList.size();i++) {
-                            if (userList.get(i).getName().equals(thisUser.getName())) {
                                 //thisUser = userList.get(i);
                                 Intent intent = new Intent(getActivity(), PersonDetailedActivity.class);
                                 intent.putExtra("name", thisUser.getName());
@@ -205,8 +199,7 @@ public class AnnonserFragment extends Fragment {
                                 intent.putExtra("desc", thisUser.getProfilBeskrivelse());
                                 intent.putExtra("email", thisUser.getEmail());
                                 startActivity(intent);
-                            }
-                        }
+
                     }
                 });
             }
@@ -223,28 +216,7 @@ public class AnnonserFragment extends Fragment {
         recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
-    public static class UsersViewHolder extends RecyclerView.ViewHolder{
 
-        View mView;
-
-        public UsersViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-            mView = itemView;
-        }
-
-        public void setDetails(Context context, String userName, String description, String userImage){
-            TextView user_name = (TextView) mView.findViewById(R.id.person_name);
-            //TextView user_description = (TextView) mView.findViewById(R.id.textViewDescription);
-            ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
-
-            user_name.setText(userName);
-            //user_description.setText(description);
-
-            //    Glide.with(context).load(userImage).into(user_image);
-
-        }
-    }
     private void initializeData(){
         userList = new ArrayList<>();
         datasource.getAllUsers(UserType.DAGMAMMA, new DidGetUsersCallBack() {
@@ -253,9 +225,6 @@ public class AnnonserFragment extends Fragment {
                 userList = personList;
             }
         });
-    }
-    public void changeCheckedInt(int integer){
-        radio_checked = integer;
     }
 }
 

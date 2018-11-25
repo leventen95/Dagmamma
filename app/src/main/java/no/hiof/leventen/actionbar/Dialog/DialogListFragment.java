@@ -46,7 +46,6 @@ public class DialogListFragment extends Fragment {
                 conversationsList = conversations;
             }
         });
-
 */      initializeAdapter();
         return view;
     }

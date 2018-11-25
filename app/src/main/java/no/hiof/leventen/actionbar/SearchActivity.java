@@ -167,7 +167,7 @@ public class SearchActivity extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull UsersViewHolder viewHolder, int position, @NonNull Person model) {
 
         //        viewHolder.setDetails(getApplicationContext(),model.getName(), model.getbeskrivelse(), model.getPhotoId());
-                viewHolder.setDetails(getApplicationContext(),model.getName(), "Hei", "");
+                viewHolder.setDetails(model);
             }
 
             @NonNull
@@ -193,15 +193,13 @@ public class SearchActivity extends AppCompatActivity {
             mView = itemView;
         }
 
-        public void setDetails(Context context, String userName, String description, String userImage){
+        public void setDetails(Person person){
             TextView user_name = (TextView) mView.findViewById(R.id.person_name);
             //TextView user_description = (TextView) mView.findViewById(R.id.textViewDescription);
             ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
 
-            user_name.setText(userName);
-            //user_description.setText(description);
+            user_name.setText(person.getName());
 
-        //    Glide.with(context).load(userImage).into(user_image);
 
         }
     }
