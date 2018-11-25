@@ -20,6 +20,8 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -46,9 +48,11 @@ public class AnnonserFragment extends Fragment {
     private ImageButton searchBtn;//
     private RecyclerView recyclerView1;//
     private DatabaseReference mUserDatabase;
-    //private CheckBox byCheckBox;
-    private CheckBox navnCheckBox;
+    //private CheckBox byCheckBox, navnCheckBox;
     private int clicked = 0;
+    public RadioGroup radioGroup;
+    public RadioButton radio_by,radio_navn;
+    public int radio_checked = 1;
 
 
     public AnnonserFragment() {
@@ -73,17 +77,36 @@ public class AnnonserFragment extends Fragment {
         mUserDatabase = FirebaseDatabase.getInstance().getReference("users/dagmamma/");
         searchField = (EditText) fragment_annonser.findViewById(R.id.search_field);//
         searchBtn = (ImageButton) fragment_annonser.findViewById(R.id.imageButton);//
-        //byCheckBox = (CheckBox) fragment_annonser.findViewById(R.id.byCheckBox);
-        navnCheckBox = (CheckBox) fragment_annonser.findViewById(R.id.navnCheckBox);
+        radioGroup = (RadioGroup) fragment_annonser.findViewById(R.id.radioGroup);
+        radio_by = (RadioButton) fragment_annonser.findViewById(R.id.radio_by);
+        radio_navn = (RadioButton) fragment_annonser.findViewById(R.id.radio_navn);
+
+
+        radio_by.setChecked(true);
+        searchField.setText("");
+        String searchText = searchField.getText().toString();
+        //query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
 
         //recyclerView.setHasFixedSize(true);
 
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.radio_by:
+                        radio_checked = 1;
+                        break;
+                    case R.id.radio_navn:
+                        radio_checked = 2;
+                        break;
+                }
+            }
+        });
 
         searchField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(hasFocus && clicked == 0){
-                    searchField.setText("");
                     clicked = 1;
 
                     String searchText = searchField.getText().toString();
@@ -99,6 +122,8 @@ public class AnnonserFragment extends Fragment {
         firebaseUserSearch("");
         return fragment_annonser;
     }
+    /*public void onRadioButtonClicked(){
+    }*/
     private void detectChangeInEditText(EditText editText){
         editText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -115,15 +140,19 @@ public class AnnonserFragment extends Fragment {
             public void afterTextChanged(Editable s) {
 
             }
-
-
         });
     }
 
     private void firebaseUserSearch(final String searchText) {
 
-        final Query query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
-        FirebaseRecyclerOptions<Person> options = new FirebaseRecyclerOptions.Builder<Person>()// Disse skal slettes hvis kommentaren ovenfor fjernes
+        Query query;
+        if(radio_checked == 1){
+             query = mUserDatabase.orderByChild("by").startAt(searchText).endAt(searchText + "\uf8ff");
+        }
+        else {
+             query = mUserDatabase.orderByChild("name").startAt(searchText).endAt(searchText + "\uf8ff");
+        }
+        FirebaseRecyclerOptions<Person> options = new FirebaseRecyclerOptions.Builder<Person>()
                 .setQuery(query, Person.class)
                 .setLifecycleOwner(this)
                 .build();//
@@ -197,7 +226,9 @@ public class AnnonserFragment extends Fragment {
                 userList = personList;
             }
         });
-
+    }
+    public void changeCheckedInt(int integer){
+        radio_checked = integer;
     }
 }
 
