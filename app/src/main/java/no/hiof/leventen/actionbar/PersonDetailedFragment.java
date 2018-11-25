@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -48,15 +49,20 @@ public class PersonDetailedFragment extends Fragment {
         personDescriptionTextView = view.findViewById(R.id.textViewDescription);
         personImageView = view.findViewById(R.id.imageViewPerson);
         personByTextView = view.findViewById(R.id.textViewBy);
+
         goChat = view.findViewById(R.id.goToChatBtn);
         goChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Person.getCurrentUser().getConversations().add(
-                        new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
-                Intent intent = new Intent(getActivity(), ChatListActivity.class);
-                intent.putExtra("id", Person.getCurrentUser().getConversations().size() -1);
-                startActivity(intent);
+                if(!(email.equals(Person.getCurrentUser().getEmail()))) {
+                    Person.getCurrentUser().getConversations().add(
+                            new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
+                    Intent intent = new Intent(getActivity(), ChatListActivity.class);
+                    intent.putExtra("id", Person.getCurrentUser().getConversations().size() -1);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "Dette er jo deg din tulling!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
