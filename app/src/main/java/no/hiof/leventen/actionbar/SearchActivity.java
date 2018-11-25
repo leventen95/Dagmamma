@@ -58,7 +58,6 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.result_list);//
         byCheckBox = (CheckBox) findViewById(R.id.byCheckBox);
         navnCheckBox = (CheckBox) findViewById(R.id.navnCheckBox);
-
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -184,12 +183,15 @@ public class SearchActivity extends AppCompatActivity {
             TextView user_name = (TextView) mView.findViewById(R.id.person_name);
             TextView textViewBy = (TextView) mView.findViewById(R.id.textViewBy);
             TextView textViewAlder = (TextView) mView.findViewById(R.id.person_age);
-            final ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
+
+            final ImageView user_image = (ImageView) mView.findViewById(R.id.person_photo);
 
             datasource.getImage(person.getFirebaseUid(), new DidReceiveProfile() {
                 @Override
                 public void didRecieve(Bitmap picture) {
-                    user_image.setImageBitmap(picture);
+
+                        user_image.setImageBitmap(picture);
+
                 }
             });
 
@@ -198,5 +200,9 @@ public class SearchActivity extends AppCompatActivity {
             textViewAlder.setText("40");
 
         }
+      private void setImage(Bitmap bit){
+
+      }
+
     }
 }

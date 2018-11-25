@@ -2,6 +2,7 @@ package no.hiof.leventen.actionbar;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import java.util.List;
 
 import no.hiof.leventen.actionbar.Chat.ChatListActivity;
 import no.hiof.leventen.actionbar.Chat.Conversation;
+import no.hiof.leventen.actionbar.Firebasehandler.DidReceiveProfile;
+import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 
 
 public class PersonDetailedFragment extends Fragment {
@@ -31,6 +34,7 @@ public class PersonDetailedFragment extends Fragment {
     private Button goChat;
     private String email;
     private View view;
+    private FirebaseDatasource datasource = new FirebaseDatasource();
 
 
     public PersonDetailedFragment() {
@@ -50,15 +54,20 @@ public class PersonDetailedFragment extends Fragment {
         personImageView = view.findViewById(R.id.imageViewPerson);
         personByTextView = view.findViewById(R.id.textViewBy);
 
+
         goChat = view.findViewById(R.id.goToChatBtn);
         goChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Person.getCurrentUser().getConversations().add(
-                        new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
-                Intent intent = new Intent(getActivity(), ChatListActivity.class);
-                intent.putExtra("id", Person.getCurrentUser().getConversations().size() -1);
-                startActivity(intent);
+                if(!(email.equals(Person.getCurrentUser().getEmail()))) {
+                    Person.getCurrentUser().getConversations().add(
+                            new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
+                    Intent intent = new Intent(getActivity(), ChatListActivity.class);
+                    intent.putExtra("id", Person.getCurrentUser().getConversations().size() -1);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "Dette er jo deg din tulling!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -74,15 +83,37 @@ public class PersonDetailedFragment extends Fragment {
         outState.putInt(PERSON_INDEX,personIndex);
     }
 
-    public void setDisplayedPersonDetail(String name, String alder, String desc, String by, final String email) {
+    public void setDisplayedPersonDetail(String name, String alder, String desc, String by, final String email, String uid) {
 
         this.email = email;
         personNameTextView.setText(name);
         personAlderTextView.setText(alder);
         personDescriptionTextView.setText(desc);
         personByTextView.setText(by);
-        if(Person.getCurrentUser().getEmail().equals(email))
-            goChat.setVisibility(View.GONE);
+
+        datasource.getImage(uid, new DidReceiveProfile() {
+            @Override
+            public void didRecieve(Bitmap picture) {
+                if(picture != null) {
+                    personImageView.setImageBitmap(picture);
+                }
+            }
+        });
+
+        for(final Conversation c : Person.getCurrentUser().getConversations()) {
+            if(c.getOtherUserEmail().equals(email)) {
+                goChat.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Person.getCurrentUser().getConversations().add(
+                                new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
+                        Intent intent = new Intent(getActivity(), ChatListActivity.class);
+                        intent.putExtra("id", c.getId());
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
     }
 
 }
