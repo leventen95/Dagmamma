@@ -126,8 +126,6 @@ public class SearchActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
 
             }
-
-
         });
     }
 

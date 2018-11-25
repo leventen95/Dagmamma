@@ -1,8 +1,11 @@
 package no.hiof.leventen.actionbar;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +25,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +45,7 @@ public class LogInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         FirebaseDatasource datasource = new FirebaseDatasource();
         intent = new Intent(LogInActivity.this, MainActivity.class);
 
@@ -54,12 +62,14 @@ public class LogInActivity extends AppCompatActivity {
         Button registrerButton = findViewById(R.id.loginRegistrerButton);
         emailInput = findViewById(R.id.loginBrukerInput);
         passwordInput = findViewById(R.id.passordInput);
+
         passwordInput.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
                 if (keyEvent.getAction()!=KeyEvent.ACTION_DOWN)
                     return false;
                 if(keyCode == KeyEvent.KEYCODE_ENTER ){
+
                     signIn(view);
                     return true;
                 }
@@ -76,16 +86,24 @@ public class LogInActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                signIn(v);
+                if(isInternetAvailable()) {
+                    signIn(v);
+                }
+                else{
+                    Toast.makeText(LogInActivity.this, "Ingen internett tilgang!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
-
         registrerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LogInActivity.this, RegistrerActivity.class);
-                startActivity(intent);
+                if(isInternetAvailable()) {
+                    Intent intent = new Intent(LogInActivity.this, RegistrerActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(LogInActivity.this, "Ingen internett tilgang!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -131,6 +149,17 @@ public class LogInActivity extends AppCompatActivity {
         a.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(a);
     }
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            //You can replace it with your name
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    //https://stackoverflow.com/questions/9570237/android-check-internet-connection
 
     }
 

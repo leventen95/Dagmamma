@@ -111,23 +111,31 @@ public class RegistrerActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case 0:
-                                if(isStoragePermissionGranted()){
+                                if (android.os.Build.VERSION.SDK_INT < 23) {
                                     choosePhotoFromGallary();
                                 }
-                                else{
-                                    ActivityCompat.requestPermissions(RegistrerActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
-                                    if(isStoragePermissionGranted())
+                                else {
+                                    if (isStoragePermissionGranted()) {
                                         choosePhotoFromGallary();
+                                    } else {
+                                        ActivityCompat.requestPermissions(RegistrerActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+                                        if (isStoragePermissionGranted())
+                                            choosePhotoFromGallary();
+                                    }
                                 }
                                 break;
                             case 1:
-                                if(isCameraPermissionGranted()) {
+                                if (android.os.Build.VERSION.SDK_INT < 23) {
                                     takePhotoFromCamera();
                                 }
-                                else{
-                                    ActivityCompat.requestPermissions(RegistrerActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
-                                    if(isCameraPermissionGranted())
+                                else {
+                                    if (isCameraPermissionGranted()) {
                                         takePhotoFromCamera();
+                                    } else {
+                                        ActivityCompat.requestPermissions(RegistrerActivity.this, new String[]{Manifest.permission.CAMERA}, 1);
+                                        if (isCameraPermissionGranted())
+                                            takePhotoFromCamera();
+                                    }
                                 }
                                 break;
                         }
