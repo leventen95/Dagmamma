@@ -128,8 +128,9 @@ public class RegistrerActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
+                    FirebaseDatasource fb = new FirebaseDatasource();
 
-                    Person newPerson = new Person(navn,
+                    final Person newPerson = new Person(navn,
                             email,
                             FirebaseAuth.getInstance().getCurrentUser().getUid(),
                             beskrivelse,
@@ -138,7 +139,8 @@ public class RegistrerActivity extends AppCompatActivity {
                             fDato,
                             true);
 
-                    FirebaseDatasource fb = new FirebaseDatasource();
+
+                    fb.uploadImage(newPerson.getFirebaseUid(),imageUri);
                     fb.addExtraInfoForUser(newPerson, FirebaseAuth.getInstance().getCurrentUser().getUid(),userType, new DidCreateUserCallback() {
                         @Override
                         public void didCreateUser(boolean didComplete) {
