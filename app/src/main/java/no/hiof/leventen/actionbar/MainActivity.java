@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        setFragment(annonserFragment);
+
 
         FirebaseDatasource datasource = new FirebaseDatasource();
 
@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
 
             datasource.getUser(FirebaseAuth.getInstance().getCurrentUser().getUid(),true);
             mAuth = FirebaseAuth.getInstance();
+            setFragment(annonserFragment);
         }
         else {
             startActivity(intent);
