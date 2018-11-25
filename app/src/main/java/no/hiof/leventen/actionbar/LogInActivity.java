@@ -103,11 +103,7 @@ public class LogInActivity extends AppCompatActivity {
                     datasource.getAllUsers(UserType.DAGMAMMA, new DidGetUsersCallBack() {
                         @Override
                         public void didRecieve(List<Person> personList) {
-                            Toast.makeText(getApplicationContext(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
-
-                            List<Person> userList = new ArrayList<>();
-                            userList = personList;
-                            for (Person p : userList) {
+                            for (Person p : personList) {
                                 if (p.getEmail().equals(emailInput.getText().toString())) {
                                     Person.setCurrentUser(p);
                                }
