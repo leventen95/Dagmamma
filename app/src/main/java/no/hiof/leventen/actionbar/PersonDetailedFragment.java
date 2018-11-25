@@ -85,21 +85,8 @@ public class PersonDetailedFragment extends Fragment {
         personAlderTextView.setText(alder);
         personDescriptionTextView.setText(desc);
         personByTextView.setText(by);
-
-        for(final Conversation c : Person.getCurrentUser().getConversations()) {
-            if(c.getOtherUserEmail().equals(email)) {
-                goChat.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Person.getCurrentUser().getConversations().add(
-                                new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
-                        Intent intent = new Intent(getActivity(), ChatListActivity.class);
-                        intent.putExtra("id", c.getId());
-                        startActivity(intent);
-                    }
-                });
-            }
-        }
+        if(Person.getCurrentUser().getEmail().equals(email))
+            goChat.setVisibility(View.GONE);
     }
 
 }
