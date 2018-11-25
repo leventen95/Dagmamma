@@ -8,8 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import no.hiof.leventen.actionbar.Chat.ChatListFragment;
 import no.hiof.leventen.actionbar.Dialog.DialogListFragment;
@@ -47,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
                         setFragment(annonserFragment);
                         return true;
                     case R.id.nav_chat:
-                     //   setFragment(chatListFragment);
                         setFragment(dialogListFragment);
                         return true;
                     case R.id.nav_minSide:

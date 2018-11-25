@@ -18,6 +18,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import no.hiof.leventen.actionbar.Classes.UserType;
+import no.hiof.leventen.actionbar.Firebasehandler.DidGetUsersCallBack;
 import no.hiof.leventen.actionbar.Firebasehandler.FirebaseDatasource;
 
 public class LogInActivity extends AppCompatActivity {
@@ -93,7 +98,24 @@ public class LogInActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    Toast.makeText(getApplicationContext(), "Innlogging vellykket!", Toast.LENGTH_LONG).show();
+
+                    FirebaseDatasource datasource = new FirebaseDatasource();
+                    datasource.getAllUsers(UserType.DAGMAMMA, new DidGetUsersCallBack() {
+                        @Override
+                        public void didRecieve(List<Person> personList) {
+                            Toast.makeText(getApplicationContext(), FirebaseAuth.getInstance().getCurrentUser().getEmail(), Toast.LENGTH_LONG).show();
+
+                            List<Person> userList = new ArrayList<>();
+                            userList = personList;
+                            for (Person p : userList) {
+                                if (p.getEmail().equals(emailInput.getText().toString())) {
+                                    Person.setCurrentUser(p);
+                               }
+                            }
+                        }
+                    });
+
+                   Toast.makeText(getApplicationContext(), "Innlogging vellykket!", Toast.LENGTH_LONG).show();
                     startActivity(intent);
                 }else{
                     Toast.makeText(getApplicationContext(), "Innlogging feilet", Toast.LENGTH_LONG).show();
