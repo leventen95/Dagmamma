@@ -11,6 +11,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 public class MinSideFragment extends Fragment {
     TextView txtNavn;
@@ -18,7 +20,7 @@ public class MinSideFragment extends Fragment {
     TextView txtBy;
     TextView txtDesc;
     ImageButton redigerSideButton;
-    ImageButton btnSignOut;
+    Button btnSignOut;
 
     private RedigerSideFragment redigerSideFragment;
     private FrameLayout frameRedigerLayout;
@@ -31,12 +33,21 @@ public class MinSideFragment extends Fragment {
         txtAlder = view.findViewById(R.id.minSideAlderText);
         txtBy = view.findViewById(R.id.minSideByText);
         txtDesc = view.findViewById(R.id.minSideDescriptionView);
+        btnSignOut = view.findViewById(R.id.btnSignOut);
 
         if(Person.getCurrentUser() != null) {
             txtNavn.setText(Person.getCurrentUser().getName());
             txtAlder.setText(Person.getCurrentUser().getfDato());   //Person har kun fDato og ikke alder
             txtBy.setText(Person.getCurrentUser().getBy());
             txtDesc.setText(Person.getCurrentUser().getProfilBeskrivelse());
+            btnSignOut.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    FirebaseAuth.getInstance().signOut();
+                    Person.setCurrentUser(null);
+                    startActivity(new Intent(view.getContext(), LogInActivity.class));
+                }
+            });
         }
         redigerSideButton = view.findViewById(R.id.redigerSideButton);
         redigerSideButton.setOnClickListener(new View.OnClickListener() {
