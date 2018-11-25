@@ -121,4 +121,9 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed(){
+        finish();
+        System.exit(1);
+    }
 }

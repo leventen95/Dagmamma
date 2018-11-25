@@ -27,6 +27,7 @@ import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
@@ -183,9 +184,8 @@ public class AnnonserFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull SearchActivity.UsersViewHolder viewHolder, final int position, @NonNull final Person model) {
-
-                viewHolder.setDetails(model);
-
+                if (!(model.getEmail().equals(FirebaseAuth.getInstance().getCurrentUser().getEmail())))
+                    viewHolder.setDetails(model);
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
