@@ -9,4 +9,5 @@
     <color name="colorGrey">#d3d3d3</color>
     <color name="lightBlue">#e6ffff</color>
     <color name="borderColor">#ccefff</color>
+    <color name="text_primary">#ff4081</color>
 </resources>

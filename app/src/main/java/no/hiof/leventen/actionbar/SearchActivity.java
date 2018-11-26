@@ -186,7 +186,6 @@ public class SearchActivity extends AppCompatActivity {
             TextView user_name = (TextView) mView.findViewById(R.id.person_name);
             TextView textViewBy = (TextView) mView.findViewById(R.id.textViewBy);
             TextView textViewAlder = (TextView) mView.findViewById(R.id.person_age);
-<<<<<<< HEAD
             final ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
 
             datasource.getImage(person.getFirebaseUid(), new DidReceiveProfile() {
@@ -199,14 +198,6 @@ public class SearchActivity extends AppCompatActivity {
             user_name.setText(person.getName());
             textViewBy.setText(person.getBy());
             textViewAlder.setText("40");
-
-=======
-            //TextView user_description = (TextView) mView.findViewById(R.id.textViewDescription);
-            ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
-                user_name.setText(person.getName());
-                textViewBy.setText(person.getBy());
-                textViewAlder.setText("44");
->>>>>>> 962454a47b4cfc03efbc916cb704fad9804a0f34
 
         }
     }
