@@ -7,9 +7,11 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -107,6 +109,7 @@ public class RegistrerActivity extends AppCompatActivity {
                 "Capture photo from camera" };
         pictureDialog.setItems(pictureDialogItems,
                 new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.M)
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
@@ -297,6 +300,7 @@ public class RegistrerActivity extends AppCompatActivity {
 
 
     }
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public  boolean isStoragePermissionGranted() {
         if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -307,6 +311,7 @@ public class RegistrerActivity extends AppCompatActivity {
             return false;
         }
     }
+    @RequiresApi(api = Build.VERSION_CODES.M)
     public  boolean isCameraPermissionGranted() {
         if (checkSelfPermission(android.Manifest.permission.CAMERA)
                 == PackageManager.PERMISSION_GRANTED) {

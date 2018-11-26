@@ -185,7 +185,7 @@ public class SearchActivity extends AppCompatActivity {
             TextView user_name = (TextView) mView.findViewById(R.id.person_name);
             TextView textViewBy = (TextView) mView.findViewById(R.id.textViewBy);
             TextView textViewAlder = (TextView) mView.findViewById(R.id.person_age);
-            final ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
+            //final ImageView user_image = (ImageView) mView.findViewById(R.id.imageView);
 
             final ImageView user_image = (ImageView) mView.findViewById(R.id.person_photo);
 
