@@ -51,6 +51,7 @@ public class AnnonserFragment extends Fragment {
     public RadioGroup radioGroup,radioGroupForeldre;
     public RadioButton radio_by,radio_navn,radio_dagmamma,radio_foreldre;
     public int radio_checked = 1;
+    private int userCount = 0;
 
 
     public AnnonserFragment() {
@@ -79,8 +80,8 @@ public class AnnonserFragment extends Fragment {
         radio_dagmamma.setChecked(true);
 
         datasource = new FirebaseDatasource();
-
         initializeData();
+
 
         mUserDatabase = FirebaseDatabase.getInstance().getReference("users/dagmamma/");
 
@@ -184,9 +185,13 @@ public class AnnonserFragment extends Fragment {
 
             @Override
             protected void onBindViewHolder(@NonNull SearchActivity.UsersViewHolder viewHolder, final int position, @NonNull final Person model) {
-                    //if((!(model.getFirebaseUid() == FirebaseAuth.getInstance().getCurrentUser().getUid())))
-                    viewHolder.setDetails(model);
 
+                if(userList.size() > 0 || position <= userList.size() -1 || userCount <= userList.size() -1){
+
+                    Person p = userList.get(position);
+                    Person pp = userList.get(userCount);
+                    viewHolder.setDetails(userList.get(position));
+                }
 
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -196,15 +201,16 @@ public class AnnonserFragment extends Fragment {
                                 Intent intent = new Intent(getActivity(), PersonDetailedActivity.class);
                                 intent.putExtra("name", thisUser.getName());
                                 intent.putExtra("alder", thisUser.getfDato());
+                                intent.putExtra("uid", thisUser.getFirebaseUid());
                                 intent.putExtra("by", thisUser.getBy());
                                 intent.putExtra("bilde", "");
                                 intent.putExtra("desc", thisUser.getProfilBeskrivelse());
                                 intent.putExtra("email", thisUser.getEmail());
                                 startActivity(intent);
-
                     }
                 });
             }
+
 
             @NonNull
             @Override
