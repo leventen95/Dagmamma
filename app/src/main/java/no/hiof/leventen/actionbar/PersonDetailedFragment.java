@@ -59,15 +59,11 @@ public class PersonDetailedFragment extends Fragment {
         goChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!(email.equals(Person.getCurrentUser().getEmail()))) {
-                    Person.getCurrentUser().getConversations().add(
-                            new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
-                    Intent intent = new Intent(getActivity(), ChatListActivity.class);
-                    intent.putExtra("id", Person.getCurrentUser().getConversations().size() -1);
-                    startActivity(intent);
-                } else {
-                    Toast.makeText(getContext(), "Dette er jo deg din tulling!", Toast.LENGTH_SHORT).show();
-                }
+                Person.getCurrentUser().getConversations().add(
+                        new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
+                Intent intent = new Intent(getActivity(), ChatListActivity.class);
+                intent.putExtra("id", Person.getCurrentUser().getConversations().size() -1);
+                startActivity(intent);
             }
         });
 
@@ -100,19 +96,8 @@ public class PersonDetailedFragment extends Fragment {
             }
         });
 
-        for(final Conversation c : Person.getCurrentUser().getConversations()) {
-            if(c.getOtherUserEmail().equals(email)) {
-                goChat.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Person.getCurrentUser().getConversations().add(
-                                new Conversation(Person.getCurrentUser().getConversations().size(), email, personNameTextView.getText().toString()));
-                        Intent intent = new Intent(getActivity(), ChatListActivity.class);
-                        intent.putExtra("id", c.getId());
-                        startActivity(intent);
-                    }
-                });
-            }
+        if((email.equals(Person.getCurrentUser().getEmail()))) {
+            goChat.setVisibility(View.GONE);
         }
     }
 
